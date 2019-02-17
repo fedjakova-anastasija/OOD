@@ -1,5 +1,6 @@
 #pragma once
 #include <climits>
+
 using namespace std;
 
 class CInfo
@@ -7,28 +8,28 @@ class CInfo
 public:
 	void UpdateInfo(double indicator)
 	{
-		if (indicator < m_minValue)
+		if (indicator < m_minIndicator)
 		{
-			m_minValue = indicator;
+			m_minIndicator = indicator;
 		}
 
-		if (m_maxValue < indicator)
+		if (m_maxIndicator < indicator)
 		{
-			m_maxValue = indicator;
+			m_maxIndicator = indicator;
 		}
 
-		m_accValue += indicator;
-		++m_counterValue;
+		m_accIndicator += indicator;
+		++m_countAcc;
 
-		std::cout << "Max value " << m_maxValue << std::endl;
-		std::cout << "Min value " << m_minValue << std::endl;
-		std::cout << "Average value " << m_accValue / m_counterValue << std::endl;
+		std::cout << "Max indicator " << m_maxIndicator << std::endl;
+		std::cout << "Min indicator " << m_minIndicator << std::endl;
+		std::cout << "Average indicator " << m_accIndicator / m_countAcc << std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 
 private:
-	double m_minValue = std::numeric_limits<double>::infinity();
-	double m_maxValue = -std::numeric_limits<double>::infinity();
-	double m_accValue = 0.0;
-	size_t m_counterValue = 0;
+	double m_minIndicator = std::numeric_limits<double>::infinity();
+	double m_maxIndicator = -std::numeric_limits<double>::infinity();
+	double m_accIndicator = 0;
+	unsigned m_countAcc = 0;
 };
