@@ -1,7 +1,6 @@
 ﻿#pragma once
-
+#include <map>
 #include <set>
-#include <functional>
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
@@ -26,9 +25,9 @@ class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T> & observer) = 0;
+	virtual void RegisterObserver(IObserver<T>& observer, int priority = 0) = 0;
 	virtual void NotifyObservers() = 0;
-	virtual void RemoveObserver(IObserver<T> & observer) = 0;
+	virtual void RemoveObserver(IObserver<T>& observer) = 0;
 };
 
 // Реализация интерфейса IObservable
@@ -38,30 +37,36 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType & observer) override
+	void RegisterObserver(ObserverType& observer, int priority = 0) override
 	{
-		m_observers.insert(&observer);
+		m_observers.insert(std::pair<int, ObserverType*>(priority, &observer));
 	}
 
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		for (auto & observer : m_observers)
+		auto observers = m_observers;
+		for (auto& observer : observers)
 		{
-			observer->Update(data);
+			observer.second->Update(data);
 		}
 	}
 
-	void RemoveObserver(ObserverType & observer) override
+	void RemoveObserver(ObserverType& observer) override
 	{
-		m_observers.erase(&observer);
+		auto pos = std::find_if(m_observers.begin(), m_observers.end(), [&](auto pair) -> bool { return pair.second == &observer; });
+
+		if (pos != m_observers.end())
+		{
+			m_observers.erase(pos);
+		}
 	}
 
 protected:
-	// Классы-наследники должны перегрузить данный метод, 
+	// Классы-наследники должны перегрузить данный метод,
 	// в котором возвращать информацию об изменениях в объекте
-	virtual T GetChangedData()const = 0;
+	virtual T GetChangedData() const = 0;
 
 private:
-	std::set<ObserverType *> m_observers;
+	std::map<int, ObserverType*> m_observers;
 };
