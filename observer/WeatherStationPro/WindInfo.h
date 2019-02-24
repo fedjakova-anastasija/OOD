@@ -28,7 +28,7 @@ public:
 		std::cout << "Min indicator " << m_minIndicator << std::endl;
 		std::cout << "Average indicator " << ((deg >= 0) ? deg : deg + 360) << std::endl;
 		std::cout << "----------------" << std::endl;
-	}
+	}	
 
 private:
 	double m_x = 0;
