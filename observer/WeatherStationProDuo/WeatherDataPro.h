@@ -57,7 +57,7 @@ private:
 		windDirection.UpdateInfo(data.windDirection);
 		std::cout << "Temperature info: " << std::endl;
 		temperature.UpdateInfo(data.temperature);
-		std::cout << "Humidify info:" << std::endl;
+		std::cout << "Humidity info:" << std::endl;
 		humidity.UpdateInfo(data.humidity);
 		std::cout << "Pressure info:" << std::endl;
 		pressure.UpdateInfo(data.pressure);
