@@ -30,7 +30,7 @@ enum CoffeeSize
 class CCoffee : public CBeverage
 {
 public:
-	CCoffee(CoffeeSize coffeeSize = CoffeeSize::Standart, const std::string& description = "Coffee")
+	CCoffee(CoffeeSize coffeeSize = CoffeeSize::Standart, const std::string& description = " Coffee")
 		: CBeverage(GetCoffeeDescription(coffeeSize) + description)
 		, m_coffeeSize(coffeeSize)
 	{

@@ -173,21 +173,25 @@ int main()
 		// добавляем пару кубиков льда
 		auto iceCubes = make_unique<CIceCubes>(move(lemon), 2, IceCubeType::Dry);
 		// добавляем 2 грамма шоколадной крошки
-		auto beverage = make_unique<CChocolateCrumbs>(move(iceCubes), 2);
+		auto сhocolateCrumbs = make_unique<CChocolateCrumbs>(move(iceCubes), 2);
+		// добавляем сливки
+		auto beverage = make_unique<CCream>(move(сhocolateCrumbs));
 
 		// Выписываем счет покупателю
 		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
 	}
 
 	{
-		auto beverage = make_unique<CChocolateCrumbs>( // Внешний слой: шоколадная крошка
-			make_unique<CIceCubes>( // | под нею - кубики льда
-				make_unique<CLemon>( // | | еще ниже лимон
-					make_unique<CCinnamon>( // | | | слоем ниже - корица
-						make_unique<CLatte>()), // | | |   в самом сердце - Латте
-					2), // | | 2 дольки лимона
-				2, IceCubeType::Dry), // | 2 кубика сухого льда
-			2); // 2 грамма шоколадной крошки
+		auto beverage = make_unique<CChoсolate>( // Внешний слой: шоколадная крошка
+			make_unique<CChocolateCrumbs>( // Внешний слой: шоколадная крошка
+				make_unique<CIceCubes>( // | под нею - кубики льда
+					make_unique<CLemon>( // | | еще ниже лимон
+						make_unique<CCinnamon>( // | | | слоем ниже - корица
+							make_unique<CLatte>()), // | | |   в самом сердце - Латте
+						2), // | | 2 дольки лимона
+					2, IceCubeType::Dry), // | 2 кубика сухого льда
+				2), // 2 грамма шоколадной крошки
+			6); // 2 шоколадные дольки
 
 		// Выписываем счет покупателю
 		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
@@ -200,7 +204,7 @@ int main()
 		// iceCubes - функция, добавляющая "3 кусочка льда" к любому напитку
 		auto iceCubes3 = MakeCondiment<CIceCubes>(3, IceCubeType::Water);
 
-		auto tea = make_unique<CTea>(TeaType::Red);
+		auto tea = make_unique<CTea>();
 
 		// декорируем чай двумя дольками лимона и тремя кусочками льда
 		auto lemonIceTea = iceCubes3(lemon2(move(tea)));
@@ -213,7 +217,7 @@ int main()
 				2, IceCubeType::Water);
 		*/
 
-		auto oneMoreLemonIceTea = make_unique<CTea>(TeaType::Red) // Берем чай
+		auto oneMoreLemonIceTea = make_unique<CTea>() // Берем чай
 			<< MakeCondiment<CLemon>(2) // добавляем пару долек лимона
 			<< MakeCondiment<CIceCubes>(3, IceCubeType::Water); // и 3 кубика льда
 		/*
@@ -232,14 +236,15 @@ int main()
 			<< MakeCondiment<CCinnamon>() // оборачиваем корицей,
 			<< MakeCondiment<CLemon>(2) // добавляем пару долек лимона
 			<< MakeCondiment<CIceCubes>(2, IceCubeType::Dry) // брасаем пару кубиков сухого льда
-			<< MakeCondiment<CChocolateCrumbs>(2); // посыпаем шоколадной крошкой
+			<< MakeCondiment<CChocolateCrumbs>(2) // посыпаем шоколадной крошкой
+			<< MakeCondiment<CLiqueur>(LiqueurType::Nut); // добавляем ореховый ликер
 
 		// Выписываем счет покупателю
 		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
 	}
 
 	{
-		auto beverage = make_unique<CMilkshake>(MilkshakeSize::Big) // Наливаем молочный коктейль
+		auto beverage = make_unique<CMilkshake>(MilkshakeSize::Middle) // Наливаем молочный коктейль
 			<< MakeCondiment<CSyrup>(SyrupType::Maple) // заливаем кленовым сиропом
 			<< MakeCondiment<CCoconutFlakes>(8); // посыпаем кокосовой стружкой
 
