@@ -22,7 +22,7 @@ private:
 
 enum CoffeeSize
 {
-	Standart,
+	Standard,
 	Double
 };
 
@@ -30,7 +30,7 @@ enum CoffeeSize
 class CCoffee : public CBeverage
 {
 public:
-	CCoffee(CoffeeSize coffeeSize = CoffeeSize::Standart, const std::string& description = " Coffee")
+	CCoffee(CoffeeSize coffeeSize = CoffeeSize::Standard, const std::string& description = " Coffee")
 		: CBeverage(GetCoffeeDescription(coffeeSize) + description)
 		, m_coffeeSize(coffeeSize)
 	{
@@ -46,7 +46,7 @@ public:
 		std::string size;
 		switch (coffeeSize)
 		{
-		case CoffeeSize::Standart:
+		case CoffeeSize::Standard:
 			size = "Standart";
 			break;
 		case CoffeeSize::Double:
@@ -66,14 +66,14 @@ protected:
 class CCapuccino : public CCoffee
 {
 public:
-	CCapuccino(CoffeeSize coffeeSize = CoffeeSize::Standart)
+	CCapuccino(CoffeeSize coffeeSize = CoffeeSize::Standard)
 		: CCoffee(coffeeSize, " Capuccino")
 	{
 	}
 
 	double GetCost() const override
 	{
-		return (m_coffeeSize == CoffeeSize::Standart) ? 80 : 120;
+		return (m_coffeeSize == CoffeeSize::Standard) ? 80 : 120;
 	}
 };
 
@@ -81,14 +81,14 @@ public:
 class CLatte : public CCoffee
 {
 public:
-	CLatte(CoffeeSize coffeeSize = CoffeeSize::Standart)
+	CLatte(CoffeeSize coffeeSize = CoffeeSize::Standard)
 		: CCoffee(coffeeSize, " Latte")
 	{
 	}
 
 	double GetCost() const override
 	{
-		return (m_coffeeSize == CoffeeSize::Standart) ? 90 : 130;
+		return (m_coffeeSize == CoffeeSize::Standard) ? 90 : 130;
 	}
 };
 
