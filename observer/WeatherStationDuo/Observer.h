@@ -2,19 +2,8 @@
 #include <map>
 #include <set>
 
-/*
-Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
-желающий получать уведомления от соответствующего IObservable
-Параметром шаблона является тип аргумента,
-передаваемого Наблюдателю в метод Update
-*/
 template <typename T>
-class IObserver
-{
-public:
-	virtual void Update(T const& data) = 0;
-	virtual ~IObserver() = default;
-};
+class IObserver;
 
 /*
 Шаблонный интерфейс IObservable. Позволяет подписаться и отписаться на оповещения, а также
@@ -28,6 +17,20 @@ public:
 	virtual void RegisterObserver(IObserver<T>& observer, int priority = 0) = 0;
 	virtual void NotifyObservers() = 0;
 	virtual void RemoveObserver(IObserver<T>& observer) = 0;
+};
+
+/*
+Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
+желающий получать уведомления от соответствующего IObservable
+Параметром шаблона является тип аргумента,
+передаваемого Наблюдателю в метод Update
+*/
+template <typename T>
+class IObserver
+{
+public:
+	virtual void Update(T const& data, IObservable<T>& observable) = 0;
+	virtual ~IObserver() = default;
 };
 
 // Реализация интерфейса IObservable
@@ -49,7 +52,7 @@ public:
 		auto observers = m_observers;
 		for (auto& observer : observers)
 		{
-			observer.second->Update(data);
+			observer.second->Update(data, *this);
 		}
 	}
 

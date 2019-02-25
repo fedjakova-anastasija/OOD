@@ -17,42 +17,6 @@ struct SWeatherInfo
 	std::string indicatorType;
 };
 
-class CDisplay : public IObserver<SWeatherInfo>
-{
-private:
-	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
-		Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
-		остается публичным
-	*/
-	void Update(SWeatherInfo const& data) override
-	{
-		std::cout << "Indicator type: " << data.indicatorType << std::endl;
-		std::cout << "Current Temp " << data.temperature << std::endl;
-		std::cout << "Current Hum " << data.humidity << std::endl;
-		std::cout << "Current Pressure " << data.pressure << std::endl;
-		std::cout << "----------------" << std::endl;
-	}
-};
-
-class CStatsDisplay : public IObserver<SWeatherInfo>
-{
-private:
-	void Update(SWeatherInfo const& data) override
-	{
-		std::cout << "Indicator type: " << data.indicatorType << std::endl;
-		std::cout << "Temperature info: " << std::endl;
-		temperature.UpdateInfo(data.temperature);
-		std::cout << "Humidity info:" << std::endl;
-		humidity.UpdateInfo(data.humidity);
-		std::cout << "Pressure info:" << std::endl;
-		pressure.UpdateInfo(data.pressure);
-	}
-
-	CInfo temperature;
-	CInfo humidity;
-	CInfo pressure;
-};
-
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
@@ -106,4 +70,75 @@ private:
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 	std::string m_indicatorType;
+};
+
+class CDisplay : public IObserver<SWeatherInfo>
+{
+public:
+	CDisplay(const CWeatherData& in, const CWeatherData& out)
+		: m_in(in)
+		, m_out(out)
+	{
+	}
+
+private:
+	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
+		Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
+		остается публичным
+	*/
+	const CWeatherData& m_in;
+	const CWeatherData& m_out;
+
+	void Update(SWeatherInfo const& data, IObservable<SWeatherInfo>& observable) override
+	{
+		std::cout << "Indicator type: " << data.indicatorType << std::endl;
+		std::cout << "Current Temp " << data.temperature << std::endl;
+		std::cout << "Current Hum " << data.humidity << std::endl;
+		std::cout << "Current Pressure " << data.pressure << std::endl;
+		std::cout << "----------------" << std::endl;
+	}
+};
+
+class CStatsDisplay : public IObserver<SWeatherInfo>
+{
+public:
+	CStatsDisplay(const CWeatherData& in, const CWeatherData& out)
+		: m_in(in)
+		, m_out(out)
+	{
+	}
+
+private:
+	CInfo temperatureIn;
+	CInfo humidityIn;
+	CInfo pressureIn;
+	CInfo temperatureOut;
+	CInfo humidityOut;
+	CInfo pressureOut;
+	const CWeatherData& m_in;
+	const CWeatherData& m_out;
+
+	void Display(SWeatherInfo const& data, CInfo& temperature, CInfo& humidity, CInfo& pressure)
+	{
+		std::cout << "Temperature info: " << std::endl;
+		temperature.UpdateInfo(data.temperature);
+		std::cout << "Humidity info:" << std::endl;
+		humidity.UpdateInfo(data.humidity);
+		std::cout << "Pressure info:" << std::endl;
+		pressure.UpdateInfo(data.pressure);
+	}
+
+	void Update(SWeatherInfo const& data, IObservable<SWeatherInfo>& observable) override
+	{
+
+		std::cout << "Indicator type: " << data.indicatorType << std::endl;
+		if (&observable == &m_in)
+		{
+			Display(data, temperatureIn, humidityIn, pressureIn);
+		}
+		if (&observable == &m_out)
+		{
+			Display(data, temperatureOut, humidityOut, pressureOut);
+		}
+	}
 };
