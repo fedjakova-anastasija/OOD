@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "CShapeFactory.h"
+#include "CCanvas.h"
+#include "CDesigner.h"
 #include "Config.h"
 
 CShapeFactory::CShapeFactory()

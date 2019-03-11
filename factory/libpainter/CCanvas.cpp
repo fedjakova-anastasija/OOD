@@ -6,11 +6,6 @@ CCanvas::CCanvas()
 {
 }
 
-//CCanvas::CCanvas(sf::RenderWindow& window)
-//	: m_window(window)
-//{
-//}
-
 void CCanvas::SetColor(const Color& color)
 {
 	m_color = color;

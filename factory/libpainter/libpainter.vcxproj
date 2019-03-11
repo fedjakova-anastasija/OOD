@@ -145,7 +145,6 @@
     <ClInclude Include="CEllipse.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Config.h" />
-    <ClInclude Include="CPainter.h" />
     <ClInclude Include="CPictureDraft.h" />
     <ClInclude Include="CPoint.h" />
     <ClInclude Include="CRectangle.h" />
@@ -155,7 +154,6 @@
     <ClInclude Include="CTriangle.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IDesigner.h" />
-    <ClInclude Include="IPainter.h" />
     <ClInclude Include="IShapeFactory.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -164,7 +162,6 @@
     <ClCompile Include="CCanvas.cpp" />
     <ClCompile Include="CDesigner.cpp" />
     <ClCompile Include="CEllipse.cpp" />
-    <ClCompile Include="CPainter.cpp" />
     <ClCompile Include="CPictureDraft.cpp" />
     <ClCompile Include="CPoint.cpp" />
     <ClCompile Include="CRectangle.cpp" />

@@ -6,5 +6,6 @@ const std::string CREATE_TRIANGLE = "triangle";
 const std::string CREATE_REGULAR_POLYGON = "regularPolygon";
 const std::string INFO = "info";
 
+const float THICKNESS = 3;
 const int WINDOW_WIDTH = 1100;
 const int WINDOW_HEIGTH = 330;
