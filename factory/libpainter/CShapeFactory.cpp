@@ -5,21 +5,11 @@
 #include "Config.h"
 
 CShapeFactory::CShapeFactory()
-	: m_action({ { CREATE_ELLIPSE, bind(&CShapeFactory::CreateEllipse, this, std::placeholders::_1) },
+	: m_actionMap({ { CREATE_ELLIPSE, bind(&CShapeFactory::CreateEllipse, this, std::placeholders::_1) },
 		  { CREATE_RECTANGLE, bind(&CShapeFactory::CreateRectangle, this, std::placeholders::_1) },
 		  { CREATE_TRIANGLE, bind(&CShapeFactory::CreateTriangle, this, std::placeholders::_1) },
 		  { CREATE_REGULAR_POLYGON, bind(&CShapeFactory::CreateRegularPolygon, this, std::placeholders::_1) } })
 {
-}
-
-void CShapeFactory::Info()
-{
-	std::cout << "-> Create an ellipse: " << CREATE_ELLIPSE << " <center.x> <center.y> <horizontal radius> <vertical radius> <color>" << std::endl
-			  << "-> Create a rectangle: " << CREATE_RECTANGLE << " <leftTop.x> <leftTop.y> <rightBottom.x> <rightBottom.y> <color>" << std::endl
-			  << "-> Create a triangle: " << CREATE_TRIANGLE << " <first.x> <first.y> <second.x> <second.y> <third.x> <third.y> <color>" << std::endl
-			  << "-> Create a regylar polygon: " << CREATE_REGULAR_POLYGON << " <center.x> <center.y> <radius> <vertex count> <color>" << std::endl
-			  << "-> Color: "
-			  << "red, green, blue, black, pink, yellow" << std::endl;
 }
 
 std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string& description)
@@ -28,13 +18,8 @@ std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string& descriptio
 	std::string action;
 	stream >> action;
 
-	if (action == "info")
-	{
-		Info();
-	}
-
-	auto it = m_action.find(action);
-	if (it != m_action.end())
+	auto it = m_actionMap.find(action);
+	if (it != m_actionMap.end())
 	{
 		return it->second(stream);
 	}
