@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeatherStationPro", "Weathe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeatherStationProDuo", "WeatherStationProDuo\WeatherStationProDuo.vcxproj", "{FB40B596-4CDD-4E0D-AB6F-6DCF4E9AF665}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeatherStationProDuoSignals", "WeatherStationProDuoSignals\WeatherStationProDuoSignals.vcxproj", "{85B07ADC-F29F-41FE-A27B-ABC8F454F396}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{FB40B596-4CDD-4E0D-AB6F-6DCF4E9AF665}.Release|x64.Build.0 = Release|x64
 		{FB40B596-4CDD-4E0D-AB6F-6DCF4E9AF665}.Release|x86.ActiveCfg = Release|Win32
 		{FB40B596-4CDD-4E0D-AB6F-6DCF4E9AF665}.Release|x86.Build.0 = Release|Win32
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Debug|x64.ActiveCfg = Debug|x64
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Debug|x64.Build.0 = Debug|x64
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Debug|x86.ActiveCfg = Debug|Win32
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Debug|x86.Build.0 = Debug|Win32
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Release|x64.ActiveCfg = Release|x64
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Release|x64.Build.0 = Release|x64
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Release|x86.ActiveCfg = Release|Win32
+		{85B07ADC-F29F-41FE-A27B-ABC8F454F396}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
