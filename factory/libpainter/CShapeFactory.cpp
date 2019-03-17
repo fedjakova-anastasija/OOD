@@ -3,6 +3,9 @@
 #include "CCanvas.h"
 #include "CDesigner.h"
 #include "Config.h"
+#include "CModernCanvas.h"
+#include "CPainter.h"
+#include "CPictureDraft.h"
 
 CShapeFactory::CShapeFactory()
 	: m_actionMap({ { CREATE_ELLIPSE, bind(&CShapeFactory::CreateEllipse, this, std::placeholders::_1) },
@@ -27,6 +30,8 @@ std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string& descriptio
 	{
 		throw std::invalid_argument("Wrong command name!\nEnter <info> to get valid input\n");
 	}
+
+	//return std::unique_ptr<CShape>(); 
 }
 
 std::unique_ptr<CTriangle> CShapeFactory::CreateTriangle(std::istringstream& args) const
@@ -67,8 +72,8 @@ std::unique_ptr<CEllipse> CShapeFactory::CreateEllipse(std::istringstream& args)
 {
 	Color color;
 	CPoint center;
-	double horizontalRadius;
-	double verticalRadius;
+	float horizontalRadius;
+	float verticalRadius;
 
 	if (args >> center.x >> center.y >> horizontalRadius >> verticalRadius >> color)
 	{

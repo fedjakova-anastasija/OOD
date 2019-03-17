@@ -19,13 +19,12 @@ CRegularPolygon::CRegularPolygon(const CPoint& center, double radius, unsigned v
 
 void CRegularPolygon::Draw(ICanvas& canvas) const
 {
-	canvas.SetColor(m_color);
-	for (size_t i = m_vertices.size() - 1; i != 0; --i)
+	canvas.SetColor(m_color);	
+	for (auto i = m_vertices.size() - 1; i != 0; --i)
 	{
-		//canvas.DrawLine(m_vertices[i], m_vertices[i - 1]);
-		canvas.DrawLine(m_vertices.at(i), m_vertices.at(i + 1));
+		canvas.DrawLine(m_vertices[i], m_vertices[i - 1]);
 	}
-	canvas.DrawLine(m_vertices.at(m_vertices.size() - 1), m_vertices.at(0));
+	canvas.DrawLine(m_vertices[m_vertices.size() - 1], m_vertices[0]);
 }
 
 CPoint CRegularPolygon::GetCenter() const

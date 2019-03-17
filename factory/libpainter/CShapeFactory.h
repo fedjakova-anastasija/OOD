@@ -16,7 +16,7 @@ public:
 
 private:
 	typedef std::map<std::string, std::function<std::unique_ptr<CShape>(std::istringstream& stream)>> ActionMap;
-
+	
 	std::unique_ptr<CEllipse> CreateEllipse(std::istringstream& stream) const;
 	std::unique_ptr<CRectangle> CreateRectangle(std::istringstream& stream) const;
 	std::unique_ptr<CTriangle> CreateTriangle(std::istringstream& stream) const;

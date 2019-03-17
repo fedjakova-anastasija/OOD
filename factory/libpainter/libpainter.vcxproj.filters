@@ -81,6 +81,12 @@
     <ClInclude Include="CShape.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="CPainter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IPainter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -114,6 +120,9 @@
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="CEllipse.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CPainter.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>

@@ -53,7 +53,6 @@ inline std::istream& operator>>(std::istream& colorStr, Color& color)
 inline std::ostream& operator<<(std::ostream& colorStr, Color& color)
 {
 	std::string str = "";
-
 	auto it = COLOR.find(color);
 	if (it != COLOR.end())
 	{
