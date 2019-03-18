@@ -70,8 +70,8 @@ std::unique_ptr<CEllipse> CShapeFactory::CreateEllipse(std::istringstream& args)
 {
 	Color color;
 	CPoint center;
-	float horizontalRadius;
-	float verticalRadius;
+	double horizontalRadius;
+	double verticalRadius;
 
 	if (args >> center.x >> center.y >> horizontalRadius >> verticalRadius >> color)
 	{

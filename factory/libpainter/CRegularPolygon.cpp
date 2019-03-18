@@ -27,6 +27,11 @@ void CRegularPolygon::Draw(ICanvas& canvas) const
 	canvas.DrawLine(m_vertices[m_vertices.size() - 1], m_vertices[0]);
 }
 
+unsigned CRegularPolygon::GetVertexCount() const
+{
+	return m_vertexCount;
+}
+
 CPoint CRegularPolygon::GetCenter() const
 {
 	return m_center;
@@ -35,9 +40,4 @@ CPoint CRegularPolygon::GetCenter() const
 double CRegularPolygon::GetRadius() const
 {
 	return m_radius;
-}
-
-unsigned CRegularPolygon::GetVertexCount() const
-{
-	return m_vertexCount;
 }

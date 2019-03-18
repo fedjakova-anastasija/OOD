@@ -20,7 +20,6 @@ void CCanvas::DrawLine(const CPoint& start, const CPoint& end)
 {
 	sf::Vertex points[] = {
 		sf::Vertex(sf::Vector2f(static_cast<float>(start.x), static_cast<float>(start.y)), m_color),
-
 		sf::Vertex(sf::Vector2f(static_cast<float>(end.x), static_cast<float>(end.y)), m_color)
 	};
 
@@ -29,8 +28,8 @@ void CCanvas::DrawLine(const CPoint& start, const CPoint& end)
 
 void CCanvas::DrawEllipse(double left, double top, double width, double height)
 {
-	auto horizontalRadius = static_cast<float>(width / 2.f);
-	auto verticalRadius = static_cast<float>(height / 2.f);
+	float horizontalRadius = static_cast<float>(width / 2.f);
+	float verticalRadius = static_cast<float>(height / 2.f);
 
 	sf::CircleShape ellipse(horizontalRadius);
 	ellipse.setPosition(static_cast<float>(left), static_cast<float>(top));
