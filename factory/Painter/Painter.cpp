@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "../libpainter/CCanvas.h"
 #include "../libpainter/CDesigner.h"
-//#include "../libpainter/CModernCanvas.h"
 #include "../libpainter/CPainter.h"
 #include "../libpainter/CShapeFactory.h"
 #include "../libpainter/Config.h"
@@ -15,18 +14,11 @@ void Info()
 			  << "-> Create a rectangle: " << CREATE_RECTANGLE << " <leftTop.x> <leftTop.y> <rightBottom.x> <rightBottom.y> <color>" << std::endl
 			  << "-> Create a triangle: " << CREATE_TRIANGLE << " <first.x> <first.y> <second.x> <second.y> <third.x> <third.y> <color>" << std::endl
 			  << "-> Create a regylar polygon: " << CREATE_REGULAR_POLYGON << " <center.x> <center.y> <radius> <vertex count> <color>" << std::endl
-			  << "-> Color: "
-			  << "red, green, blue, black, pink, yellow" << std::endl;
+			  << "-> Color: " << "red, green, blue, black, pink, yellow" << std::endl
+			  << "-> Draw the picture: " << "draw" << std::endl;
 }
-
-int main()
+void Draw(CPictureDraft& pictureDraft)
 {
-	Info();
-	CShapeFactory shapeFactory;
-	CDesigner designer(shapeFactory);
-
-	CPictureDraft pictureDraft = designer.CreateDraft(std::cin);
-
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGTH), "Shapes");
 	CCanvas canvas(window);
 	CPainter painter;
@@ -47,6 +39,16 @@ int main()
 
 		window.display();
 	}
+}
+
+int main()
+{
+	Info();
+	CShapeFactory shapeFactory;
+	CDesigner designer(shapeFactory);
+
+	CPictureDraft pictureDraft = designer.CreateDraft(std::cin);
+	Draw(pictureDraft);
 
 	return 0;
 }
