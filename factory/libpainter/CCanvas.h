@@ -1,7 +1,7 @@
 #pragma once
+#include "CPoint.h"
 #include "Color.h"
 #include "ICanvas.h"
-#include "CPoint.h"
 
 class CCanvas : public ICanvas
 {
@@ -13,14 +13,15 @@ public:
 	void DrawEllipse(double left, double top, double width, double height) override;
 
 private:
+	const std::map<Color, sf::Color> COLORS = {
+		{ Color::GREEN, sf::Color::Green },
+		{ Color::RED, sf::Color::Red },
+		{ Color::BLUE, sf::Color::Blue },
+		{ Color::YELLOW, sf::Color::Yellow },
+		{ Color::PINK, sf::Color(0xFF, 0xB6, 0xC1) },
+		{ Color::BLACK, sf::Color::Black }
+	};
+
 	sf::RenderWindow& m_window;
 	sf::Color m_color;
-	const std::map<Color, sf::Color> COLORS = { 
-		{ Color::BLACK, sf::Color::Black },
-		{ Color::BLUE, sf::Color::Blue },
-		{ Color::GREEN, sf::Color::Green },
-		{ Color::PINK, sf::Color(255, 105, 180) },
-		{ Color::RED, sf::Color::Red },
-		{ Color::YELLOW, sf::Color::Yellow } };
 };
-

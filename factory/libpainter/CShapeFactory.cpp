@@ -30,8 +30,6 @@ std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string& descriptio
 	{
 		throw std::invalid_argument("Wrong command name!\nEnter <info> to get valid input\n");
 	}
-
-	//return std::unique_ptr<CShape>(); 
 }
 
 std::unique_ptr<CTriangle> CShapeFactory::CreateTriangle(std::istringstream& args) const

@@ -25,7 +25,6 @@ CPictureDraft CDesigner::CreateDraft(std::istream& inputData)
 		{
 			if (line != "draw")
 			{
-				std::unique_ptr<CShape> shape = m_factory.CreateShape(line);
 				draft.AddShape(m_factory.CreateShape(line));
 			}
 			else

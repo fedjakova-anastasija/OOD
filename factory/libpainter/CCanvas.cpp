@@ -2,6 +2,7 @@
 #include "CCanvas.h"
 #include "CPoint.h"
 #include "Config.h"
+#include "Color.h"
 
 CCanvas::CCanvas(sf::RenderWindow& window)
 	: m_window(window)
