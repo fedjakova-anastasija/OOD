@@ -207,10 +207,10 @@ private:
 // Пространство имен приложения (доступно для модификации)
 namespace app
 {
-class CAdapter : public graphics_lib::ICanvas
+class CRendererAdapter : public graphics_lib::ICanvas
 {
 public:
-	CAdapter(modern_graphics_lib::CModernGraphicsRenderer& render)
+	CRendererAdapter(modern_graphics_lib::CModernGraphicsRenderer& render)
 		: m_render(render)
 		, m_point(0, 0)
 	{
@@ -260,7 +260,7 @@ void PaintPictureOnModernGraphicsRenderer()
 	// TODO: при помощи существующей функции PaintPicture() нарисовать
 	// картину на renderer
 	// Подсказка: используйте паттерн "Адаптер"
-	CAdapter adapter(renderer);
+	CRendererAdapter adapter(renderer);
 	shape_drawing_lib::CCanvasPainter painter(adapter);
 	PaintPicture(painter);
 }

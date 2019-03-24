@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duck-adapter", "duck-adapte
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lwtask", "lwtask\lwtask.vcxproj", "{0A11E3EF-7992-41CE-803D-A2D082C7B448}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lwtasktests1", "lwtasktests\lwtasktests.vcxproj", "{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lwtasktest", "lwtasktest\lwtasktest.vcxproj", "{EFA00130-54EB-4E24-AB37-62A6908AC3F3}"
 EndProject
 Global
@@ -35,14 +33,6 @@ Global
 		{0A11E3EF-7992-41CE-803D-A2D082C7B448}.Release|x64.Build.0 = Release|x64
 		{0A11E3EF-7992-41CE-803D-A2D082C7B448}.Release|x86.ActiveCfg = Release|Win32
 		{0A11E3EF-7992-41CE-803D-A2D082C7B448}.Release|x86.Build.0 = Release|Win32
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Debug|x64.ActiveCfg = Debug|x64
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Debug|x64.Build.0 = Debug|x64
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Debug|x86.ActiveCfg = Debug|Win32
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Debug|x86.Build.0 = Debug|Win32
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Release|x64.ActiveCfg = Release|x64
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Release|x64.Build.0 = Release|x64
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Release|x86.ActiveCfg = Release|Win32
-		{FBCFFAAF-2558-4A6A-8ACC-F07C6BCCDC70}.Release|x86.Build.0 = Release|Win32
 		{EFA00130-54EB-4E24-AB37-62A6908AC3F3}.Debug|x64.ActiveCfg = Debug|x64
 		{EFA00130-54EB-4E24-AB37-62A6908AC3F3}.Debug|x64.Build.0 = Debug|x64
 		{EFA00130-54EB-4E24-AB37-62A6908AC3F3}.Debug|x86.ActiveCfg = Debug|Win32
