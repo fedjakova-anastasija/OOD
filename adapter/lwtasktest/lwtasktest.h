@@ -156,13 +156,13 @@ public:
 	{
 	}
 
-	//~CModernGraphicsRenderer()
-	//{
-	//	if (m_drawing) // Завершаем рисование, если оно было начато
-	//	{
-	//		EndDraw();
-	//	}
-	//}
+	~CModernGraphicsRenderer()
+	{
+		if (m_drawing) // Завершаем рисование, если оно было начато
+		{
+			EndDraw();
+		}
+	}
 
 	// Этот метод должен быть вызван в начале рисования
 	void BeginDraw()
