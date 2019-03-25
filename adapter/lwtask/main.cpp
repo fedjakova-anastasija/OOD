@@ -225,7 +225,7 @@ public:
 	void LineTo(int x, int y) override
 	{
 		m_render.DrawLine(m_point, modern_graphics_lib::CPoint(x, y));
-		MoveTo(x, y);
+		//MoveTo(x, y);
 	}
 
 private:
