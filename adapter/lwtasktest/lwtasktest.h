@@ -156,13 +156,13 @@ public:
 	{
 	}
 
-	~CModernGraphicsRenderer()
-	{
-		if (m_drawing) // Завершаем рисование, если оно было начато
-		{
-			EndDraw();
-		}
-	}
+	//~CModernGraphicsRenderer()
+	//{
+	//	if (m_drawing) // Завершаем рисование, если оно было начато
+	//	{
+	//		EndDraw();
+	//	}
+	//}
 
 	// Этот метод должен быть вызван в начале рисования
 	void BeginDraw()
@@ -214,7 +214,17 @@ public:
 		: m_render(render)
 		, m_point(0, 0)
 	{
+		//m_render.BeginDraw();
+	}
+
+	void BeginDraw()
+	{
 		m_render.BeginDraw();
+	}
+
+	void EndDraw()
+	{
+		m_render.EndDraw();
 	}
 
 	void MoveTo(int x, int y) override
@@ -262,7 +272,9 @@ void PaintPictureOnModernGraphicsRenderer()
 	// Подсказка: используйте паттерн "Адаптер"
 	CRendererAdapter adapter(renderer);
 	shape_drawing_lib::CCanvasPainter painter(adapter);
+	adapter.BeginDraw();
 	PaintPicture(painter);
+	adapter.EndDraw();
 }
 } // namespace app
 

@@ -214,7 +214,17 @@ public:
 		: m_render(render)
 		, m_point(0, 0)
 	{
+		//m_render.BeginDraw();
+	}
+
+	void BeginDraw()
+	{
 		m_render.BeginDraw();
+	}
+
+	void EndDraw()
+	{
+		m_render.EndDraw();
 	}
 
 	void MoveTo(int x, int y) override
@@ -225,7 +235,7 @@ public:
 	void LineTo(int x, int y) override
 	{
 		m_render.DrawLine(m_point, modern_graphics_lib::CPoint(x, y));
-		//MoveTo(x, y);
+		MoveTo(x, y);
 	}
 
 private:
@@ -262,7 +272,9 @@ void PaintPictureOnModernGraphicsRenderer()
 	// Подсказка: используйте паттерн "Адаптер"
 	CRendererAdapter adapter(renderer);
 	shape_drawing_lib::CCanvasPainter painter(adapter);
+	adapter.BeginDraw();
 	PaintPicture(painter);
+	adapter.EndDraw();
 }
 } // namespace app
 
