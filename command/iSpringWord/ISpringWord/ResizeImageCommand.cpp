@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "ResizeImageCommand.h"
 
-CResizeImageCommand::CResizeImageCommand(int& targetWidth, int const& newWidth, int& targetHeight, int const& newHeight)
-	: m_targetHeight(targetHeight)
-	, m_targetWidth(targetWidth)
+CResizeImageCommand::CResizeImageCommand(int& width, int const& newWidth, int& height, int const& newHeight)
+	: m_height(height)
+	, m_width(width)
 	, m_newHeight(newHeight)
 	, m_newWidth(newWidth)
 {
@@ -11,11 +11,12 @@ CResizeImageCommand::CResizeImageCommand(int& targetWidth, int const& newWidth, 
 
 void CResizeImageCommand::DoExecute()
 {
-	std::swap(m_targetHeight, m_newHeight);
-	std::swap(m_targetWidth, m_newWidth);
+	std::swap(m_height, m_newHeight);
+	std::swap(m_width, m_newWidth);
 }
 
 void CResizeImageCommand::DoUnexecute()
 {
-	DoExecute();
+	std::swap(m_width, m_newWidth);
+	std::swap(m_height, m_newHeight);
 }

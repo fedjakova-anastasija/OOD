@@ -1,17 +1,17 @@
 #include "stdafx.h"
 #include "DocumentItem.h"
 
-CDocumentItem::CDocumentItem(const std::shared_ptr<IImage>& image, const std::shared_ptr<IParagraph>& paragraph)
-	: CConstDocumentItem(image, paragraph)
+CDocumentItem::CDocumentItem(const std::shared_ptr<IImage>& image, const std::shared_ptr<IParagraph>& text)
+	: CConstDocumentItem(image, text)
 {
 }
 
 std::shared_ptr<IImage> CDocumentItem::GetImage()
 {
-	return std::shared_ptr<IImage>();
+	return m_image;
 }
 
 std::shared_ptr<IParagraph> CDocumentItem::GetParagraph()
 {
-	return std::shared_ptr<IParagraph>();
+	return m_text;
 }

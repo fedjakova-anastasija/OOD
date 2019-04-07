@@ -1,6 +1,17 @@
 #include "stdafx.h"
 #include "SaveCommand.h"
 
+namespace
+{
+const std::vector<std::pair<std::string, std::string>> ESCAPES = {
+	{ "&", "&amp;" },
+	{ "<", "&lt;" },
+	{ ">", "&gt;" },
+	{ "\"", "&quot;" },
+	{ "'", "&apos;" }
+};
+} // namespace
+
 SaveCommand::SaveCommand(const boost::filesystem::path& path)
 {
 	SetPath(path);
@@ -9,9 +20,8 @@ SaveCommand::SaveCommand(const boost::filesystem::path& path)
 void SaveCommand::Save() const
 {
 	CopyImages();
-	OutputHtml();
+	Html();
 }
-
 
 void SaveCommand::ProccessEscapes(std::string& text) const
 {
@@ -21,13 +31,13 @@ void SaveCommand::ProccessEscapes(std::string& text) const
 	}
 }
 
-void SaveCommand::SetTitle(const std::string & title)
+void SaveCommand::SetTitle(const std::string& title)
 {
 	m_title = title;
 	SaveCommand::ProccessEscapes(m_title);
 }
 
-void SaveCommand::AddItem(const CConstDocumentItem & item)
+void SaveCommand::AddItem(const CConstDocumentItem& item)
 {
 	m_items.emplace_back(item);
 }
@@ -75,16 +85,15 @@ void SaveCommand::CopyImages() const
 	}
 }
 
-void SaveCommand::OutputHead(std::ofstream& out) const
+void SaveCommand::Html() const
 {
-	out << "<head>" << std::endl;
-	out << "<title>" << m_title << "</title>" << std::endl;
-	out << "</head>" << std::endl;
-}
+	std::ofstream output(m_path.string());
 
-void SaveCommand::OutputBody(std::ofstream& out) const
-{
-	out << "<body>" << std::endl;
+	output << "<html>" << std::endl;
+	output << "<head>" << std::endl;
+	output << "<title>" << m_title << "</title>" << std::endl;
+	output << "</head>" << std::endl;
+	output << "<body>" << std::endl;
 
 	for (size_t i = 0; i < m_items.size(); ++i)
 	{
@@ -93,25 +102,16 @@ void SaveCommand::OutputBody(std::ofstream& out) const
 		{
 			boost::filesystem::path path = (boost::filesystem::path("images") /= (image->GetPath()).filename());
 
-			out << boost::format(R"(<img src=%1% width="%2%" height="%3%" />)") % path % image->GetWidth() % image->GetHeight() << std::endl;
+			output << boost::format(R"(<img src=%1% width="%2%" height="%3%" />)") % path % image->GetWidth() % image->GetHeight() << std::endl;
 		}
 		else
 		{
 			auto paragraph = item.GetParagraph();
 			std::string text = paragraph->GetText();
 			SaveCommand::ProccessEscapes(text);
-			out << boost::format(R"(<p>%1%</p>)") % text << std::endl;
+			output << boost::format(R"(<p>%1%</p>)") % text << std::endl;
 		}
 	}
-	out << "</body>" << std::endl;
-}
-
-void SaveCommand::OutputHtml() const
-{
-	std::ofstream output(m_path.string());
-
-	output << "<html>" << std::endl;
-	OutputHead(output);
-	OutputBody(output);
+	output << "</body>" << std::endl;
 	output << "</html>" << std::endl;
 }

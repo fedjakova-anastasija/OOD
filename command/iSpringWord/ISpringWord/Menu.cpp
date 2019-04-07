@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void CMenu::AddItem(const string & shortcut, const string & description, const Command & command)
+void CMenu::AddItem(const string& shortcut, const string& description, const Command& command)
 {
 	m_items.emplace_back(shortcut, description, command);
 }
@@ -12,18 +12,27 @@ void CMenu::Run()
 {
 	ShowInstructions();
 
-	string command;
-	while ((cout << ">")
-		&& getline(cin, command)
-		&& ExecuteCommand(command))
+	std::string command;
+	while ((std::cout << ">") && std::getline(std::cin, command))
 	{
+		try
+		{
+			if (!ExecuteCommand(command))
+			{
+				break;
+			}
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
 	}
 }
 
 void CMenu::ShowInstructions() const
 {
 	cout << "Commands list:\n";
-	for (auto & item : m_items)
+	for (auto& item : m_items)
 	{
 		cout << "  " << item.shortcut << ": " << item.description << "\n";
 	}
@@ -34,14 +43,14 @@ void CMenu::Exit()
 	m_exit = true;
 }
 
-bool CMenu::ExecuteCommand(const string & command)
+bool CMenu::ExecuteCommand(const string& command)
 {
 	istringstream iss(command);
 	string name;
 	iss >> name;
 
 	m_exit = false;
-	auto it = boost::find_if(m_items, [&](const Item & item) {
+	auto it = boost::find_if(m_items, [&](const Item& item) {
 		return item.shortcut == name;
 	});
 	if (it != m_items.end())

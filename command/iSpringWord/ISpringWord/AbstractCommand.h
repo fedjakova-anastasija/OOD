@@ -1,5 +1,6 @@
 #pragma once
 #include "ICommand.h"
+
 class CAbstractCommand : public ICommand
 {
 public:

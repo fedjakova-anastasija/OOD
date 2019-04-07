@@ -1,5 +1,6 @@
 #pragma once
 #include "AbstractCommand.h"
+
 class CChangeStringCommand : public CAbstractCommand
 {
 public:

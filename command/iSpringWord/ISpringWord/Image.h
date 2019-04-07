@@ -5,7 +5,7 @@
 class CImage : public IImage
 {
 public:
-	CImage(ICommandHistory& history, const boost::filesystem::path& path, int width, int height);
+	CImage(const boost::filesystem::path& path, int width, int height, ICommandHistory& history);
 
 	boost::filesystem::path GetPath() const override;
 

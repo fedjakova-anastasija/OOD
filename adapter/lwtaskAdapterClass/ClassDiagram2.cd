@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="graphics_lib::ICanvas" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="graphics_lib::CCanvas">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::ICanvasDrawable" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::CTriangle" Collapsed="true">
+    <Position X="10" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::CRectangle" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAwABAAAAAAQAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::CCanvasPainter" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAIAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib::CPoint" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib::CModernGraphicsRenderer">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAAAAAAAAAQAAAABAAgAABAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="app::CRendererAdapter">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAACAAAIAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="graphics_lib_pro::ICanvas" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAEAAAgAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib_pro::CPoint" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib_pro::CRGBAColor" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAQABAAAAAAg=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib_pro::CModernGraphicsRenderer" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAAAAAAAAAQAAAABAAgAABAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="shape_drawing_lib::Point" Collapsed="true">
+    <Position X="10.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>lwtaskAdapterClass.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

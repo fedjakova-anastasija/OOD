@@ -16,21 +16,10 @@ private:
 
 	void SetPath(const boost::filesystem::path& path);
 	void CopyImages() const;
-
-	void OutputHead(std::ofstream& out) const;
-	void OutputBody(std::ofstream& out) const;
-	void OutputHtml() const;
+	void Html() const;
 
 	std::string m_title;
 	std::vector<CConstDocumentItem> m_items;
-
-	const std::vector<std::pair<std::string, std::string>> ESCAPES = {
-		{ "&", "&amp;" },
-		{ "\"", "&quot;" },
-		{ "\'", "&apos;" },
-		{ "<", "&lt;" },
-		{ ">", "&gt;" },
-	};
 
 	void ProccessEscapes(std::string& text) const;
 };

@@ -10,23 +10,15 @@ CDeleteCommand::CDeleteCommand(std::vector<CDocumentItem>& items, size_t index)
 
 CDeleteCommand::~CDeleteCommand()
 {
-	//если выполнена и это картинка то из images удаляем
-	auto image = m_item->GetImage();
-	if (m_executed && image)
+	if (m_executed && m_item->GetImage())
 	{
 		boost::system::error_code errorCode;
-		boost::filesystem::remove(image->GetPath(), errorCode);
-		if (errorCode)
-		{
-			std::cout << errorCode.message() << std::endl;
-		}
+		boost::filesystem::remove(m_item->GetImage()->GetPath(), errorCode);
 	}
 }
 
 void CDeleteCommand::DoExecute()
 {
-	m_item = std::make_shared<CDocumentItem>(m_items.at(m_index));
-
 	m_items.erase(m_items.begin() + m_index);
 }
 

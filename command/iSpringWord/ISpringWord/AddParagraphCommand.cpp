@@ -2,38 +2,26 @@
 #include "AddParagraphCommand.h"
 #include "Paragraph.h"
 
-CAddParagraphCommand::CAddParagraphCommand(std::shared_ptr<IParagraph>&& paragraph, std::vector<CDocumentItem>& items, boost::optional<size_t> position)
+CAddParagraphCommand::CAddParagraphCommand(std::shared_ptr<IParagraph>&& text, std::vector<CDocumentItem>& items, boost::optional<size_t> pos)
 	: m_items(items)
-	, m_position(position)
-	, m_paragraph(paragraph)
+	, m_pos(pos)
+	, m_text(text)
 {
 }
 
 void CAddParagraphCommand::DoExecute()
 {
-	if (m_position == boost::none)
-	{
-
-		m_items.emplace_back(CDocumentItem(nullptr, m_paragraph));
-	}
-	else if (m_position > m_items.size())
-	{
-		throw std::invalid_argument("Index should be less than the size of the document");
-	}
-	else
-	{
-		m_items.emplace(m_items.begin() + m_position.get(), CDocumentItem(nullptr, m_paragraph));
-	}
+	m_items.emplace(m_items.begin() + m_pos.get(), CDocumentItem(nullptr, m_text));
 }
 
 void CAddParagraphCommand::DoUnexecute()
 {
-	if (m_position == boost::none)
+	if (m_pos != boost::none)
 	{
-		m_items.pop_back();
+		m_items.erase(m_items.begin() + m_pos.get());
 	}
 	else
 	{
-		m_items.erase(m_items.begin() + m_position.get());
+		m_items.pop_back();
 	}
 }

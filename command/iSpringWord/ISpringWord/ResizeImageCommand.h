@@ -4,14 +4,15 @@
 class CResizeImageCommand : public CAbstractCommand
 {
 public:
-	CResizeImageCommand(int& targetWidth, int const& newWidth, int& targetHeight, int const& newHeight);
-
-private:
+	CResizeImageCommand(int& width, int const& newWidth, int& height, int const& newHeight);
+	
+protected:
 	void DoExecute() override;
 	void DoUnexecute() override;
 
-	int& m_targetWidth;
-	int m_newWidth;
-	int& m_targetHeight;
+private:
+	int& m_height;
 	int m_newHeight;
+	int& m_width;
+	int m_newWidth;
 };
