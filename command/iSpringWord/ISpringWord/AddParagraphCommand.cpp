@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "AddParagraphCommand.h"
 #include "Paragraph.h"
 
@@ -11,6 +11,10 @@ CAddParagraphCommand::CAddParagraphCommand(std::shared_ptr<IParagraph>&& text, s
 
 void CAddParagraphCommand::DoExecute()
 {
+	if (m_pos > m_items.size())
+	{
+		throw std::invalid_argument("Wrong position!");
+	}
 	m_items.emplace(m_items.begin() + m_pos.get(), CDocumentItem(nullptr, m_text));
 }
 

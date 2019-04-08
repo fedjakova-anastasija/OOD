@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "TextAndImageEditor.h"
 #include "Document.h"
 #include "Menu.h"

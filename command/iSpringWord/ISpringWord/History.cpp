@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+﻿#include "../ISpringWord/stdafx.h"
 #include "History.h"
 #include "ICommand.h"
 

@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+﻿#include "../ISpringWord/stdafx.h"
 #include "DeleteCommand.h"
 
 CDeleteCommand::CDeleteCommand(std::vector<CDocumentItem>& items, size_t index)

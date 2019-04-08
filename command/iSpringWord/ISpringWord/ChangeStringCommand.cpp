@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "ChangeStringCommand.h"
 
 CChangeStringCommand::CChangeStringCommand(std::string& target, std::string const& newValue)

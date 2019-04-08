@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+﻿#include "../ISpringWord/stdafx.h"
 #include "AddImageCommand.h"
 #include "Image.h"
 
@@ -37,18 +37,10 @@ void CAddImageCommand::DoUnexecute()
 
 void CAddImageCommand::SetImage(ICommandHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& dirName)
 {
-	//boost::filesystem::path imagesFolderPath = boost::filesystem::path(dirName);
-	//boost::filesystem::create_directory(imagesFolderPath);
-
 	boost::filesystem::path imagesDir = CreateNewDir(dirName);
-
 	std::string extensionFile = boost::filesystem::extension(path);
 	boost::algorithm::to_lower(extensionFile);
 	CheckExtension(extensionFile);
-	/*if (extensionFile != ".jpg" && extensionFile != ".png" && extensionFile != ".gif")
-	{
-		throw std::logic_error("Wrong file extension");
-	}*/
 
 	std::string newFileName = boost::filesystem::unique_path().string() + extensionFile;
 
@@ -56,7 +48,7 @@ void CAddImageCommand::SetImage(ICommandHistory& history, const boost::filesyste
 	newRelativePath /= boost::filesystem::path(newFileName);
 
 	boost::filesystem::copy_file(path, (imagesDir /= boost::filesystem::path(newFileName)));
-	m_image = std::make_shared<CImage>(newRelativePath, width, height, history);
+	m_image = std::make_shared<CImage>(newRelativePath.generic_string(), width, height, history);
 }
 
 boost::filesystem::path CAddImageCommand::CreateNewDir(const std::string& dirName)
@@ -68,8 +60,8 @@ boost::filesystem::path CAddImageCommand::CreateNewDir(const std::string& dirNam
 
 void CAddImageCommand::CheckExtension(std::string extensionFile)
 {
-		if (extensionFile != ".jpg" && extensionFile != ".png" && extensionFile != ".gif")
+	if (extensionFile != ".jpg" && extensionFile != ".png" && extensionFile != ".gif")
 	{
-		throw std::logic_error("Wrong file extension");
+		throw std::logic_error("Wrong file extension!");
 	}
 }

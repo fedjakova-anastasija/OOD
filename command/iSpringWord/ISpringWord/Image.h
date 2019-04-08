@@ -23,5 +23,6 @@ private:
 	int m_width;
 	int m_height;
 	ICommandHistory& m_history;
-	void InitializationPath(const boost::filesystem::path& path);
+	
+	void CheckPath(const boost::filesystem::path& path);
 };

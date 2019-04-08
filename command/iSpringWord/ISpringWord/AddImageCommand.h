@@ -16,7 +16,7 @@ protected:
 private:
 	void SetImage(ICommandHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& dirName);
 	boost::filesystem::path CreateNewDir(const std::string& dirName);
-	void CAddImageCommand::CheckExtension(std::string extensionFile);
+	void CheckExtension(std::string extensionFile);
 	std::vector<CDocumentItem>& m_items;
 	boost::optional<size_t> m_pos;
 	std::shared_ptr<IImage> m_image;	

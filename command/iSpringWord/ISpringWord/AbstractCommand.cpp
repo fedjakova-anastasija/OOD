@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "AbstractCommand.h"
 
 void CAbstractCommand::Execute()

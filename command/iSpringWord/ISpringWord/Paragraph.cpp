@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "Paragraph.h"
 #include "ChangeStringCommand.h"
 #include "ParagraphImpl.h"

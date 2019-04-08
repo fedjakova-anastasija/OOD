@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "ResizeImageCommand.h"
 
 CResizeImageCommand::CResizeImageCommand(int& width, int const& newWidth, int& height, int const& newHeight)

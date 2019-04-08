@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "DocumentItem.h"
 
 CDocumentItem::CDocumentItem(const std::shared_ptr<IImage>& image, const std::shared_ptr<IParagraph>& text)

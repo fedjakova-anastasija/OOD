@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../ISpringWord/stdafx.h"
 #include "Document.h"
 #include "ChangeStringCommand.h"
 #include "DeleteCommand.h"
