@@ -18,8 +18,17 @@ CAddImageCommand::~CAddImageCommand()
 	}
 }
 
+void CAddImageCommand::CheckPos()
+{
+	if (m_pos > m_items.size())
+	{
+		throw std::invalid_argument("Wrong position!");
+	}
+}
+
 void CAddImageCommand::DoExecute()
 {
+	CheckPos();
 	if (m_pos != boost::none)
 	{
 		m_items.emplace(m_items.begin() + m_pos.get(), CDocumentItem(m_image, nullptr));
@@ -32,7 +41,14 @@ void CAddImageCommand::DoExecute()
 
 void CAddImageCommand::DoUnexecute()
 {
-	m_items.erase(m_items.begin() + m_pos.get());
+	if (m_pos != boost::none)
+	{
+		m_items.erase(m_items.begin() + m_pos.get());
+	}
+	else
+	{
+		m_items.pop_back();
+	}
 }
 
 void CAddImageCommand::SetImage(ICommandHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& dirName)
@@ -45,10 +61,10 @@ void CAddImageCommand::SetImage(ICommandHistory& history, const boost::filesyste
 	std::string newFileName = boost::filesystem::unique_path().string() + extensionFile;
 
 	boost::filesystem::path newRelativePath = imagesDir.stem();
-	newRelativePath /= boost::filesystem::path(newFileName);
+	newRelativePath = imagesDir.string() + "/" + newFileName;
 
-	boost::filesystem::copy_file(path, (imagesDir /= boost::filesystem::path(newFileName)));
-	m_image = std::make_shared<CImage>(newRelativePath.generic_string(), width, height, history);
+	boost::filesystem::copy_file(path, (imagesDir.string() + "/" + newFileName));
+	m_image = std::make_shared<CImage>(newRelativePath, width, height, history);
 }
 
 boost::filesystem::path CAddImageCommand::CreateNewDir(const std::string& dirName)

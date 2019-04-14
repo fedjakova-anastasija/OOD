@@ -13,7 +13,7 @@ CTextAndImageEditor::CTextAndImageEditor() //-V730
 	m_menu.AddItem("list", "Show document", bind(&CTextAndImageEditor::List, this, std::placeholders::_1));
 	AddMenuItem("undo", "Undo command", &CTextAndImageEditor::Undo);
 	AddMenuItem("redo", "Redo undone command", &CTextAndImageEditor::Redo);
-	AddMenuItem("insertParagraph", "Insert Paragraph <position>|end <text>", &CTextAndImageEditor::InsertParagraph);
+	AddMenuItem("insertParagraph", "<position>|end <text>", &CTextAndImageEditor::InsertParagraph);
 	AddMenuItem("save", "<path>", &CTextAndImageEditor::Save);
 	AddMenuItem("replaceText", "<position> <text>", &CTextAndImageEditor::ReplaceText);
 	AddMenuItem("deleteItem", "<position>", &CTextAndImageEditor::DeleteItem);

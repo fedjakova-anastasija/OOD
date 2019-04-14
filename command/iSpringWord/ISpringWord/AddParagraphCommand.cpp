@@ -9,13 +9,25 @@ CAddParagraphCommand::CAddParagraphCommand(std::shared_ptr<IParagraph>&& text, s
 {
 }
 
-void CAddParagraphCommand::DoExecute()
+void CAddParagraphCommand::CheckPos()
 {
 	if (m_pos > m_items.size())
 	{
 		throw std::invalid_argument("Wrong position!");
 	}
-	m_items.emplace(m_items.begin() + m_pos.get(), CDocumentItem(nullptr, m_text));
+}
+
+void CAddParagraphCommand::DoExecute()
+{
+	CheckPos();
+	if (m_pos != boost::none)
+	{
+		m_items.emplace(m_items.begin() + m_pos.get(), CDocumentItem(nullptr, m_text));
+	}
+	else
+	{
+		m_items.emplace_back(CDocumentItem(nullptr, m_text));
+	}	
 }
 
 void CAddParagraphCommand::DoUnexecute()

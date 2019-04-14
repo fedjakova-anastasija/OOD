@@ -12,7 +12,7 @@ public:
 	void Undo();
 	bool CanRedo() const;
 	void Redo();
-	void AddAndExecuteCommand(ICommandPtr&& command);
+	void AddAndExecuteCommand(ICommandPtr&& command) override;
 
 private:
 	const size_t COMMAND_COUNT = 10;

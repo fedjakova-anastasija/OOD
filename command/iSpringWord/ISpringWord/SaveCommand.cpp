@@ -102,7 +102,7 @@ void SaveCommand::Html() const
 		{
 			boost::filesystem::path path = (boost::filesystem::path("images") /= (image->GetPath()).filename());
 
-			output << boost::format(R"(<img src=%1% width="%2%" height="%3%" />)") % path % image->GetWidth() % image->GetHeight() << std::endl;
+			output << boost::format(R"(<img src=%1% width="%2%" height="%3%" />)") % path.generic_string() % image->GetWidth() % image->GetHeight() << std::endl;
 		}
 		else
 		{

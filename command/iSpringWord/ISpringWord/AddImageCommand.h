@@ -15,6 +15,7 @@ protected:
 
 private:
 	void SetImage(ICommandHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& dirName);
+	void CheckPos();
 	boost::filesystem::path CreateNewDir(const std::string& dirName);
 	void CheckExtension(std::string extensionFile);
 	std::vector<CDocumentItem>& m_items;

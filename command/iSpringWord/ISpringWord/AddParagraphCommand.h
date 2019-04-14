@@ -12,6 +12,7 @@ protected:
 	void DoUnexecute() override;
 
 private:
+	void CheckPos();
 	std::vector<CDocumentItem>& m_items;
 	boost::optional<size_t> m_pos;
 	std::shared_ptr<IParagraph> m_text;
