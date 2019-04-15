@@ -62,7 +62,7 @@ TEST_CASE("Can insert image")
 {
 	document.Delete(0);
 	CEditorList editor;
-	std::string path = (PATH + "image.png");
+	std::string path = (IMAGE_PATH);
 	boost::algorithm::trim_left(path);
 	const boost::filesystem::path imgPath = boost::filesystem::path(path);
 	document.InsertImage(imgPath, 100, 100, 0);
@@ -77,7 +77,7 @@ TEST_CASE("Can insert image")
 
 TEST_CASE("Can not insert image with wrong path")
 {
-	std::string path = (PATH + "image/" + "image.png");
+	std::string path = ("/" + IMAGE_PATH);
 	boost::algorithm::trim_left(path);
 	const boost::filesystem::path imgPath = boost::filesystem::path(path);
 
@@ -86,7 +86,7 @@ TEST_CASE("Can not insert image with wrong path")
 
 TEST_CASE("Can not insert image with wrong extension")
 {
-	std::string path = boost::filesystem::change_extension(PATH + "image.png", ".doc").string();
+	std::string path = boost::filesystem::change_extension(FILE_PATH, ".doc").string();
 	boost::algorithm::trim_left(path);
 	const boost::filesystem::path imgPath = boost::filesystem::path(path);
 
@@ -141,14 +141,14 @@ TEST_CASE("Can delete item")
 
 TEST_CASE("Can save file")
 {
-	boost::filesystem::remove(PATH + "test.html");
-	REQUIRE_FALSE(boost::filesystem::exists(PATH + "test.html"));
+	boost::filesystem::remove(FILE_PATH);
+	REQUIRE_FALSE(boost::filesystem::exists(FILE_PATH));
 	std::string text = "test";
 	document.InsertParagraph(text, 0);
-	document.Save(PATH + "test.html");
-	REQUIRE(boost::filesystem::exists(PATH + "test.html"));
+	document.Save(FILE_PATH);
+	REQUIRE(boost::filesystem::exists(FILE_PATH));
 	boost::system::error_code errorCode;
-	boost::filesystem::remove(PATH + "test.html", errorCode);
+	boost::filesystem::remove(FILE_PATH, errorCode);
 	if (errorCode)
 	{
 		std::cout << errorCode.message() << std::endl;
@@ -161,8 +161,8 @@ TEST_CASE("Can not save with wrong escapes")
 	CDocument document;
 	document.InsertParagraph(text, 0);
 
-	document.Save(PATH + "test.html");
-	std::ifstream ifs(PATH + "test.html");
+	document.Save(FILE_PATH);
+	std::ifstream ifs(FILE_PATH);
 	std::stringstream buffer;
 
 	buffer << ifs.rdbuf();

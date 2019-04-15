@@ -8,7 +8,7 @@ TEST_CASE("Can insert image [AddImageCommand]")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto insertImage = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 100, 100, "images", 0);
+	auto insertImage = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 100, 100, "images", 0);
 	REQUIRE(items.empty());
 	insertImage->Execute();
 	REQUIRE_FALSE(items.empty());
@@ -18,7 +18,7 @@ TEST_CASE("Command insert image can be execute")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto insertImage = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 100, 100, "images", 0);
+	auto insertImage = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 100, 100, "images", 0);
 	REQUIRE(items.empty());
 	insertImage->Execute();
 	REQUIRE_FALSE(items.empty());
@@ -30,7 +30,7 @@ TEST_CASE("Can create path image")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto insertImage = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 100, 100, "images", 0);
+	auto insertImage = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 100, 100, "images", 0);
 	REQUIRE(items.empty());
 	insertImage->Execute();
 
@@ -42,7 +42,7 @@ TEST_CASE("Can delete image")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto insertImage = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 100, 100, "images", 0);
+	auto insertImage = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 100, 100, "images", 0);
 	REQUIRE(items.empty());
 	insertImage->Execute();
 
@@ -57,7 +57,7 @@ TEST_CASE("Can not insert wrong extension file")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	std::string path = boost::filesystem::change_extension(PATH + "image.png", ".doc").string();
+	std::string path = boost::filesystem::change_extension(IMAGE_PATH, ".doc").string();
 	REQUIRE_THROWS(std::make_unique<CAddImageCommand>(history, items, path, 100, 100, "images", 0));
 }
 
@@ -66,7 +66,7 @@ TEST_CASE("Can not insert wrong position file")
 	CHistory history;
 	std::vector<CDocumentItem> items;
 	
-	auto insertImage = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 100, 100, "images", 2);
+	auto insertImage = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 100, 100, "images", 2);
 	REQUIRE_THROWS(insertImage->Execute());
 }
 
@@ -74,5 +74,5 @@ TEST_CASE("Can not insert wrong path file")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	REQUIRE_THROWS(std::make_unique<CAddImageCommand>(history, items, PATH + "image/" + "image.png", 100, 100, "images", 0));
+	REQUIRE_THROWS(std::make_unique<CAddImageCommand>(history, items, "/" + IMAGE_PATH, 100, 100, "images", 0));
 }

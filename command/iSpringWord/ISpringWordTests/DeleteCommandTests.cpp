@@ -9,7 +9,7 @@ TEST_CASE("Command delete can be executed ")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto image = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 1000, 500, "images", 0);
+	auto image = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 1000, 500, "images", 0);
 	image->Execute();
 	REQUIRE_FALSE(items.empty());
 	auto deleteItem = std::make_unique<CDeleteCommand>(items, 0);
@@ -21,7 +21,7 @@ TEST_CASE("Command delete can be unexecuted")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto image = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 1000, 500, "images", 0);
+	auto image = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 1000, 500, "images", 0);
 	image->Execute();
 	REQUIRE_FALSE(items.empty());
 	auto deleteItem = std::make_unique<CDeleteCommand>(items, 0);
@@ -35,7 +35,7 @@ TEST_CASE("Can not delete history image")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto image = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 1000, 500, "images", 0);
+	auto image = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 1000, 500, "images", 0);
 	image->Execute();
 	auto img = items.front().GetImage();
 	REQUIRE(boost::filesystem::exists(img->GetPath()));
@@ -49,7 +49,7 @@ TEST_CASE("Can not delete history image with unexecuted command")
 {
 	CHistory history;
 	std::vector<CDocumentItem> items;
-	auto image = std::make_unique<CAddImageCommand>(history, items, PATH + "image.png", 1000, 500, "images", 0);
+	auto image = std::make_unique<CAddImageCommand>(history, items, IMAGE_PATH, 1000, 500, "images", 0);
 	image->Execute();
 	auto img = items.front().GetImage();
 	REQUIRE(boost::filesystem::exists(img->GetPath()));
