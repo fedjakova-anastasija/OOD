@@ -19,6 +19,7 @@ CDeleteCommand::~CDeleteCommand()
 
 void CDeleteCommand::DoExecute()
 {
+	m_item = std::make_shared<CDocumentItem>(m_items.at(m_index));
 	m_items.erase(m_items.begin() + m_index);
 }
 
