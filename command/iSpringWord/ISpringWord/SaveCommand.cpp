@@ -101,15 +101,14 @@ void SaveCommand::Html() const
 		if (auto image = item.GetImage())
 		{
 			boost::filesystem::path path = (boost::filesystem::path("images") /= (image->GetPath()).filename());
-
-			output << boost::format(R"(<img src=%1% width="%2%" height="%3%" />)") % path.generic_string() % image->GetWidth() % image->GetHeight() << std::endl;
+			output << "<img src='" << path.generic_string() << "' width='" << image->GetWidth() << "' height='" << image->GetHeight() << "' />" << std::endl;
 		}
 		else
 		{
 			auto paragraph = item.GetParagraph();
 			std::string text = paragraph->GetText();
 			SaveCommand::CheckEscapes(text);
-			output << boost::format(R"(<p>%1%</p>)") % text << std::endl;
+			output << "<p>" << text << "</p>" << std::endl;
 		}
 	}
 	output << "</body>" << std::endl;
