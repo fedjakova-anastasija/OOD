@@ -54,17 +54,18 @@ void CAddImageCommand::DoUnexecute()
 void CAddImageCommand::SetImage(ICommandHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& dirName)
 {
 	boost::filesystem::path imagesDir = CreateNewDir(dirName);
-	std::string extensionFile = boost::filesystem::extension(path);
-	boost::algorithm::to_lower(extensionFile);
-	CheckExtension(extensionFile);
+	std::string extension = boost::filesystem::extension(path);
+	boost::algorithm::to_lower(extension);
+	CheckExtension(extension);
 
-	std::string newFileName = boost::filesystem::unique_path().string() + extensionFile;
+	std::string fileName = boost::filesystem::unique_path().string() + extension;
 
-	boost::filesystem::path newRelativePath = imagesDir.stem();
-	newRelativePath = imagesDir.string() + "/" + newFileName;
+	boost::filesystem::path newPath = imagesDir.stem();
+	newPath = imagesDir.string() + "/" + fileName;
 
-	boost::filesystem::copy_file(path, (imagesDir.string() + "/" + newFileName));
-	m_image = std::make_shared<CImage>(newRelativePath, width, height, history);
+	//boost::filesystem::copy_file(path, (imagesDir.string() + "/" + fileName));
+	boost::filesystem::copy_file(path, (imagesDir /= boost::filesystem::path(fileName)));
+	m_image = std::make_shared<CImage>(newPath, width, height, history);
 }
 
 boost::filesystem::path CAddImageCommand::CreateNewDir(const std::string& dirName)
@@ -74,9 +75,9 @@ boost::filesystem::path CAddImageCommand::CreateNewDir(const std::string& dirNam
 	return imagesDir;
 }
 
-void CAddImageCommand::CheckExtension(std::string extensionFile)
+void CAddImageCommand::CheckExtension(std::string extension)
 {
-	if (extensionFile != ".jpg" && extensionFile != ".png" && extensionFile != ".gif")
+	if (extension != ".jpg" && extension != ".png" && extension != ".gif")
 	{
 		throw std::logic_error("Wrong file extension!");
 	}
