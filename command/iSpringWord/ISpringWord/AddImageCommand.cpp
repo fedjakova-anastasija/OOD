@@ -61,7 +61,7 @@ void CAddImageCommand::SetImage(ICommandHistory& history, const boost::filesyste
 	std::string fileName = boost::filesystem::unique_path().string() + extension;
 
 	boost::filesystem::path newPath = imagesDir.string() + "/" + fileName;
-	boost::filesystem::copy_file(path, (imagesDir.string() + "/" + fileName));
+	boost::filesystem::copy_file(path, newPath);
 
 	m_image = std::make_shared<CImage>(newPath, width, height, history);
 }

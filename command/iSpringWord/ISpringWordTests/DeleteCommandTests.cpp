@@ -56,7 +56,6 @@ TEST_CASE("Can not delete history image with unexecuted command")
 
 	auto deleteItem = std::make_unique<CDeleteCommand>(items, 0);
 	deleteItem->Execute();
-	deleteItem.reset();
-
+	deleteItem->Unexecute();
 	REQUIRE(boost::filesystem::exists(img->GetPath()));
 }
