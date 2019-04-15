@@ -14,7 +14,6 @@ CDeleteCommand::~CDeleteCommand()
 	{
 		boost::system::error_code errorCode;
 		boost::filesystem::remove(m_item->GetImage()->GetPath(), errorCode);
-		std::cout << "CDeleteCommand" << std::endl;
 	}
 }
 
