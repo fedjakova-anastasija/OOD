@@ -40,7 +40,7 @@ void CImage::CheckPath(const boost::filesystem::path& path)
 
 		if (extensionFile != ".jpg" && extensionFile != ".png" && extensionFile != ".gif")
 		{
-			throw std::logic_error("File extension is incorrect");
+			throw std::logic_error("Wrong file extension!");
 		}
 	}
 	else
