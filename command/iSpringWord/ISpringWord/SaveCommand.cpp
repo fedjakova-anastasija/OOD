@@ -23,7 +23,7 @@ void SaveCommand::Save() const
 	Html();
 }
 
-void SaveCommand::ProccessEscapes(std::string& text) const
+void SaveCommand::CheckEscapes(std::string& text) const
 {
 	for (auto& it : ESCAPES)
 	{
@@ -34,7 +34,7 @@ void SaveCommand::ProccessEscapes(std::string& text) const
 void SaveCommand::SetTitle(const std::string& title)
 {
 	m_title = title;
-	SaveCommand::ProccessEscapes(m_title);
+	SaveCommand::CheckEscapes(m_title);
 }
 
 void SaveCommand::AddItem(const CConstDocumentItem& item)
@@ -108,7 +108,7 @@ void SaveCommand::Html() const
 		{
 			auto paragraph = item.GetParagraph();
 			std::string text = paragraph->GetText();
-			SaveCommand::ProccessEscapes(text);
+			SaveCommand::CheckEscapes(text);
 			output << boost::format(R"(<p>%1%</p>)") % text << std::endl;
 		}
 	}

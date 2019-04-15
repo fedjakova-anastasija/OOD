@@ -21,5 +21,5 @@ private:
 	std::string m_title;
 	std::vector<CConstDocumentItem> m_items;
 
-	void ProccessEscapes(std::string& text) const;
+	void CheckEscapes(std::string& text) const;
 };

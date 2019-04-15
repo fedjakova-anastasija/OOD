@@ -15,6 +15,7 @@ CAddImageCommand::~CAddImageCommand()
 	{
 		boost::system::error_code errorCode;
 		boost::filesystem::remove(m_image->GetPath(), errorCode);
+		std::cout << "CAddImageCommand" << std::endl;
 	}
 }
 
@@ -54,17 +55,16 @@ void CAddImageCommand::DoUnexecute()
 void CAddImageCommand::SetImage(ICommandHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& dirName)
 {
 	boost::filesystem::path imagesDir = CreateNewDir(dirName);
+	
 	std::string extension = boost::filesystem::extension(path);
 	boost::algorithm::to_lower(extension);
 	CheckExtension(extension);
-
 	std::string fileName = boost::filesystem::unique_path().string() + extension;
 
 	boost::filesystem::path newPath = imagesDir.stem();
 	newPath = imagesDir.string() + "/" + fileName;
+	boost::filesystem::copy_file(path, (imagesDir.string() + "/" + fileName));
 
-	//boost::filesystem::copy_file(path, (imagesDir.string() + "/" + fileName));
-	boost::filesystem::copy_file(path, (imagesDir /= boost::filesystem::path(fileName)));
 	m_image = std::make_shared<CImage>(newPath, width, height, history);
 }
 
