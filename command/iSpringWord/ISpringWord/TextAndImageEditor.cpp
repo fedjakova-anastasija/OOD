@@ -43,6 +43,54 @@ void CTextAndImageEditor::SetTitle(std::istream& in)
 	m_document->SetTitle(title);
 }
 
+void CTextAndImageEditor::List(std::istream&)
+{
+	std::cout << "-------------" << std::endl;
+	std::cout << "Title: " << m_document->GetTitle() << std::endl;
+	auto itemsCount = m_document->GetItemsCount();
+
+	for (size_t i = 0; i < itemsCount; ++i)
+	{
+		std::cout << i << ". ";
+		auto item = m_document->GetItem(i);
+
+		if (auto paragraph = item.GetParagraph())
+		{
+			std::cout << "Paragraph: " << paragraph->GetText() << std::endl;
+		}
+
+		if (auto image = item.GetImage())
+		{
+			std::cout << "Image: " << image->GetWidth() << " " << image->GetHeight() << " " << image->GetPath() << std::endl;
+		}
+	}
+	std::cout << "-------------" << std::endl;
+}
+
+void CTextAndImageEditor::Undo(std::istream&)
+{
+	if (m_document->CanUndo())
+	{
+		m_document->Undo();
+	}
+	else
+	{
+		std::cout << "Can't undo" << std::endl;
+	}
+}
+
+void CTextAndImageEditor::Redo(std::istream&)
+{
+	if (m_document->CanRedo())
+	{
+		m_document->Redo();
+	}
+	else
+	{
+		std::cout << "Can't redo" << std::endl;
+	}
+}
+
 void CTextAndImageEditor::InsertParagraph(std::istream& input)
 {
 	std::string text;
@@ -110,43 +158,6 @@ void CTextAndImageEditor::ReplaceText(std::istream& input)
 	}
 }
 
-void CTextAndImageEditor::DeleteItem(std::istream& input)
-{
-	size_t index;
-	if (input >> index)
-	{
-		m_document->Delete(index);
-	}
-	else
-	{
-		throw std::invalid_argument("<position>");
-	}
-}
-
-void CTextAndImageEditor::List(std::istream&)
-{
-	std::cout << "-------------" << std::endl;
-	std::cout << "Title: " << m_document->GetTitle() << std::endl;
-	auto itemsCount = m_document->GetItemsCount();
-
-	for (size_t i = 0; i < itemsCount; ++i)
-	{
-		std::cout << i << ". ";
-		auto item = m_document->GetItem(i);
-
-		if (auto paragraph = item.GetParagraph())
-		{
-			std::cout << "Paragraph: " << paragraph->GetText() << std::endl;
-		}
-
-		if (auto image = item.GetImage())
-		{
-			std::cout << "Image: " << image->GetWidth() << " " << image->GetHeight() << " " << image->GetPath() << std::endl;
-		}
-	}
-	std::cout << "-------------" << std::endl;
-}
-
 void CTextAndImageEditor::ResizeImage(std::istream& input)
 {
 	size_t index;
@@ -168,34 +179,23 @@ void CTextAndImageEditor::ResizeImage(std::istream& input)
 	}
 }
 
-void CTextAndImageEditor::Undo(std::istream&)
-{
-	if (m_document->CanUndo())
-	{
-		m_document->Undo();
-	}
-	else
-	{
-		std::cout << "Can't undo" << std::endl;
-	}
-}
-
-void CTextAndImageEditor::Redo(std::istream&)
-{
-	if (m_document->CanRedo())
-	{
-		m_document->Redo();
-	}
-	else
-	{
-		std::cout << "Can't redo" << std::endl;
-	}
-}
-
 void CTextAndImageEditor::Save(std::istream& input)
 {
 	std::string path;
 	std::getline(input, path);
 	boost::algorithm::trim_left(path);
 	m_document->Save(path);
+}
+
+void CTextAndImageEditor::DeleteItem(std::istream& input)
+{
+	size_t index;
+	if (input >> index)
+	{
+		m_document->Delete(index);
+	}
+	else
+	{
+		throw std::invalid_argument("<position>");
+	}
 }
