@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gumball_machine", "gumball_machine\gumball_machine.vcxproj", "{10249F42-5FAF-4FF6-9229-C1201F1E5341}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gumball_machine_tests", "gumball_machine_tests\gumball_machine_tests.vcxproj", "{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Debug|x64.ActiveCfg = Debug|x64
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Debug|x64.Build.0 = Debug|x64
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Debug|x86.ActiveCfg = Debug|Win32
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Debug|x86.Build.0 = Debug|Win32
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Release|x64.ActiveCfg = Release|x64
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Release|x64.Build.0 = Release|x64
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Release|x86.ActiveCfg = Release|Win32
+		{10249F42-5FAF-4FF6-9229-C1201F1E5341}.Release|x86.Build.0 = Release|Win32
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Debug|x64.ActiveCfg = Debug|x64
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Debug|x64.Build.0 = Debug|x64
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Debug|x86.ActiveCfg = Debug|Win32
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Debug|x86.Build.0 = Debug|Win32
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Release|x64.ActiveCfg = Release|x64
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Release|x64.Build.0 = Release|x64
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Release|x86.ActiveCfg = Release|Win32
+		{22A222AC-DCC5-4D9E-8F01-ECABCE390EC8}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29965D32-4593-4703-9AED-F3A80F4A83DF}
+	EndGlobalSection
+EndGlobal
