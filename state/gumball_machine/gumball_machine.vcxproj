@@ -149,10 +149,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GumBallMachineWithDynamicallyCreatedState.h" />
     <ClInclude Include="GumBallMachineWithState.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="MultiGumballMachine.h" />
     <ClInclude Include="MultiNaiveGumBallMachine.h" />
     <ClInclude Include="NaiveGumBallMachine.h" />

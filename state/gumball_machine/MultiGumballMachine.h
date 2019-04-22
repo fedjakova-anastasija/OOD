@@ -76,7 +76,7 @@ public:
 			}
 		}
 	}
-	void Addition(unsigned gumballsCount) override
+	void Addition(unsigned /*gumballsCount*/) override
 	{
 		//m_gumballMachine.AddGumballs(gumballsCount);
 		std::cout << "Sorry, you cannot add the gumballs then the machine is workink :(\n ";
@@ -258,7 +258,7 @@ public:
 	}
 	void EjectQuarter()
 	{
-		m_quartersCount = 0;
+		//m_quartersCount = 0;
 		m_state->EjectQuarter();
 	}
 	void InsertQuarter()
@@ -329,8 +329,8 @@ private:
 	}
 	void EjectAdditionalQuarter() override
 	{
-		m_quartersCount = 0;
 		std::cout << boost::format(R"(%1% quarter%2% returned)") % m_quartersCount % (m_quartersCount != 1 ? "s" : "") << std::endl;
+		m_quartersCount = 0;
 	}
 	void SetSoldOutState() override
 	{

@@ -1,13 +1,14 @@
-#include "NaiveGumBallMachine.h"
+#include "GumBallMachineWithDynamicallyCreatedState.h"
 #include "GumBallMachineWithState.h"
+#include "Menu.h"
 #include "MultiGumBallMachine.h"
 #include "MultiNaiveGumBallMachine.h"
-#include "GumBallMachineWithDynamicallyCreatedState.h"
+#include "NaiveGumBallMachine.h"
 
 using namespace std;
 
 template <typename GumballMachineType>
-void TestGumballMachine(GumballMachineType & m)
+void TestGumballMachine(GumballMachineType& m)
 {
 	cout << m.ToString() << endl;
 
@@ -73,7 +74,7 @@ void TestMultiNaiveGumballMachine()
 
 int main()
 {
-	TestNaiveGumballMachine();
+	/*TestNaiveGumballMachine();
 
 	cout << "\n-----------------\n";
 	TestGumballMachineWithState();
@@ -85,7 +86,10 @@ int main()
 	TestMultiGumballMachine();
 
 	cout << "\n-----------------\n";
-	TestMultiNaiveGumballMachine();
+	TestMultiNaiveGumballMachine();*/
+
+	CMenu menu;
+	menu.Run();
 
 	return 0;
 }
