@@ -108,7 +108,8 @@ public:
 		if (m_gumballMachine.GetQuartersCount() != 0)
 		{
 			m_gumballMachine.EjectAdditionalQuarter();
-			m_gumballMachine.SetNoQuarterState();
+			//m_gumballMachine.SetNoQuarterState();
+			m_gumballMachine.SetSoldOutState();
 		}
 		else
 		{
