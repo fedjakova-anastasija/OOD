@@ -211,7 +211,7 @@ public:
 
 	void InsertQuarter() override
 	{
-		std::cout << "You inserted a quarter\n";
+		//std::cout << "You inserted a quarter\n";
 		m_gumballMachine.InsertAdditionalQuarter();
 		m_gumballMachine.SetHasQuarterState();
 	}
@@ -258,7 +258,6 @@ public:
 	}
 	void EjectQuarter()
 	{
-		//m_quartersCount = 0;
 		m_state->EjectQuarter();
 	}
 	void InsertQuarter()
