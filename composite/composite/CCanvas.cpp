@@ -3,12 +3,14 @@
 
 using namespace std;
 
-CCanvas::CCanvas(std::ostream & ostream, double height, double width)
+CCanvas::CCanvas(std::ostream& ostream, double height, double width)
 	: m_output(ostream)
 	, m_height(height)
 	, m_width(width)
 {
-	m_output << "<svg version = \"1.1\" encoding=\"UTF - 8\" xmlns = \"http://www.w3.org/2000/svg\"" << " height=\"" << m_height << "\"" << " width=\"" << m_width << "\">" << endl;
+	m_output << "<svg version = \"1.1\" encoding=\"UTF - 8\" xmlns = \"http://www.w3.org/2000/svg\""
+			 << " height=\"" << m_height << "\""
+			 << " width=\"" << m_width << "\">" << endl;
 }
 
 CCanvas::~CCanvas()
@@ -20,7 +22,6 @@ CCanvas::~CCanvas()
 
 	m_output << "</svg>";
 }
-
 
 void CCanvas::SetLineColor(RGBAColor color)
 {
