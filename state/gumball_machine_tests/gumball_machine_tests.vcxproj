@@ -156,6 +156,15 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CHasQuarterStateGumballMachineTests.cpp" />
+    <ClCompile Include="CHasQuarterStateMultiGumballMachineTests.cpp" />
+    <ClCompile Include="CNoQuarterStateGumballMachineTests.cpp" />
+    <ClCompile Include="CNoQuarterStateMultiGumballMachineTests.cpp" />
+    <ClCompile Include="CSoldOutStateGumballMachineTests.cpp" />
+    <ClCompile Include="CSoldOutStateMultiGumballMachineTests.cpp" />
+    <ClCompile Include="CSoldStateGumballMachineTests.cpp" />
+    <ClCompile Include="CSoldStateMultiGumballMachineTests.cpp" />
+    <ClCompile Include="CSoldStateMultiNaiveGumballMachineTests.cpp" />
     <ClCompile Include="MultiGumBallMachineTests.cpp" />
     <ClCompile Include="GumBallMachineWithStateTests.cpp" />
     <ClCompile Include="gumball_machine_tests.cpp" />

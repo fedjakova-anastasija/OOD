@@ -1,259 +1,126 @@
 ﻿#include "../gumball_machine/MultiGumBallMachine.h"
 #include "pch.h"
 
-TEST_CASE("Сan set the correct initial state of multi machine.")
+std::string MachineState(unsigned count, unsigned quarters, std::string state)
 {
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
-
-	std::string output = R"(
+	auto fmt = boost::format(R"(
 Mighty Gumball, Inc.
 C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 0
-Machine is waiting for quarter
-)";
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
-TEST_CASE("Сan change count of quarters after inserting additional quarters.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
-
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 2
-Machine is waiting for turn of crank
-)";
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
-TEST_CASE("Сan eject the quarters.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 2
-Machine is waiting for turn of crank
-)";
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-	strm.str("");
-	output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 0
-Machine is waiting for quarter
-)";
-	machine.EjectQuarter();
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
+Inventory: %1% gumball%2%
+Quarters: %3%
+Machine is %4%
+)");
+	return (fmt % count % (count != 1 ? "s" : "") % quarters % state).str();
 }
 
-TEST_CASE("Can eject the quarters if gumball machine is sold out.")
+TEST_CASE("Multi gumball machine ")
 {
 	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 1 };
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	machine.TurnCrank();
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 0 gumballs
-Quarters: 1
-Machine is sold out
-)";
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-	strm.str("");
-	output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 0 gumballs
-Quarters: 0
-Machine is sold out
-)";
-	machine.EjectQuarter();
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
+	with_multi_state::CGumballMachine machine{ 5, strm };
 
-TEST_CASE("Can change count of gumballs if you turn crank.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
+	SECTION("can set the correct initial state.")
+	{
+		REQUIRE(machine.ToString() == MachineState(5, 0, "waiting for quarter"));
+	}
 
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 4 gumballs
-Quarters: 1
-Machine is waiting for turn of crank
-)";
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	machine.TurnCrank();
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
+	SECTION("can change count of quarters after inserting additional quarters.")
+	{
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		REQUIRE(machine.ToString() == MachineState(5, 2, "waiting for turn of crank"));
+	}
 
-TEST_CASE("Can insert only 5 additional quarters.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
+	SECTION("can eject the quarters.")
+	{
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		REQUIRE(machine.ToString() == MachineState(5, 2, "waiting for turn of crank"));
+		strm.str("");
+		machine.EjectQuarter();
+		REQUIRE(machine.ToString() == MachineState(5, 0, "waiting for quarter"));
+	}
 
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 5
-Machine is waiting for turn of crank
-)";
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	machine.InsertQuarter();
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-	strm.str("");
-	output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 5
-Machine is waiting for turn of crank
-)";
-	machine.InsertQuarter();
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
+	SECTION("can eject the quarters if gumball machine is sold out.")
+	{
+		std::stringstream strm;
+		with_multi_state::CGumballMachine machine{ 1, strm };
 
-TEST_CASE("Can insert additional gumballs in initial state machine.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 0 };
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		machine.TurnCrank();
+		REQUIRE(machine.ToString() == MachineState(0, 1, "sold out"));
+		strm.str("");
+		machine.EjectQuarter();
+		REQUIRE(machine.ToString() == MachineState(0, 0, "sold out"));
+	}
 
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 0
-Machine is waiting for quarter
-)";
-	machine.Addition(5);
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
+	SECTION("can change count of gumballs if you turn crank.")
+	{
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		machine.TurnCrank();
+		REQUIRE(machine.ToString() == MachineState(4, 1, "waiting for turn of crank"));
+	}
 
-TEST_CASE("Can add 0 gumballs.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
+	SECTION("can insert only 5 additional quarters.")
+	{
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		machine.InsertQuarter();
+		REQUIRE(machine.ToString() == MachineState(5, 5, "waiting for turn of crank"));
+		strm.str("");
+		machine.InsertQuarter();
+		REQUIRE(machine.ToString() == MachineState(5, 5, "waiting for turn of crank"));
+	}
 
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 0
-Machine is waiting for quarter
-)";
-	machine.Addition(0);
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
+	SECTION("can insert additional gumballs in initial state machine.")
+	{
+		std::stringstream strm;
+		with_multi_state::CGumballMachine machine{ 0, strm };
+		
+		machine.Addition(5);
+		REQUIRE(machine.ToString() == MachineState(5, 0, "waiting for quarter"));
+	}
 
-TEST_CASE("Can add gumballs after inserting the quarters.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
+	SECTION("can add 0 gumballs.")
+	{
+		machine.Addition(0);
+		REQUIRE(machine.ToString() == MachineState(5, 0, "waiting for quarter"));
+	}
 
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 6 gumballs
-Quarters: 1
-Machine is waiting for turn of crank
-)";
-	machine.InsertQuarter();
-	machine.Addition(1);
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
+	SECTION("can add gumballs after inserting the quarters.")
+	{
+		machine.InsertQuarter();
+		machine.Addition(1);
+		REQUIRE(machine.ToString() == MachineState(6, 1, "waiting for turn of crank"));
+	}
 
-TEST_CASE("Can add gumballs after ejecting the quarters.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
+	SECTION("can add gumballs after ejecting the quarters.")
+	{
+		machine.InsertQuarter();
+		machine.EjectQuarter();
+		machine.Addition(1);
+		REQUIRE(machine.ToString() == MachineState(6, 0, "waiting for quarter"));
+	}
 
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 6 gumballs
-Quarters: 0
-Machine is waiting for quarter
-)";
-	machine.InsertQuarter();
-	machine.EjectQuarter();
-	machine.Addition(1);
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
+	SECTION("can add gumballs after turning the crank.")
+	{
+		machine.InsertQuarter();
+		machine.TurnCrank();
+		machine.Addition(1);
+		REQUIRE(machine.ToString() == MachineState(5, 0, "waiting for quarter"));
+	}
 
-TEST_CASE("Can add gumballs after turning the crank.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 5 };
-
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 0
-Machine is waiting for quarter
-)";
-	machine.InsertQuarter();
-	machine.TurnCrank();
-	machine.Addition(1);
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-}
-
-TEST_CASE("Can add gumballs then the gumball machine is empty.")
-{
-	std::stringstream strm;
-	with_multi_state::CGumballMachine machine{ 0 };
-
-	std::string output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 0 gumballs
-Quarters: 0
-Machine is sold out
-)";
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
-	strm.str("");
-	output = R"(
-Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
-Inventory: 5 gumballs
-Quarters: 0
-Machine is waiting for quarter
-)";
-	machine.Addition(5);
-	strm << machine.ToString();
-	REQUIRE(strm.str() == output);
+	SECTION("can add gumballs when the gumball machine is empty.")
+	{
+		std::stringstream strm;
+		with_multi_state::CGumballMachine machine{ 0, strm };
+		
+		REQUIRE(machine.ToString() == MachineState(0, 0, "sold out"));
+		strm.str("");
+		machine.Addition(5);
+		REQUIRE(machine.ToString() == MachineState(5, 0, "waiting for quarter"));
+	}
 }

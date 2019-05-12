@@ -1,16 +1,19 @@
 #pragma once
 #include "MultiGumBallMachine.h"
+#include "GumBallMachineWithState.h"
 
 class CMenu
 {
 public:
-	CMenu();
+	CMenu(std::stringstream& output);
 	void Run();
 
 private:
 	bool m_exit;
 	std::unique_ptr<with_multi_state::CGumballMachine> m_machine;
+	//std::unique_ptr<with_state::CGumballMachine> m_machine;
 	using Command = std::function<void(std::istream& args)>;
+	std::stringstream& m_out;
 
 	void InsertQuarter(std::istream&);
 	void EjectQuarter(std::istream&);

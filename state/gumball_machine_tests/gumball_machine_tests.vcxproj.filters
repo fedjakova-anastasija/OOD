@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\GumballMashineWithStateTests">
+      <UniqueIdentifier>{9a296297-cb98-41b0-9157-933815df965a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MultiGumballMachineTests">
+      <UniqueIdentifier>{3ad20a23-55c9-43e7-a80b-9f03caf82982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MultiNaiveGumballMachineTests">
+      <UniqueIdentifier>{eb84da8d-545f-4847-9dae-53ab7a08dd4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -29,14 +38,41 @@
     <ClCompile Include="gumball_machine_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GumBallMachineWithStateTests.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CHasQuarterStateGumballMachineTests.cpp">
+      <Filter>Source Files\GumballMashineWithStateTests</Filter>
     </ClCompile>
-    <ClCompile Include="MultiNaiveGumBallMachineTests.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CSoldOutStateGumballMachineTests.cpp">
+      <Filter>Source Files\GumballMashineWithStateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoldStateGumballMachineTests.cpp">
+      <Filter>Source Files\GumballMashineWithStateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CNoQuarterStateGumballMachineTests.cpp">
+      <Filter>Source Files\GumballMashineWithStateTests</Filter>
+    </ClCompile>
+    <ClCompile Include="GumBallMachineWithStateTests.cpp">
+      <Filter>Source Files\GumballMashineWithStateTests</Filter>
     </ClCompile>
     <ClCompile Include="MultiGumBallMachineTests.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\MultiGumballMachineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoldStateMultiGumballMachineTests.cpp">
+      <Filter>Source Files\MultiGumballMachineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoldOutStateMultiGumballMachineTests.cpp">
+      <Filter>Source Files\MultiGumballMachineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CNoQuarterStateMultiGumballMachineTests.cpp">
+      <Filter>Source Files\MultiGumballMachineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CHasQuarterStateMultiGumballMachineTests.cpp">
+      <Filter>Source Files\MultiGumballMachineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="CSoldStateMultiNaiveGumballMachineTests.cpp">
+      <Filter>Source Files\MultiNaiveGumballMachineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiNaiveGumBallMachineTests.cpp">
+      <Filter>Source Files\MultiNaiveGumballMachineTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
