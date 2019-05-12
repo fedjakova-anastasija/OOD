@@ -1,69 +1,85 @@
 #include "stdafx.h"
 #include "CCompositeOutlineStyle.h"
-#include "CStyle.h"
+//#include "CStyle.h"
 
 using namespace std;
 
+CCompositeOutlineStyle::CCompositeOutlineStyle(OutlineStyleEnumerator & enumerator)
+	: m_enumerator(enumerator)
+{
+}
+
 void CCompositeOutlineStyle::Enable(bool enable)
 {
-	if (m_shapes->GetShapesCount() != 0)
-	{
-		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
-		{
-			auto shape = m_shapes->GetShapeAtIndex(i);
-			auto style = m_style->GetStyle(shape);
-			style->Enable(true);
-		}
-	}
+	m_enumerator([&](IOutlineStyle& style) {
+		style.Enable(enable);
+	});
 }
 
 void CCompositeOutlineStyle::SetColor(RGBAColor color)
 {
-	if (m_shapes->GetShapesCount() != 0)
-	{
-		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
-		{
-			auto shape = m_shapes->GetShapeAtIndex(i);
-			auto style = m_style->GetStyle(shape);
-			style->SetColor(color);
-		}
-	}
+	m_enumerator([&](IOutlineStyle& style) {
+		style.SetColor(color);
+	});
 }
 
 optional<bool> CCompositeOutlineStyle::IsEnabled() const
 {
 	optional<bool> isEnabled;
-	auto shape = m_shapes->GetShapeAtIndex(0);
-	auto style = m_style->GetStyle(shape);
-	return style->IsEnabled();
+	auto callback = [&](IOutlineStyle& style) {
+		if (!isEnabled.is_initialized())
+		{
+			isEnabled = style.IsEnabled();
+		}
+		else if (isEnabled != style.IsEnabled())
+		{
+			isEnabled = boost::none;
+		}
+	};
+
+	m_enumerator(callback);
+
+	return isEnabled;
 }
 
 optional<RGBAColor> CCompositeOutlineStyle::GetColor() const
 {
 	optional<RGBAColor> color;
-	auto shape = m_shapes->GetShapeAtIndex(0);
-	auto style = m_style->GetStyle(shape);
-	return style->GetColor();
+	auto callback = [&](IOutlineStyle& style) {
+		if (!color.is_initialized())
+		{
+			color = style.GetColor();
+		}
+	};
+
+	m_enumerator(callback);
+
+	return color;
 }
 
-//optional<float> CCompositeOutlineStyle::GetThickness()const
-//{
-//	if (m_shapes->GetShapesCount() != 0)
-//	{
-//		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
-//		{
-//			GetThickness();
-//		}
-//	}
-//}
-//
-//void CCompositeOutlineStyle::SetThickness(float thickness)
-//{
-//	if (m_shapes->GetShapesCount() != 0)
-//	{
-//		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
-//		{
-//			SetThickness(thickness);
-//		}
-//	}
-//}
+optional<float> CCompositeOutlineStyle::GetThickness()const
+{
+	optional<float> thickness;
+
+	auto callback = [&](IOutlineStyle& style) {
+		if (!thickness.is_initialized())
+		{
+			thickness = style.IsEnabled();
+		}
+		else if (thickness != style.GetThickness())
+		{
+			thickness = boost::none;
+		}
+	};
+
+	m_enumerator(callback);
+
+	return thickness;
+}
+
+void CCompositeOutlineStyle::SetThickness(float thickness)
+{
+	m_enumerator([&](IOutlineStyle& style) {
+		style.SetThickness(thickness);
+	});
+}

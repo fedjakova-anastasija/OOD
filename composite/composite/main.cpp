@@ -4,7 +4,7 @@
 #include "CEllipse.h"
 #include "CRectangle.h"
 #include "CSlide.h"
-#include "CStyle.h"
+//#include "CStyle.h"
 #include "CTriangle.h"
 #include "CommonTypes.h"
 
@@ -23,7 +23,7 @@ int main()
 	auto sun = make_shared<CEllipse>(PointD{ 100, 100 }, 20, 20);
 	sun->GetFillStyle()->SetColor(0xffeb3b);
 	sun->GetOutlineStyle()->SetColor(0xffeb3b);
-	//sun->SetThickness(5);
+	sun->GetOutlineStyle()->SetThickness(5);
 
 	sun->Draw(canvas);
 
@@ -31,6 +31,7 @@ int main()
 	auto houseBody = make_shared<CRectangle>(PointD{ 200, 300 }, PointD{ 300, 200 });
 	houseBody->GetFillStyle()->SetColor(0x8B4513);
 	houseBody->GetOutlineStyle()->SetColor(0x000000);
+	houseBody->GetOutlineStyle()->SetThickness(2);
 
 	houseBody->Draw(canvas);
 
@@ -39,6 +40,7 @@ int main()
 	auto houseRoof = make_shared<CTriangle>(PointD{ 180, 200 }, PointD{ 250, 150 }, PointD{ 320, 200 });
 	houseRoof->GetFillStyle()->SetColor(0x808080);
 	houseRoof->GetOutlineStyle()->SetColor(0x000000);
+	houseRoof->GetOutlineStyle()->SetThickness(2);
 
 	houseRoof->Draw(canvas);
 

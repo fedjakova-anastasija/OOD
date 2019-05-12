@@ -1,47 +1,58 @@
 #include "stdafx.h"
 #include "CCompositeFillStyle.h"
-#include "CStyle.h"
+//#include "CStyle.h"
 
 using namespace std;
 
+CCompositeFillStyle::CCompositeFillStyle(FillStyleEnumerator& enumerator)
+	: m_enumerator(enumerator)
+{
+}
+
 void CCompositeFillStyle::Enable(bool enable)
 {
-	if (m_shapes->GetShapesCount() != 0)
-	{
-		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
-		{
-			auto shape = m_shapes->GetShapeAtIndex(i);
-			auto style = m_style->GetStyle(shape);
-			style->Enable(true);
-		}
-	}
+	m_enumerator([&](IStyle& style) {
+		style.Enable(enable);
+	});
 }
 
 void CCompositeFillStyle::SetColor(RGBAColor color)
 {
-	if (m_shapes->GetShapesCount() != 0)
-	{
-		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
-		{
-			auto shape = m_shapes->GetShapeAtIndex(i);
-			auto style = m_style->GetStyle(shape);
-			style->SetColor(color);
-		}
-	}
+	m_enumerator([&](IStyle& style) {
+		style.SetColor(color);
+	});
 }
 
 optional<bool> CCompositeFillStyle::IsEnabled() const
 {
 	optional<bool> isEnabled;
-	auto shape = m_shapes->GetShapeAtIndex(0);
-	auto style = m_style->GetStyle(shape);
-	return style->IsEnabled();
+	auto callback = [&](IStyle& style) {
+		if (!isEnabled.is_initialized())
+		{
+			isEnabled = style.IsEnabled();
+		}
+		else if (isEnabled != style.IsEnabled())
+		{
+			isEnabled = boost::none;
+		}
+	};
+
+	m_enumerator(callback);
+
+	return isEnabled;
 }
 
 optional<RGBAColor> CCompositeFillStyle::GetColor() const
 {
 	optional<RGBAColor> color;
-	auto shape = m_shapes->GetShapeAtIndex(0);
-	auto style = m_style->GetStyle(shape);
-	return style->GetColor();
+	auto callback = [&](IStyle& style) {
+		if (!color.is_initialized())
+		{
+			color = style.GetColor();
+		}
+	};
+
+	m_enumerator(callback);
+
+	return color;
 }

@@ -1,16 +1,19 @@
 #include "stdafx.h"
 #include "CShapeUnit.h"
-#include "CStyle.h"
+//#include "CStyle.h"
+#include "CFillStyle.h"
+#include "COutlineStyle.h"
+//#include "IOutlineStyle.h"
 
 using namespace std;
 
 CShapeUnit::CShapeUnit()
 {
-	m_fillStyle = make_shared<CStyle>(false, NULL);
-	m_outlineStyle = make_shared<CStyle>(true, 0);
+	m_fillStyle = make_shared<CFillStyle>(false, NULL);
+	m_outlineStyle = make_shared<COutlineStyle>(true, 0, 0); 
 }
 
-std::shared_ptr<IStyle> CShapeUnit::GetOutlineStyle() const
+std::shared_ptr<IOutlineStyle> CShapeUnit::GetOutlineStyle() const
 {
 	return m_outlineStyle;
 }
@@ -35,6 +38,11 @@ void CShapeUnit::SetCanvasStyles(ICanvas& canvas)
 	if (m_outlineStyle->GetColor())
 	{
 		canvas.SetLineColor(*m_outlineStyle->GetColor());
+	}
+
+	if (m_outlineStyle->IsEnabled())
+	{
+		canvas.SetThickness(m_outlineStyle->GetThickness().get());
 	}
 
 	if (m_fillStyle->IsEnabled())

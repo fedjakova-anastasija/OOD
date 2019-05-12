@@ -6,6 +6,8 @@ class CCanvas : public ICanvas
 public:
 	CCanvas(std::ostream& ostream, double height, double width);
 
+	void SetThickness(float thickness) override;
+	
 	virtual void SetLineColor(RGBAColor color) override;
 	virtual void MoveTo(double x, double y) override;
 	virtual void LineTo(double x, double y) override;
@@ -20,9 +22,10 @@ private:
 	void OpenPath();
 	void ClosePath();
 
-	int m_lineWidth = 1;
+	//int m_lineWidth = 1;
 	double m_height;
 	double m_width;
+	float m_outlineThickness = 1;
 	RGBAColor m_lineColor = 0;
 	RGBAColor m_fillColor = NULL;
 	std::ostream& m_output;

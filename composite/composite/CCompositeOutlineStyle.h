@@ -1,17 +1,15 @@
-#pragma once
-#include "CShapes.h"
-#include "ICompositeStyle.h"
+﻿#pragma once
+//#include "CShapes.h"
+//#include "ICompositeStyle.h"
 #include "IOutlineStyle.h"
-#include "IStyle.h"
+//#include "IStyle.h"
 
-class CCompositeOutlineStyle : public IStyle
+typedef std::function<void(std::function<void(IOutlineStyle&)>)> OutlineStyleEnumerator;
+
+class CCompositeOutlineStyle : public IOutlineStyle
 {
 public:
-	CCompositeOutlineStyle(std::shared_ptr<const CShapes> shapes, std::unique_ptr<ICompositeStyle> style)
-		: m_shapes(move(shapes))
-		, m_style(move(style))
-	{
-	}
+	CCompositeOutlineStyle(OutlineStyleEnumerator& enumerator);
 
 	boost::optional<bool> IsEnabled() const override;
 	void Enable(bool enable) override;
@@ -19,10 +17,9 @@ public:
 	boost::optional<RGBAColor> GetColor() const override;
 	void SetColor(RGBAColor color) override;
 
-	//boost::optional<float> GetThickness()const override;
-	//void SetThickness(float thickness) override;
+	boost::optional<float> GetThickness()const override;
+	void SetThickness(float thickness) override;
 
 private:
-	std::shared_ptr<const IShapes> m_shapes;
-	std::unique_ptr<ICompositeStyle> m_style;
+	OutlineStyleEnumerator & m_enumerator;
 };

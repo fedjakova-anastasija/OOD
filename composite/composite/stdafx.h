@@ -15,3 +15,5 @@
 #include <numeric>
 #include <sstream>
 #include <vector>
+#include <string>
+#include <functional>

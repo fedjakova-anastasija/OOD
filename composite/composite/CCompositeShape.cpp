@@ -1,18 +1,42 @@
 #include "stdafx.h"
 #include "CCompositeShape.h"
-#include "CCompositeFillStyle.h"
-#include "CCompositeOutlineStyle.h"
-#include "CFillStyle.h"
-#include "COutlineStyle.h"
-#include "CStyle.h"
+#include "CShapes.h"
+//#include "CCompositeFillStyle.h"
+//#include "CCompositeOutlineStyle.h"
+//#include "CFillStyle.h"
+//#include "COutlineStyle.h"
+//#include "CStyle.h"
 
 using namespace std;
 
 CCompositeShape::CCompositeShape()
 {
 	m_shapes = make_shared<CShapes>();
-	m_fillStyle = make_shared<CCompositeFillStyle>(m_shapes, make_unique<CFillStyle>());
-	m_outlineStyle = make_shared<CCompositeOutlineStyle>(m_shapes, make_unique<COutlineStyle>());
+	FillStyleEnumerator fillStyleEnumerator = [this](std::function<void(IStyle&)> fun) {
+		/*for (auto&& shape : m_shapes)
+		{
+			fun(*shape->GetFillStyle());
+		}*/
+		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
+		{
+			auto shape = m_shapes->GetShapeAtIndex(i);
+			fun(*shape->GetFillStyle());
+		}
+	};
+	m_fillStyle = make_shared<CCompositeFillStyle>(fillStyleEnumerator);
+
+	OutlineStyleEnumerator outlineStyleEnumerator = [this](std::function<void(IOutlineStyle&)> fun) {
+		/*for (auto&& shape : m_shapes)
+		{
+			fun(*shape->GetOutlineStyle());
+		}*/
+		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
+		{
+			auto shape = m_shapes->GetShapeAtIndex(i);
+			fun(*shape->GetOutlineStyle());
+		}
+	};
+	m_outlineStyle = make_shared<CCompositeOutlineStyle>(outlineStyleEnumerator);
 }
 
 void CCompositeShape::Draw(ICanvas& canvas)
@@ -24,7 +48,7 @@ void CCompositeShape::Draw(ICanvas& canvas)
 	}
 }
 
-shared_ptr<IStyle> CCompositeShape::GetOutlineStyle() const
+shared_ptr<IOutlineStyle> CCompositeShape::GetOutlineStyle() const
 {
 	return m_outlineStyle;
 }
@@ -34,14 +58,16 @@ shared_ptr<IStyle> CCompositeShape::GetFillStyle() const
 	return m_fillStyle;
 }
 
-shared_ptr<ICompositeShape> CCompositeShape::GetComposite()
+std::shared_ptr<ICompositeShape> CCompositeShape::GetComposite()
 {
-	return make_shared<CCompositeShape>(*this);
+	//return make_shared<CCompositeShape>(*this);
+	return shared_from_this();
 }
 
-shared_ptr<const ICompositeShape> CCompositeShape::GetComposite() const
+std::shared_ptr<const ICompositeShape> CCompositeShape::GetComposite() const
 {
-	return make_shared<CCompositeShape>(*this);
+	//return make_shared<CCompositeShape>(*this);
+	return shared_from_this();
 }
 
 RectD CCompositeShape::GetFrame() const

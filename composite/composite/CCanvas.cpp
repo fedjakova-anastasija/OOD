@@ -23,6 +23,11 @@ CCanvas::~CCanvas()
 	m_output << "</svg>";
 }
 
+void CCanvas::SetThickness(float thickness)
+{
+	m_outlineThickness = thickness;
+}
+
 void CCanvas::SetLineColor(RGBAColor color)
 {
 	m_lineColor = color;
@@ -67,7 +72,7 @@ void CCanvas::DrawEllipse(double left, double top, double width, double height)
 	}
 
 	m_output << " <ellipse";
-	m_output << " stroke=\"#" << std::setfill('0') << std::setw(6) << std::hex << m_lineColor << "\" stroke-width=\"" << m_lineWidth << "\"";
+	m_output << " stroke=\"#" << std::setfill('0') << std::setw(6) << std::hex << m_lineColor << "\" stroke-width=\"" << m_outlineThickness << "\"";
 	if (m_fillColor)
 	{
 		m_output << " fill=\"#" << std::setfill('0') << std::setw(6) << std::hex << m_fillColor << "\"";
@@ -84,7 +89,7 @@ void CCanvas::OpenPath()
 {
 	m_pathOpened = true;
 	m_output << "<path";
-	m_output << " stroke=\"#" << std::setfill('0') << std::setw(6) << std::hex << m_lineColor << "\" stroke-width=\"" << m_lineWidth << "\"";
+	m_output << " stroke=\"#" << std::setfill('0') << std::setw(6) << std::hex << m_lineColor << "\" stroke-width=\"" << m_outlineThickness << "\"";
 	if (m_fillColor)
 	{
 		m_output << " fill=\"#" << std::setfill('0') << std::setw(6) << std::hex << m_fillColor << "\"";
