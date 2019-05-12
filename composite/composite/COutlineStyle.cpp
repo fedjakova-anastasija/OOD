@@ -1,11 +1,5 @@
 ﻿#include "stdafx.h"
 #include "COutlineStyle.h"
-//#include "CommonTypes.h"
-
-//std::shared_ptr<IStyle> COutlineStyle::GetStyle(std::shared_ptr<IShape> shape)
-//{
-//	return shape->GetOutlineStyle();
-//}
 
 COutlineStyle::COutlineStyle(bool enable, RGBAColor color, float thickness)
 	: m_enabled(enable)

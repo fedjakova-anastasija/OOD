@@ -7,7 +7,7 @@ public:
 	CCanvas(std::ostream& ostream, double height, double width);
 
 	void SetThickness(float thickness) override;
-	
+
 	virtual void SetLineColor(RGBAColor color) override;
 	virtual void MoveTo(double x, double y) override;
 	virtual void LineTo(double x, double y) override;
@@ -22,7 +22,6 @@ private:
 	void OpenPath();
 	void ClosePath();
 
-	//int m_lineWidth = 1;
 	double m_height;
 	double m_width;
 	float m_outlineThickness = 1;

@@ -1,11 +1,6 @@
 #include "stdafx.h"
 #include "CFillStyle.h"
 
-//std::shared_ptr<IStyle> CFillStyle::GetStyle(std::shared_ptr<IShape> shape)
-//{
-//	return shape->GetFillStyle();
-//}
-
 using namespace std;
 
 CFillStyle::CFillStyle(bool isEnabled, RGBAColor color)
@@ -14,7 +9,7 @@ CFillStyle::CFillStyle(bool isEnabled, RGBAColor color)
 {
 }
 
-optional<bool> CFillStyle::IsEnabled()const
+optional<bool> CFillStyle::IsEnabled() const
 {
 	return m_isEnabled;
 }
@@ -24,7 +19,7 @@ void CFillStyle::Enable(bool enable)
 	m_isEnabled = enable;
 }
 
-optional<RGBAColor> CFillStyle::GetColor()const
+optional<RGBAColor> CFillStyle::GetColor() const
 {
 	return m_color;
 }

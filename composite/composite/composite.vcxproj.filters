@@ -27,9 +27,6 @@
     <ClCompile Include="CSlide.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CStyle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CTriangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -113,16 +110,10 @@
     <ClInclude Include="CShapes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CStyle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CCompositeShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ICompositeShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICompositeStyle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CShapeUnit.h">
@@ -135,9 +126,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IOutlineStyle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IFillStyle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CCanvas.h">

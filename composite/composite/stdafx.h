@@ -9,11 +9,11 @@
 #include <boost/optional.hpp>
 #include <cstdint>
 #include <fstream>
+#include <functional>
 #include <iomanip>
 #include <iostream>
 #include <memory>
 #include <numeric>
 #include <sstream>
-#include <vector>
 #include <string>
-#include <functional>
+#include <vector>

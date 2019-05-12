@@ -4,7 +4,6 @@
 #include "CEllipse.h"
 #include "CRectangle.h"
 #include "CSlide.h"
-//#include "CStyle.h"
 #include "CTriangle.h"
 #include "CommonTypes.h"
 
@@ -22,7 +21,7 @@ int main()
 	//sun
 	auto sun = make_shared<CEllipse>(PointD{ 100, 100 }, 20, 20);
 	sun->GetFillStyle()->SetColor(0xffeb3b);
-	sun->GetOutlineStyle()->SetColor(0xffeb3b);
+	sun->GetOutlineStyle()->SetColor(0xffd700);
 	sun->GetOutlineStyle()->SetThickness(5);
 
 	sun->Draw(canvas);
@@ -48,9 +47,10 @@ int main()
 	house->InsertShape(houseBody);
 	house->InsertShape(houseRoof);
 	house->SetFrame({ 500, 150, 50, 50 });
-	house->GetFillStyle()->SetColor(0x0000ff);
+	//house->GetFillStyle()->SetColor(0x0000ff);
+	//house->GetOutlineStyle()->SetColor(0x0000ff);
 
-	CSlide slide;
+	CSlide slide(500, 500);
 	slide.InsertShape(house);
 	slide.Draw(canvas);
 

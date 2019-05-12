@@ -156,7 +156,6 @@
     <ClCompile Include="CShapes.cpp" />
     <ClCompile Include="CShapeUnit.cpp" />
     <ClCompile Include="CSlide.cpp" />
-    <ClCompile Include="CStyle.cpp" />
     <ClCompile Include="CCanvas.cpp" />
     <ClCompile Include="CTriangle.cpp" />
   </ItemGroup>
@@ -171,9 +170,7 @@
     <ClInclude Include="CCompositeShape.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IDrawable.h" />
-    <ClInclude Include="ICompositeStyle.h" />
     <ClInclude Include="ICompositeShape.h" />
-    <ClInclude Include="IFillStyle.h" />
     <ClInclude Include="IOutlineStyle.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="IShapes.h" />
@@ -183,7 +180,6 @@
     <ClInclude Include="CShapeUnit.h" />
     <ClInclude Include="CSlide.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="CStyle.h" />
     <ClInclude Include="CCanvas.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="CTriangle.h" />

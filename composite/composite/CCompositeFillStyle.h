@@ -1,6 +1,4 @@
 #pragma once
-//#include "CShapes.h"
-//#include "ICompositeStyle.h"
 #include "IStyle.h"
 
 typedef std::function<void(std::function<void(IStyle&)>)> FillStyleEnumerator;

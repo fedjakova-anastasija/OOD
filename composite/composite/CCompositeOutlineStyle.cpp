@@ -1,24 +1,23 @@
 #include "stdafx.h"
 #include "CCompositeOutlineStyle.h"
-//#include "CStyle.h"
 
 using namespace std;
 
-CCompositeOutlineStyle::CCompositeOutlineStyle(OutlineStyleEnumerator & enumerator)
+CCompositeOutlineStyle::CCompositeOutlineStyle(OutlineStyleEnumerator& enumerator)
 	: m_enumerator(enumerator)
 {
 }
 
 void CCompositeOutlineStyle::Enable(bool enable)
 {
-	m_enumerator([&](IOutlineStyle& style) {
+	m_enumerator([&enable](IOutlineStyle& style) {
 		style.Enable(enable);
 	});
 }
 
 void CCompositeOutlineStyle::SetColor(RGBAColor color)
 {
-	m_enumerator([&](IOutlineStyle& style) {
+	m_enumerator([&color](IOutlineStyle& style) {
 		style.SetColor(color);
 	});
 }
@@ -53,11 +52,10 @@ optional<RGBAColor> CCompositeOutlineStyle::GetColor() const
 	};
 
 	m_enumerator(callback);
-
 	return color;
 }
 
-optional<float> CCompositeOutlineStyle::GetThickness()const
+optional<float> CCompositeOutlineStyle::GetThickness() const
 {
 	optional<float> thickness;
 
@@ -73,13 +71,12 @@ optional<float> CCompositeOutlineStyle::GetThickness()const
 	};
 
 	m_enumerator(callback);
-
 	return thickness;
 }
 
 void CCompositeOutlineStyle::SetThickness(float thickness)
 {
-	m_enumerator([&](IOutlineStyle& style) {
+	m_enumerator([&thickness](IOutlineStyle& style) {
 		style.SetThickness(thickness);
 	});
 }

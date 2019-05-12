@@ -5,7 +5,7 @@
 class CSlide : public ISlide
 {
 public:
-	//CSlide(double width, double height);
+	CSlide(double width, double height);
 	virtual double GetWidth() const override;
 	virtual double GetHeight() const override;
 

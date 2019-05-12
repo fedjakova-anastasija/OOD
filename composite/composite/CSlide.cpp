@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "CSlide.h"
-#include <algorithm>
 
-//CSlide::CSlide(double width, double height)
-//	: m_width(width)
-//	, m_height(height)
-//{
-//}
+CSlide::CSlide(double width, double height)
+	: m_width(width)
+	, m_height(height)
+{
+}
 
 double CSlide::GetWidth() const
 {

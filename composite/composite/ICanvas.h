@@ -5,7 +5,7 @@ class ICanvas
 {
 public:
 	virtual void SetThickness(float thickness) = 0;
-	
+
 	virtual void SetLineColor(RGBAColor color) = 0;
 	virtual void BeginFill(RGBAColor color) = 0;
 	virtual void EndFill() = 0;

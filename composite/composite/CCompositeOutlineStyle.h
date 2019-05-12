@@ -1,8 +1,5 @@
 ﻿#pragma once
-//#include "CShapes.h"
-//#include "ICompositeStyle.h"
 #include "IOutlineStyle.h"
-//#include "IStyle.h"
 
 typedef std::function<void(std::function<void(IOutlineStyle&)>)> OutlineStyleEnumerator;
 
@@ -17,9 +14,9 @@ public:
 	boost::optional<RGBAColor> GetColor() const override;
 	void SetColor(RGBAColor color) override;
 
-	boost::optional<float> GetThickness()const override;
+	boost::optional<float> GetThickness() const override;
 	void SetThickness(float thickness) override;
 
 private:
-	OutlineStyleEnumerator & m_enumerator;
+	OutlineStyleEnumerator& m_enumerator;
 };

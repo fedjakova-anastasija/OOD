@@ -1,24 +1,32 @@
 #include "stdafx.h"
 #include "CShapeUnit.h"
-//#include "CStyle.h"
 #include "CFillStyle.h"
 #include "COutlineStyle.h"
-//#include "IOutlineStyle.h"
 
 using namespace std;
 
 CShapeUnit::CShapeUnit()
 {
 	m_fillStyle = make_shared<CFillStyle>(false, NULL);
-	m_outlineStyle = make_shared<COutlineStyle>(true, 0, 0); 
+	m_outlineStyle = make_shared<COutlineStyle>(true, 0, 0);
 }
 
-std::shared_ptr<IOutlineStyle> CShapeUnit::GetOutlineStyle() const
+std::shared_ptr<IOutlineStyle> CShapeUnit::GetOutlineStyle()
 {
 	return m_outlineStyle;
 }
 
-std::shared_ptr<IStyle> CShapeUnit::GetFillStyle() const
+std::shared_ptr<const IOutlineStyle> CShapeUnit::GetOutlineStyle() const
+{
+	return m_outlineStyle;
+}
+
+std::shared_ptr<IStyle> CShapeUnit::GetFillStyle()
+{
+	return m_fillStyle;
+}
+
+std::shared_ptr<const IStyle> CShapeUnit::GetFillStyle() const
 {
 	return m_fillStyle;
 }

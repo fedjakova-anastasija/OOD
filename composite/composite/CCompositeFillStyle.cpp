@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CCompositeFillStyle.h"
-//#include "CStyle.h"
 
 using namespace std;
 
@@ -11,14 +10,14 @@ CCompositeFillStyle::CCompositeFillStyle(FillStyleEnumerator& enumerator)
 
 void CCompositeFillStyle::Enable(bool enable)
 {
-	m_enumerator([&](IStyle& style) {
+	m_enumerator([&enable](IStyle& style) {
 		style.Enable(enable);
 	});
 }
 
 void CCompositeFillStyle::SetColor(RGBAColor color)
 {
-	m_enumerator([&](IStyle& style) {
+	m_enumerator([&color](IStyle& style) {
 		style.SetColor(color);
 	});
 }
@@ -38,7 +37,6 @@ optional<bool> CCompositeFillStyle::IsEnabled() const
 	};
 
 	m_enumerator(callback);
-
 	return isEnabled;
 }
 
@@ -53,6 +51,5 @@ optional<RGBAColor> CCompositeFillStyle::GetColor() const
 	};
 
 	m_enumerator(callback);
-
 	return color;
 }
