@@ -142,10 +142,10 @@ public:
 			{
 				m_gumballMachine.SetNoQuarterState();
 			}
-			else
+			/*else
 			{
 				m_gumballMachine.SetSoldOutState();
-			}
+			}*/
 		}
 	}
 	std::string ToString() const override
