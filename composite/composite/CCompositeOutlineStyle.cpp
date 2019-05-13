@@ -25,7 +25,7 @@ void CCompositeOutlineStyle::SetColor(RGBAColor color)
 optional<bool> CCompositeOutlineStyle::IsEnabled() const
 {
 	optional<bool> isEnabled;
-	auto callback = [&](IOutlineStyle& style) {
+	m_enumerator([&](IOutlineStyle& style) {
 		if (!isEnabled.is_initialized())
 		{
 			isEnabled = style.IsEnabled();
@@ -34,9 +34,7 @@ optional<bool> CCompositeOutlineStyle::IsEnabled() const
 		{
 			isEnabled = boost::none;
 		}
-	};
-
-	m_enumerator(callback);
+	});
 
 	return isEnabled;
 }
@@ -44,14 +42,13 @@ optional<bool> CCompositeOutlineStyle::IsEnabled() const
 optional<RGBAColor> CCompositeOutlineStyle::GetColor() const
 {
 	optional<RGBAColor> color;
-	auto callback = [&](IOutlineStyle& style) {
+	m_enumerator([&](IOutlineStyle& style) {
 		if (!color.is_initialized())
 		{
 			color = style.GetColor();
 		}
-	};
+	});
 
-	m_enumerator(callback);
 	return color;
 }
 
@@ -59,7 +56,7 @@ optional<float> CCompositeOutlineStyle::GetThickness() const
 {
 	optional<float> thickness;
 
-	auto callback = [&](IOutlineStyle& style) {
+	m_enumerator([&](IOutlineStyle& style) {
 		if (!thickness.is_initialized())
 		{
 			thickness = style.IsEnabled();
@@ -68,9 +65,8 @@ optional<float> CCompositeOutlineStyle::GetThickness() const
 		{
 			thickness = boost::none;
 		}
-	};
+	});
 
-	m_enumerator(callback);
 	return thickness;
 }
 
