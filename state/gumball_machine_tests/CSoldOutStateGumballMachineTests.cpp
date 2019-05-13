@@ -1,41 +1,10 @@
-#include "../gumball_machine/GumBallMachineWithState.h"
+#include "MachineState.h"
 #include "pch.h"
-
-namespace CSoldOutStateTests
-{
-class CGumballMachine : public with_state::IGumballMachine
-{
-public:
-	CGumballMachine(unsigned count, std::stringstream& output)
-		: m_count(count)
-		, m_out(output){};
-
-	unsigned GetBallCount() const override
-	{
-		return m_count;
-	};
-
-private:
-	void ReleaseBall() override{};
-
-	void SetSoldOutState() override{};
-	void SetNoQuarterState() override{};
-	void SetSoldState() override{};
-	void SetHasQuarterState() override{};
-
-private:
-	const unsigned MAX_QUARTERS_COUNT = 5;
-	unsigned m_count = 0;
-	unsigned m_quartersCount = 0;
-	with_state::IState* m_state;
-	std::stringstream& m_out;
-};
-} // namespace CSoldOutStateTests
 
 TEST_CASE("when gumball machine with state has sold out state, it ", "[CSoldOutStateTests]")
 {
 	std::stringstream out;
-	CSoldOutStateTests::CGumballMachine machine(1, out);
+	MachineState::CGumballMachine machine(1, out);
 	with_state::CSoldOutState soldStateMachine(machine, out);
 
 	SECTION("can not insert quarter")

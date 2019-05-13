@@ -27,6 +27,9 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MultiMachineState.h">
+      <Filter>Source Files\MultiGumballMachineTests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="MultiNaiveGumBallMachineTests.cpp">
       <Filter>Source Files\MultiNaiveGumballMachineTests</Filter>
+    </ClCompile>
+    <ClCompile Include="MachineState.h">
+      <Filter>Source Files\GumballMashineWithStateTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
