@@ -5,7 +5,7 @@
 class CMenu
 {
 public:
-	CMenu(std::stringstream& output);
+	CMenu();
 	void Run();
 
 private:
@@ -13,7 +13,6 @@ private:
 	std::unique_ptr<with_multi_state::CGumballMachine> m_machine;
 	//std::unique_ptr<with_state::CGumballMachine> m_machine;
 	using Command = std::function<void(std::istream& args)>;
-	std::stringstream& m_out;
 
 	void InsertQuarter(std::istream&);
 	void EjectQuarter(std::istream&);

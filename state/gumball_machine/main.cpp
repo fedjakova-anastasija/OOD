@@ -4,75 +4,35 @@
 #include "MultiGumBallMachine.h"
 #include "MultiNaiveGumBallMachine.h"
 #include "NaiveGumBallMachine.h"
-#include <sstream>
+#include <iostream>
 
 using namespace std;
 
 template <typename GumballMachineType>
-void TestGumballMachine(GumballMachineType& m, stringstream& output)
+void TestGumballMachine(GumballMachineType& m)
 {
 	cout << m.ToString() << endl;
 
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.TurnCrank();
-	cout << output.str();
 
-	cout << m.ToString() << endl;
-
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.EjectQuarter();
-	cout << output.str();
-	output.str("");
 	m.TurnCrank();
-	cout << output.str();
 
-	cout << m.ToString() << endl;
-
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.TurnCrank();
-	cout << output.str();
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.TurnCrank();
-	cout << output.str();
-	output.str("");
 	m.EjectQuarter();
-	cout << output.str();
 
-	cout << m.ToString() << endl;
-
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.TurnCrank();
-	cout << output.str();
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.TurnCrank();
-	cout << output.str();
-	output.str("");
 	m.InsertQuarter();
-	cout << output.str();
-	output.str("");
 	m.TurnCrank();
-	cout << output.str();
 
 	cout << m.ToString() << endl;
 }
@@ -85,10 +45,8 @@ void TestGumballMachine(GumballMachineType& m, stringstream& output)
 
 void TestGumballMachineWithState()
 {
-	stringstream output;
-	output.str("");
-	with_state::CGumballMachine m(5, output);
-	TestGumballMachine(m, output);
+	with_state::CGumballMachine m(5, cout);
+	TestGumballMachine(m);
 }
 //
 //void TestGumballMachineWithDynamicState()
@@ -105,10 +63,8 @@ void TestGumballMachineWithState()
 //
 void TestMultiNaiveGumballMachine()
 {	
-	stringstream output;
-	output.str("");
-	naive_multi::CGumballMachine m(5, output);
-	TestGumballMachine(m, output);
+	naive_multi::CGumballMachine m(5, cout);
+	TestGumballMachine(m);
 }
 
 int main()
@@ -127,8 +83,7 @@ int main()
 	cout << "\n-----------------\n";
 	TestMultiGumballMachine();*/
 
-	stringstream output;
-	CMenu menu(output);
+	CMenu menu;
 	menu.Run();
 
 	return 0;	

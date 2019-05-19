@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <boost/format.hpp>
 #include <iostream>
-#include <sstream>
 
 namespace naive_multi
 {
@@ -16,7 +15,7 @@ public:
 		Sold, // Монетка выдана
 	};
 
-	CGumballMachine(unsigned count, std::stringstream& output)
+	CGumballMachine(unsigned count, std::ostream& output)
 		: m_count(count)
 		, m_state(count > 0 ? State::NoQuarter : State::SoldOut)
 		, m_quartersCount(0)
@@ -179,6 +178,6 @@ private:
 	unsigned m_quartersCount; // Количество монет
 	unsigned m_count; // Количество шариков
 	State m_state = State::SoldOut;
-	std::stringstream& m_output;
+	std::ostream& m_output;
 };
 } // namespace naive_multi

@@ -6,7 +6,7 @@ namespace MachineState
 class CGumballMachine : public with_state::IGumballMachine
 {
 public:
-	CGumballMachine(unsigned count, std::stringstream& output)
+	CGumballMachine(unsigned count, std::ostream& output)
 		: m_count(count)
 		, m_out(output){};
 
@@ -28,6 +28,6 @@ private:
 	unsigned m_count = 0;
 	unsigned m_quartersCount = 0;
 	with_state::IState* m_state;
-	std::stringstream& m_out;
+	std::ostream& m_out;
 };
 } // namespace CHasQuarterStateTests

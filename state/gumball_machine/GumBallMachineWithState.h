@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <sstream>
 #include <boost\format.hpp>
 
 namespace with_state
@@ -32,7 +31,7 @@ struct IGumballMachine
 class CSoldState : public IState
 {
 public:
-	CSoldState(IGumballMachine & gumballMachine, std::stringstream& output)
+	CSoldState(IGumballMachine & gumballMachine, std::ostream& output)
 		:m_gumballMachine(gumballMachine)
 		, m_output(output)
 	{}
@@ -67,13 +66,13 @@ public:
 	}
 private:
 	IGumballMachine & m_gumballMachine;
-	std::stringstream& m_output;
+	std::ostream& m_output;
 };
 
 class CSoldOutState : public IState
 {
 public:
-	CSoldOutState(IGumballMachine & gumballMachine, std::stringstream& output)
+	CSoldOutState(IGumballMachine & gumballMachine, std::ostream& output)
 		:m_gumballMachine(gumballMachine)
 		, m_output(output)
 	{}
@@ -100,13 +99,13 @@ public:
 	}
 private:
 	IGumballMachine & m_gumballMachine;
-	std::stringstream& m_output;
+	std::ostream& m_output;
 };
 
 class CHasQuarterState : public IState
 {
 public:
-	CHasQuarterState(IGumballMachine & gumballMachine, std::stringstream& output)
+	CHasQuarterState(IGumballMachine & gumballMachine, std::ostream& output)
 		:m_gumballMachine(gumballMachine)
 		, m_output(output)
 	{}
@@ -135,13 +134,13 @@ public:
 	}
 private:
 	IGumballMachine & m_gumballMachine;
-	std::stringstream& m_output;
+	std::ostream& m_output;
 };
 
 class CNoQuarterState : public IState
 {
 public:
-	CNoQuarterState(IGumballMachine & gumballMachine, std::stringstream& output)
+	CNoQuarterState(IGumballMachine & gumballMachine, std::ostream& output)
 		: m_gumballMachine(gumballMachine)
 		, m_output(output)
 	{}
@@ -169,13 +168,13 @@ public:
 	}
 private:
 	IGumballMachine & m_gumballMachine;
-	std::stringstream& m_output;
+	std::ostream& m_output;
 };
 
 class CGumballMachine : private IGumballMachine
 {
 public:
-	CGumballMachine(unsigned numBalls, std::stringstream& output)
+	CGumballMachine(unsigned numBalls, std::ostream& output)
 		: m_soldState(*this, output)
 		, m_soldOutState(*this, output)
 		, m_noQuarterState(*this, output)
@@ -249,7 +248,7 @@ private:
 	CNoQuarterState m_noQuarterState;
 	CHasQuarterState m_hasQuarterState;
 	IState * m_state;
-	std::stringstream& m_output;
+	std::ostream& m_output;
 };
 
 }
