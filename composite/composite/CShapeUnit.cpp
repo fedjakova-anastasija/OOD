@@ -7,8 +7,8 @@ using namespace std;
 
 CShapeUnit::CShapeUnit()
 {
-	m_fillStyle = make_shared<CFillStyle>(false, NULL);
-	m_outlineStyle = make_shared<COutlineStyle>(true, 0, 0);
+	m_fillStyle = make_unique<CFillStyle>(false, NULL);
+	m_outlineStyle = make_unique<COutlineStyle>(true, 0, 0);
 }
 
 IOutlineStyle& CShapeUnit::GetOutlineStyle()
@@ -31,9 +31,10 @@ const IStyle& CShapeUnit::GetFillStyle() const
 	return *m_fillStyle;
 }
 
-ICompositeShape* CShapeUnit::GetComposite()
+std::shared_ptr<ICompositeShape> CShapeUnit::GetComposite()
 {
 	return nullptr;
+
 }
 
 std::shared_ptr<const ICompositeShape> CShapeUnit::GetComposite() const

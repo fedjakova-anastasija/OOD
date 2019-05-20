@@ -17,7 +17,7 @@ public:
 	virtual IStyle& GetFillStyle() = 0;
 	virtual const IStyle& GetFillStyle() const = 0;
 
-	virtual ICompositeShape* GetComposite() = 0;
+	virtual std::shared_ptr<ICompositeShape> GetComposite() = 0;
 	virtual std::shared_ptr<const ICompositeShape> GetComposite() const = 0;
 
 	virtual ~IShape() = default;

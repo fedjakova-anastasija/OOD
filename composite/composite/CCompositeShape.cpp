@@ -54,9 +54,9 @@ const IStyle& CCompositeShape::GetFillStyle() const
 	return *m_fillStyle;
 }
 
-ICompositeShape* CCompositeShape::GetComposite()
+std::shared_ptr<ICompositeShape> CCompositeShape::GetComposite()
 {
-	return this;
+	return shared_from_this();
 }
 
 std::shared_ptr<const ICompositeShape> CCompositeShape::GetComposite() const
@@ -84,6 +84,7 @@ RectD CCompositeShape::GetFrame() const
 				auto shape = m_shapes->GetShapeAtIndex(i);
 
 				RectD const& frame = shape->GetFrame();
+
 				minX = min(minX, frame.left);
 				minY = min(minY, frame.top);
 				maxX = max(maxX, frame.left + frame.width);

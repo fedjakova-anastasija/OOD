@@ -13,7 +13,7 @@ public:
 
 	void Draw(ICanvas& canvas) override;
 
-	ICompositeShape* GetComposite() override;
+	std::shared_ptr<ICompositeShape> GetComposite() override;
 	std::shared_ptr<const ICompositeShape> GetComposite() const override;
 
 	IOutlineStyle& GetOutlineStyle() override;

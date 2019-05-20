@@ -6,8 +6,7 @@ class CShapeUnit : public IShape
 {
 public:
 	CShapeUnit();
-
-	virtual ICompositeShape* GetComposite() override;
+	virtual std::shared_ptr<ICompositeShape> GetComposite() override;
 	virtual std::shared_ptr<const ICompositeShape> GetComposite() const override;
 
 	virtual IOutlineStyle& GetOutlineStyle() override;
@@ -19,6 +18,6 @@ public:
 	void SetCanvasStyles(ICanvas& canvas);
 
 protected:
-	std::shared_ptr<IOutlineStyle> m_outlineStyle;
-	std::shared_ptr<IStyle> m_fillStyle;
+	std::unique_ptr<IOutlineStyle> m_outlineStyle;
+	std::unique_ptr<IStyle> m_fillStyle;
 };
