@@ -58,15 +58,15 @@ int main()
 	//emptyGroup->SetFrame({ 0, 0, 0, 0 });
 	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << std::endl;
 	//std::cout << "Frame: " << emptyGroup->GetFrame().height << " " << emptyGroup->GetFrame().width << std::endl;
-	//house->InsertShape(emptyRectangle);
-	house->InsertShape(emptyGroup);
+	house->InsertShape(emptyRectangle);
+	//house->InsertShape(emptyGroup);
 	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << std::endl;
 	//std::cout << "Frame: " << emptyGroup->GetFrame().height << " " << emptyGroup->GetFrame().width << std::endl;
-	
+
 	house->GetOutlineStyle().SetColor(0x0000ff);
 	house->GetFillStyle().SetColor(0x0000ff);
 	house->GetOutlineStyle().SetThickness(5);
-	
+
 	slide.InsertShape(house);
 	slide.Draw(canvas);
 

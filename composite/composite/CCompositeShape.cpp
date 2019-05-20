@@ -105,12 +105,12 @@ void CCompositeShape::SetFrame(const RectD& rect)
 	for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
 	{
 		auto shape = m_shapes->GetShapeAtIndex(i);
-
 		RectD shapeFrame = shape->GetFrame();
 		shapeFrame.left = rect.left + (shapeFrame.left - oldFrame.left) / (oldFrame.width / rect.width);
 		shapeFrame.top = rect.top + (shapeFrame.top - oldFrame.top) / (oldFrame.height / rect.height);
 		shapeFrame.width = shapeFrame.width * (rect.width / oldFrame.width);
 		shapeFrame.height = shapeFrame.height * (rect.height / oldFrame.height);
+
 		shape->SetFrame(shapeFrame);
 	}
 }
