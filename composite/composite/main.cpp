@@ -56,13 +56,11 @@ int main()
 	house->InsertShape(houseRoof);
 	house->SetFrame({ 500, 150, 50, 50 });
 	//emptyGroup->SetFrame({ 0, 0, 0, 0 });
-	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << std::endl;
-	//std::cout << "Frame: " << emptyGroup->GetFrame().height << " " << emptyGroup->GetFrame().width << std::endl;
+	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << " " << house->GetFrame().top << " " << house->GetFrame().left << std::endl;
 	house->InsertShape(emptyRectangle);
 	//house->InsertShape(emptyGroup);
-	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << std::endl;
-	//std::cout << "Frame: " << emptyGroup->GetFrame().height << " " << emptyGroup->GetFrame().width << std::endl;
-
+	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << " " << house->GetFrame().top << " " << house->GetFrame().left << std::endl;
+	
 	house->GetOutlineStyle().SetColor(0x0000ff);
 	house->GetFillStyle().SetColor(0x0000ff);
 	house->GetOutlineStyle().SetThickness(5);
