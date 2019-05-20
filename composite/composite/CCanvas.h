@@ -19,8 +19,8 @@ public:
 	~CCanvas();
 
 private:
-	void OpenPath();
-	void ClosePath();
+	void Begin();
+	void End();
 
 	double m_height;
 	double m_width;

@@ -8,7 +8,7 @@ CCanvas::CCanvas(std::ostream& ostream, double height, double width)
 	, m_height(height)
 	, m_width(width)
 {
-	m_output << "<svg version = \"1.1\" encoding=\"UTF - 8\" xmlns = \"http://www.w3.org/2000/svg\""
+	m_output << "<svg version = \"1.1\" encoding=\"UTF-8\" xmlns = \"http://www.w3.org/2000/svg\""
 			 << " height=\"" << m_height << "\""
 			 << " width=\"" << m_width << "\">" << endl;
 }
@@ -17,7 +17,7 @@ CCanvas::~CCanvas()
 {
 	if (m_pathOpened)
 	{
-		CCanvas::ClosePath();
+		CCanvas::End();
 	}
 
 	m_output << "</svg>";
@@ -31,7 +31,7 @@ void CCanvas::SetThickness(float thickness)
 void CCanvas::SetLineColor(RGBAColor color)
 {
 	m_lineColor = color;
-	ClosePath();
+	End();
 }
 
 void CCanvas::BeginFill(RGBAColor color)
@@ -48,7 +48,7 @@ void CCanvas::MoveTo(double x, double y)
 {
 	if (!m_pathOpened)
 	{
-		OpenPath();
+		Begin();
 	}
 
 	m_output << "M " << x << "," << y << " ";
@@ -68,7 +68,7 @@ void CCanvas::DrawEllipse(double left, double top, double width, double height)
 {
 	if (m_pathOpened)
 	{
-		ClosePath();
+		End();
 	}
 
 	m_output << " <ellipse";
@@ -82,10 +82,10 @@ void CCanvas::DrawEllipse(double left, double top, double width, double height)
 		m_output << " fill=\"none\"";
 	}
 	m_output << " cx=\"" << left << "\" cy=\"" << top << "\" rx=\"" << width << "\" ry=\"" << height << "\" />" << endl;
-	ClosePath();
+	End();
 }
 
-void CCanvas::OpenPath()
+void CCanvas::Begin()
 {
 	m_pathOpened = true;
 	m_output << "<path";
@@ -101,7 +101,7 @@ void CCanvas::OpenPath()
 	m_output << " d=\"";
 }
 
-void CCanvas::ClosePath()
+void CCanvas::End()
 {
 	if (m_pathOpened)
 	{

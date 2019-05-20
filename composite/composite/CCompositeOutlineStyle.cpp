@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CCompositeOutlineStyle::CCompositeOutlineStyle(OutlineStyleEnumerator& enumerator)
+CCompositeOutlineStyle::CCompositeOutlineStyle(OutlineStyleEnumerator&& enumerator)
 	: m_enumerator(enumerator)
 {
 }

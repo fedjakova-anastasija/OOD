@@ -13,14 +13,14 @@ public:
 
 	void Draw(ICanvas& canvas) override;
 
-	std::shared_ptr<ICompositeShape> GetComposite() override;
+	ICompositeShape* GetComposite() override;
 	std::shared_ptr<const ICompositeShape> GetComposite() const override;
 
-	std::shared_ptr<IOutlineStyle> GetOutlineStyle() override;
-	std::shared_ptr<const IOutlineStyle> GetOutlineStyle() const override;
+	IOutlineStyle& GetOutlineStyle() override;
+	const IOutlineStyle& GetOutlineStyle() const override;
 
-	std::shared_ptr<IStyle> GetFillStyle() override;
-	std::shared_ptr<const IStyle> GetFillStyle() const override;
+	IStyle& GetFillStyle() override;
+	const IStyle& GetFillStyle() const override;
 
 	size_t GetShapesCount() const override;
 	void InsertShape(const std::shared_ptr<IShape>& shape) override;
@@ -31,7 +31,7 @@ public:
 	void SetFrame(const RectD& rect) override;
 
 private:
-	std::shared_ptr<IStyle> m_fillStyle;
-	std::shared_ptr<IOutlineStyle> m_outlineStyle;
+	std::unique_ptr<IStyle> m_fillStyle;
+	std::unique_ptr<IOutlineStyle> m_outlineStyle;
 	std::shared_ptr<CShapes> m_shapes;
 };

@@ -6,7 +6,7 @@ typedef std::function<void(std::function<void(IOutlineStyle&)>)> OutlineStyleEnu
 class CCompositeOutlineStyle : public IOutlineStyle
 {
 public:
-	CCompositeOutlineStyle(OutlineStyleEnumerator& enumerator);
+	CCompositeOutlineStyle(OutlineStyleEnumerator&& enumerator);
 
 	boost::optional<bool> IsEnabled() const override;
 	void Enable(bool enable) override;
@@ -18,5 +18,5 @@ public:
 	void SetThickness(float thickness) override;
 
 private:
-	OutlineStyleEnumerator& m_enumerator;
+	OutlineStyleEnumerator m_enumerator;
 };

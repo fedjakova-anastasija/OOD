@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CCompositeFillStyle::CCompositeFillStyle(FillStyleEnumerator& enumerator)
+CCompositeFillStyle::CCompositeFillStyle(FillStyleEnumerator&& enumerator)
 	: m_enumerator(enumerator)
 {
 }

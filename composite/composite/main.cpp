@@ -17,40 +17,50 @@ int main()
 
 	ofstream inputFile(file);
 	CCanvas canvas(inputFile, 600, 600);
+	CSlide slide(500, 500);
 
 	//sun
 	auto sun = make_shared<CEllipse>(PointD{ 100, 100 }, 20, 20);
-	sun->GetFillStyle()->SetColor(0xffeb3b);
-	sun->GetOutlineStyle()->SetColor(0xffd700);
-	sun->GetOutlineStyle()->SetThickness(5);
+	sun->GetFillStyle().SetColor(0xffeb3b);
+	sun->GetOutlineStyle().SetColor(0xffd700);
+	sun->GetOutlineStyle().SetThickness(5);
 
 	sun->Draw(canvas);
 
 	//house body
 	auto houseBody = make_shared<CRectangle>(PointD{ 200, 300 }, PointD{ 300, 200 });
-	houseBody->GetFillStyle()->SetColor(0x8B4513);
-	houseBody->GetOutlineStyle()->SetColor(0x000000);
-	houseBody->GetOutlineStyle()->SetThickness(2);
+	houseBody->GetFillStyle().SetColor(0x8B4513);
+	houseBody->GetOutlineStyle().SetColor(0x000000);
+	houseBody->GetOutlineStyle().SetThickness(2);
 
 	houseBody->Draw(canvas);
 
 	//house roof
 
 	auto houseRoof = make_shared<CTriangle>(PointD{ 180, 200 }, PointD{ 250, 150 }, PointD{ 320, 200 });
-	houseRoof->GetFillStyle()->SetColor(0x808080);
-	houseRoof->GetOutlineStyle()->SetColor(0x000000);
-	houseRoof->GetOutlineStyle()->SetThickness(2);
+	houseRoof->GetFillStyle().SetColor(0x808080);
+	houseRoof->GetOutlineStyle().SetColor(0x000000);
+	houseRoof->GetOutlineStyle().SetThickness(2);
 
 	houseRoof->Draw(canvas);
 
+	//house body
+	auto emptyRectangle = make_shared<CRectangle>(PointD{ 0, 0 }, PointD{ 0, 0 });
+
+	emptyRectangle->Draw(canvas);
+
 	auto house = make_shared<CCompositeShape>();
+
 	house->InsertShape(houseBody);
 	house->InsertShape(houseRoof);
+	house->InsertShape(emptyRectangle);
 	house->SetFrame({ 500, 150, 50, 50 });
-	//house->GetFillStyle()->SetColor(0x0000ff);
-	//house->GetOutlineStyle()->SetColor(0x0000ff);
+	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << std::endl;
+	
+	house->GetOutlineStyle().SetColor(0x0000ff);
 
-	CSlide slide(500, 500);
+	
+	house->GetFillStyle().SetColor(0x0000ff);
 	slide.InsertShape(house);
 	slide.Draw(canvas);
 

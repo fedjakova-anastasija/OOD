@@ -11,27 +11,27 @@ CShapeUnit::CShapeUnit()
 	m_outlineStyle = make_shared<COutlineStyle>(true, 0, 0);
 }
 
-std::shared_ptr<IOutlineStyle> CShapeUnit::GetOutlineStyle()
+IOutlineStyle& CShapeUnit::GetOutlineStyle()
 {
-	return m_outlineStyle;
+	return *m_outlineStyle;
 }
 
-std::shared_ptr<const IOutlineStyle> CShapeUnit::GetOutlineStyle() const
+const IOutlineStyle& CShapeUnit::GetOutlineStyle() const
 {
-	return m_outlineStyle;
+	return *m_outlineStyle;
 }
 
-std::shared_ptr<IStyle> CShapeUnit::GetFillStyle()
+IStyle& CShapeUnit::GetFillStyle()
 {
-	return m_fillStyle;
+	return *m_fillStyle;
 }
 
-std::shared_ptr<const IStyle> CShapeUnit::GetFillStyle() const
+const IStyle& CShapeUnit::GetFillStyle() const
 {
-	return m_fillStyle;
+	return *m_fillStyle;
 }
 
-std::shared_ptr<ICompositeShape> CShapeUnit::GetComposite()
+ICompositeShape* CShapeUnit::GetComposite()
 {
 	return nullptr;
 }
