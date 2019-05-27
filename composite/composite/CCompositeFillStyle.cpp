@@ -25,29 +25,37 @@ void CCompositeFillStyle::SetColor(RGBAColor color)
 optional<bool> CCompositeFillStyle::IsEnabled() const
 {
 	optional<bool> isEnabled;
+	bool differentStates = false;
+
 	m_enumerator([&](IStyle& style) {
 		if (!isEnabled.is_initialized())
 		{
 			isEnabled = style.IsEnabled();
 		}
-		else if (isEnabled != style.IsEnabled())
+		else if (style.IsEnabled() != isEnabled)
 		{
-			isEnabled = boost::none;
+			differentStates = true;
 		}
 	});
 
-	return isEnabled;
+	return differentStates ? boost::none : isEnabled;
 }
 
 optional<RGBAColor> CCompositeFillStyle::GetColor() const
 {
 	optional<RGBAColor> color;
+	bool differentColors = false;
+
 	m_enumerator([&](IStyle& style) {
 		if (!color.is_initialized())
 		{
 			color = style.GetColor();
 		}
+		else if (style.GetColor() != color)
+		{
+			differentColors = true;
+		}
 	});
 
-	return color;
+	return differentColors ? boost::none : color;
 }

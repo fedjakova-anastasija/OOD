@@ -66,11 +66,15 @@ std::shared_ptr<const ICompositeShape> CCompositeShape::GetComposite() const
 
 RectD CCompositeShape::GetFrame() const
 {
-	RectD frame = { 0, 0, 0, 0 };
-
-	if (m_shapes->GetShapesCount() != 0)
+	std::exception_ptr p;
+	try
 	{
-		RectD const& firstFrame = m_shapes->GetShapeAtIndex(0)->GetFrame();
+		if (m_shapes->GetShapesCount() == 0)
+		{
+			throw std::logic_error("Empty group frame!");
+		}
+
+		RectD firstFrame = m_shapes->GetShapeAtIndex(0)->GetFrame();
 
 		double minX = firstFrame.left;
 		double minY = firstFrame.top;
@@ -92,26 +96,44 @@ RectD CCompositeShape::GetFrame() const
 			}
 		}
 
-		frame = { minX, minY, maxX - minX, maxY - minY };
+		firstFrame = { minX, minY, maxX - minX, maxY - minY };
+		return firstFrame;
 	}
-
-	return frame;
+	catch (const std::exception& e)
+	{
+		p = std::current_exception();
+		std::cout << e.what() << std::endl;
+	}
 }
 
-void CCompositeShape::SetFrame(const RectD& rect)
+void CCompositeShape::SetFrame(const RectD& frame)
 {
-	RectD oldFrame = GetFrame();
-
-	for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
+	std::exception_ptr p;
+	try
 	{
-		auto shape = m_shapes->GetShapeAtIndex(i);
-		RectD shapeFrame = shape->GetFrame();
-		shapeFrame.left = rect.left + (shapeFrame.left - oldFrame.left) / (oldFrame.width / rect.width);
-		shapeFrame.top = rect.top + (shapeFrame.top - oldFrame.top) / (oldFrame.height / rect.height);
-		shapeFrame.width = shapeFrame.width * (rect.width / oldFrame.width);
-		shapeFrame.height = shapeFrame.height * (rect.height / oldFrame.height);
+		if (m_shapes->GetShapesCount() == 0)
+		{
+			throw std::logic_error("Empty group frame!");
+		}
 
-		shape->SetFrame(shapeFrame);
+		RectD oldFrame = GetFrame();
+
+		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
+		{
+			auto shape = m_shapes->GetShapeAtIndex(i);
+			RectD shapeFrame = shape->GetFrame();
+			shapeFrame.left = frame.left + (shapeFrame.left - oldFrame.left) / (oldFrame.width / frame.width);
+			shapeFrame.top = frame.top + (shapeFrame.top - oldFrame.top) / (oldFrame.height / frame.height);
+			shapeFrame.width = shapeFrame.width * (frame.width / oldFrame.width);
+			shapeFrame.height = shapeFrame.height * (frame.height / oldFrame.height);
+
+			shape->SetFrame(shapeFrame);
+		}
+	}
+	catch (const std::exception& e)
+	{
+		p = std::current_exception();
+		std::cout << e.what() << std::endl;
 	}
 }
 

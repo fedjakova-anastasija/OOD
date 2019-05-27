@@ -41,7 +41,7 @@ void CCanvas::BeginFill(RGBAColor color)
 
 void CCanvas::EndFill()
 {
-	m_fillColor = NULL;
+	m_fillColor = 0;
 }
 
 void CCanvas::MoveTo(double x, double y)

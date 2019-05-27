@@ -26,7 +26,7 @@ private:
 	double m_width;
 	float m_outlineThickness = 1;
 	RGBAColor m_lineColor = 0;
-	RGBAColor m_fillColor = NULL;
+	RGBAColor m_fillColor = 0;
 	std::ostream& m_output;
 	bool m_pathOpened = false;
 };

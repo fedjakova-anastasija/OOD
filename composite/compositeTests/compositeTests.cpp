@@ -20,16 +20,16 @@ TEST_CASE("A number of shapes is zero when group was created")
 	REQUIRE(group->GetShapesCount() == 0);
 }
 
-TEST_CASE("New group has empty frame")
-{
-	auto group = std::make_shared<CCompositeShape>();
-	auto groupFrame = group->GetFrame();
-
-	REQUIRE(groupFrame.left == 0);
-	REQUIRE(groupFrame.top == 0);
-	REQUIRE(groupFrame.width == 0);
-	REQUIRE(groupFrame.height == 0);
-}
+//TEST_CASE("New group has empty frame")
+//{
+//	auto group = std::make_shared<CCompositeShape>();
+//	auto groupFrame = group->GetFrame();
+//
+//	REQUIRE(groupFrame.left == NAN);
+//	REQUIRE(groupFrame.top == NAN);
+//	REQUIRE(groupFrame.width == NAN);
+//	REQUIRE(groupFrame.height == NAN);
+//}
 
 TEST_CASE("New group can not set frame")
 {
@@ -77,6 +77,7 @@ TEST_CASE("The group can remove shape")
 	auto ellipse = std::make_shared<CEllipse>(PointD{ 100, 100 }, 20, 20);
 	group->InsertShape(ellipse);
 	REQUIRE(group->GetShapesCount() == 1);
+	REQUIRE_THROWS_WITH(group->RemoveShapeAtIndex(1), "Wrong index!");
 	group->RemoveShapeAtIndex(0);
 	REQUIRE(group->GetShapesCount() == 0);
 }
@@ -84,18 +85,50 @@ TEST_CASE("The group can remove shape")
 TEST_CASE("CGroupShape with shapes", "[CGroupShape]")
 {
 	auto group = std::make_shared<CCompositeShape>();
-	auto rectangle = std::make_shared<CRectangle>(PointD{ 10, 10 }, PointD{ 10, 20 });
+	auto rectangle = std::make_shared<CRectangle>(PointD{ 10, 10 }, PointD{ 20, 20 });
+	auto newRectangle = std::make_shared<CRectangle>(PointD{ 10, 10 }, PointD{ 20, 20 });
 
 	rectangle->GetFillStyle().SetColor(0x000000);
+	rectangle->GetOutlineStyle().SetColor(0x000000);
+	rectangle->GetOutlineStyle().SetThickness(2);
 	group->InsertShape(rectangle);
-
-	auto rectangleFrame = rectangle->GetFrame();
 	auto groupFrame = group->GetFrame();
+	auto rectangleFrame = rectangle->GetFrame();
+	
+	/*SECTION("The group does not change frame after addition the empty group")
+	{
+		auto emptyGroup = make_shared<CCompositeShape>();
+		emptyGroup->SetFrame({ 0, 0, 0, 0 });
+		std::cout << "Frame: " << group->GetFrame().height << " " << group->GetFrame().width << " " << group->GetFrame().top << " " << group->GetFrame().left << std::endl;
+
+		group->InsertShape(emptyGroup);
+		REQUIRE(group->GetFrame().height == 10);
+		REQUIRE(group->GetFrame().width == 10);
+		REQUIRE(group->GetFrame().top == 10);
+		REQUIRE(group->GetFrame().left == 10);
+	}*/
 
 	SECTION("Discoloration of the group changes color in children")
 	{
 		group->GetFillStyle().SetColor(0x0000ff);
 		REQUIRE(group->GetShapeAtIndex(0)->GetFillStyle().GetColor() == group->GetFillStyle().GetColor());
+	}
+
+	SECTION("Can set frame with children")
+	{
+		REQUIRE(groupFrame.top == rectangleFrame.top);
+		REQUIRE(groupFrame.left == rectangleFrame.left);
+		REQUIRE(groupFrame.height == rectangleFrame.height);
+		REQUIRE(groupFrame.width == rectangleFrame.width);
+
+		group->SetFrame({ 500, 150, 50, 50 });
+		groupFrame = group->GetFrame();
+
+		groupFrame = group->GetFrame();
+		REQUIRE(groupFrame.top == 150);
+		REQUIRE(groupFrame.left == 500);
+		REQUIRE(groupFrame.height == 50);
+		REQUIRE(groupFrame.width == 50);
 	}
 
 	SECTION("The group changes frame after addition the empty rectangle")
@@ -104,7 +137,7 @@ TEST_CASE("CGroupShape with shapes", "[CGroupShape]")
 		group->InsertShape(emptyRectangle);
 		REQUIRE(group->GetShapesCount() == 2);
 		REQUIRE(group->GetFrame().height == 20);
-		REQUIRE(group->GetFrame().width == 10);
+		REQUIRE(group->GetFrame().width == 20);
 		REQUIRE(group->GetFrame().top == 0);
 		REQUIRE(group->GetFrame().left == 0);
 	}
@@ -120,11 +153,53 @@ TEST_CASE("CGroupShape with shapes", "[CGroupShape]")
 		REQUIRE(group->GetShapesCount() == 1);
 	}
 
-	SECTION("Shape frame changes group frame")
+	SECTION("Shape's frame changes group frame")
 	{
 		REQUIRE(groupFrame.top == rectangleFrame.top);
 		REQUIRE(groupFrame.left == rectangleFrame.left);
 		REQUIRE(groupFrame.height == rectangleFrame.height);
 		REQUIRE(groupFrame.width == rectangleFrame.width);
+	}
+
+	SECTION("Return none when get fill style with different colors")
+	{
+		newRectangle->GetFillStyle().SetColor(0x0000ff);
+		group->InsertShape(newRectangle);
+		REQUIRE(group->GetFillStyle().GetColor() == boost::none);
+	}
+
+	SECTION("Return none when get outline style with different colors")
+	{
+		newRectangle->GetOutlineStyle().SetColor(0x0000ff);
+		group->InsertShape(newRectangle);
+		REQUIRE(group->GetOutlineStyle().GetColor() == boost::none);
+	}
+
+	SECTION("Return none when get outline style with different thicknesses")
+	{
+		newRectangle->GetOutlineStyle().SetThickness(3);
+		group->InsertShape(newRectangle);
+		REQUIRE(group->GetOutlineStyle().GetThickness() == boost::none);
+	}
+
+	SECTION("Return color when get fill style with the same colors")
+	{
+		newRectangle->GetOutlineStyle().SetColor(0x000000);
+		group->InsertShape(newRectangle);
+		REQUIRE(group->GetOutlineStyle().GetColor() == newRectangle->GetOutlineStyle().GetColor());
+	}
+
+	SECTION("Return color when get outline style with the same thicknesses")
+	{
+		newRectangle->GetOutlineStyle().SetThickness(2);
+		group->InsertShape(newRectangle);
+		REQUIRE(group->GetOutlineStyle().GetThickness() == newRectangle->GetOutlineStyle().GetThickness());
+	}
+
+	SECTION("Return color when get fill style with the same colors")
+	{
+		newRectangle->GetFillStyle().SetColor(0x000000);
+		group->InsertShape(newRectangle);
+		REQUIRE(group->GetFillStyle().GetColor() == newRectangle->GetFillStyle().GetColor());
 	}
 }

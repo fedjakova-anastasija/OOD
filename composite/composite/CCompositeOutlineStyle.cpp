@@ -25,49 +25,58 @@ void CCompositeOutlineStyle::SetColor(RGBAColor color)
 optional<bool> CCompositeOutlineStyle::IsEnabled() const
 {
 	optional<bool> isEnabled;
+	bool differentStates = false;
+
 	m_enumerator([&](IOutlineStyle& style) {
 		if (!isEnabled.is_initialized())
 		{
 			isEnabled = style.IsEnabled();
 		}
-		else if (isEnabled != style.IsEnabled())
+		else if (style.IsEnabled() != isEnabled)
 		{
-			isEnabled = boost::none;
+			differentStates = true;
 		}
 	});
 
-	return isEnabled;
+	return differentStates ? boost::none : isEnabled;
 }
 
 optional<RGBAColor> CCompositeOutlineStyle::GetColor() const
 {
 	optional<RGBAColor> color;
+	bool differentColors = false;
+
 	m_enumerator([&](IOutlineStyle& style) {
 		if (!color.is_initialized())
 		{
 			color = style.GetColor();
 		}
+		else if (style.GetColor() != color)
+		{
+			differentColors = true;
+		}
 	});
 
-	return color;
+	return differentColors ? boost::none : color;
 }
 
 optional<float> CCompositeOutlineStyle::GetThickness() const
 {
 	optional<float> thickness;
+	bool differentThicknesses = false;
 
 	m_enumerator([&](IOutlineStyle& style) {
 		if (!thickness.is_initialized())
 		{
-			thickness = style.IsEnabled();
+			thickness = style.GetThickness();
 		}
 		else if (thickness != style.GetThickness())
 		{
-			thickness = boost::none;
+			differentThicknesses = true;
 		}
 	});
 
-	return thickness;
+	return differentThicknesses ? boost::none : thickness;
 }
 
 void CCompositeOutlineStyle::SetThickness(float thickness)

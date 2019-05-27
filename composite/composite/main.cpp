@@ -6,6 +6,7 @@
 #include "CSlide.h"
 #include "CTriangle.h"
 #include "CommonTypes.h"
+#include <boost/optional/optional_io.hpp>
 
 using namespace std;
 
@@ -44,27 +45,28 @@ int main()
 
 	houseRoof->Draw(canvas);
 
-	//house body
+	//empty rectangle
 	auto emptyRectangle = make_shared<CRectangle>(PointD{ 0, 0 }, PointD{ 0, 0 });
 
 	emptyRectangle->Draw(canvas);
 
 	auto house = make_shared<CCompositeShape>();
 	auto emptyGroup = make_shared<CCompositeShape>();
+	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << " " << house->GetFrame().top << " " << house->GetFrame().left << std::endl;
 
 	house->InsertShape(houseBody);
 	house->InsertShape(houseRoof);
 	house->SetFrame({ 500, 150, 50, 50 });
 	//emptyGroup->SetFrame({ 0, 0, 0, 0 });
 	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << " " << house->GetFrame().top << " " << house->GetFrame().left << std::endl;
+
 	house->InsertShape(emptyRectangle);
 	//house->InsertShape(emptyGroup);
 	std::cout << "Frame: " << house->GetFrame().height << " " << house->GetFrame().width << " " << house->GetFrame().top << " " << house->GetFrame().left << std::endl;
-	
+
 	house->GetOutlineStyle().SetColor(0x0000ff);
 	house->GetFillStyle().SetColor(0x0000ff);
 	house->GetOutlineStyle().SetThickness(5);
-
 	slide.InsertShape(house);
 	slide.Draw(canvas);
 
