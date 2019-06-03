@@ -61,7 +61,7 @@ private:
 	afx_msg void OnClickedRadioCos();
 	afx_msg void OnClickedAddHarmonic();
 	afx_msg void OnClickedDeleteHarmonic();
-	afx_msg void OnSetFocusListBox();
+	afx_msg void OnSetFocusGroup();
 
 	HICON m_hIcon;
 
@@ -76,7 +76,7 @@ private:
 	HarmonicOscillationsTypeChangeSignal m_typeChanged;
 	HarmonicOscillationsAddSignal m_addHarmonic;
 	HarmonicOscillationsDeleteSignal m_deleteHarmonic;
-	HarmonicOscillationsChangeSignal m_setFocusList;
+	HarmonicOscillationsChangeSignal m_setFocusGroup;
 	InitSignal m_init;
 
 	float GetHarmonicCoeffValue(CEdit & coef);

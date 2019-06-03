@@ -7,7 +7,7 @@ class IMainDlgView;
 class MainDlgPresenter
 {
 public:
-	typedef std::vector<std::wstring> ListBox;
+	typedef std::vector<std::wstring> Group;
 
 	MainDlgPresenter(HarmonicOscillationsGroup& harmonicOscillationsGroup, IMainDlgView& view);
 
@@ -16,7 +16,7 @@ private:
 	void UpdateGroup();
 	void UpdateChart();
 
-	void SetFocusListBox(int index);
+	void SetFocusGroup(int index);
 	void SetAmplitude(int index, double value);
 	void SetFrequency(int index, double value);
 	void SetPhase(int index, double value);

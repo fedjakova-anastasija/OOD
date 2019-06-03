@@ -62,7 +62,7 @@ BEGIN_MESSAGE_MAP(MainDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_CHECKBOX_COS, &MainDlg::OnClickedRadioCos)
 	ON_BN_CLICKED(IDC_BUTTON_ADD_NEW_HARMONIC, &MainDlg::OnClickedAddHarmonic)
 	ON_BN_CLICKED(IDC_BUTTON_DELETE_HARMONIC, &MainDlg::OnClickedDeleteHarmonic)
-	ON_LBN_SELCHANGE(IDC_HARMONICS_GROUP, &MainDlg::OnSetFocusListBox)
+	ON_LBN_SELCHANGE(IDC_HARMONICS_GROUP, &MainDlg::OnSetFocusGroup)
 END_MESSAGE_MAP()
 
 BOOL MainDlg::OnInitDialog()
@@ -167,7 +167,7 @@ sig::connection MainDlg::DoOnDeleteHarmonicOscillations(const HarmonicOscillatio
 
 sig::connection MainDlg::DoOnSetGroup(const HarmonicOscillationsChangeSignal::slot_type& handler)
 {
-	return m_setFocusList.connect(handler);
+	return m_setFocusGroup.connect(handler);
 }
 
 float MainDlg::GetHarmonicCoeffValue(CEdit & coef)
@@ -261,14 +261,14 @@ void MainDlg::OnClickedAddHarmonic()
 	}
 }
 
-void MainDlg::OnSetFocusListBox()
+void MainDlg::OnSetFocusGroup()
 {
 	if (UpdateData())
 	{
 		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
-			m_setFocusList(index);
+			m_setFocusGroup(index);
 		}
 	}
 }

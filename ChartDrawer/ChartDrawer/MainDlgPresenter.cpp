@@ -17,7 +17,7 @@ MainDlgPresenter::MainDlgPresenter(HarmonicOscillationsGroup& harmonicOscillatio
 	m_view.DoOnHarmonicOscillationsTypeChange(std::bind(&MainDlgPresenter::SetHarmonicOscillationsType, this, std::placeholders::_1, std::placeholders::_2));
 	m_view.DoOnAddHarmonicOscillations(std::bind(&MainDlgPresenter::AddHarmonicOscillations, this));
 	m_view.DoOnDeleteHarmonicOscillations(std::bind(&MainDlgPresenter::DeleteHarmonicOscillations, this, std::placeholders::_1));
-	m_view.DoOnSetGroup(std::bind(&MainDlgPresenter::SetFocusListBox, this, std::placeholders::_1));
+	m_view.DoOnSetGroup(std::bind(&MainDlgPresenter::SetFocusGroup, this, std::placeholders::_1));
 	m_view.DoOnInit(std::bind(&MainDlgPresenter::InitView, this));
 	m_harmonicOscillationsGroup.DoOnHarmonicOscillationsChange([this] {
 		Update();
@@ -75,7 +75,7 @@ void MainDlgPresenter::DeleteHarmonicOscillations(int index)
 	m_harmonicOscillationsGroup.DeleteHarmonicOscillations(index);
 }
 
-void MainDlgPresenter::SetFocusListBox(int index)
+void MainDlgPresenter::SetFocusGroup(int index)
 {
 	auto harmonic = m_harmonicOscillationsGroup.GetHarmonicOscillations(index);
 	m_view.UpdateInputFields(harmonic->GetHarmonicOscillationsType(), harmonic->GetAmplitude(), harmonic->GetFrequency(), harmonic->GetPhase());
@@ -83,7 +83,7 @@ void MainDlgPresenter::SetFocusListBox(int index)
 
 void MainDlgPresenter::UpdateGroup()
 {
-	ListBox harmonics;
+	Group harmonics;
 
 	for (size_t i = 0; i < m_harmonicOscillationsGroup.GetHarmonicsCount(); ++i)
 	{

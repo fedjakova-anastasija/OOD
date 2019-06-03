@@ -18,7 +18,7 @@ public:
 	typedef std::vector<std::wstring> Group;
 
 	virtual IChartView& GetChartView() = 0;
-	virtual void AddHarmonicOscillationsToGroup(Group const& list) = 0;
+	virtual void AddHarmonicOscillationsToGroup(Group const& group) = 0;
 	virtual void InitDefaultHarmonicOscillations() = 0;
 	virtual void UpdateInputFields(HarmonicOscillationTypes harmonicOscillationType, double amplitude, double frequency, double phase) = 0;
 
