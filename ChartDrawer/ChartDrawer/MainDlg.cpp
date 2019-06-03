@@ -14,7 +14,6 @@
 MainDlg::MainDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG1, pParent)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
 }
 
 BOOL MainDlg::PreTranslateMessage(MSG* msg)
