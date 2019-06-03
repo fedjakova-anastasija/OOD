@@ -31,18 +31,6 @@ IHarmonic HarmonicOscillationsGroup::GetHarmonicOscillations(size_t index) const
 	}
 }
 
-size_t HarmonicOscillationsGroup::GetHarmonicsCount() const
-{
-	return m_harmonicOscillationsGroup.size();
-}
-
-void HarmonicOscillationsGroup::AddNewHarmonicOscillations(HarmonicOscillationTypes harmonicOscillationsType, double amplitude, double frequency, double phase)
-{
-	auto harmonic = std::make_shared<HarmonicOscillations>(harmonicOscillationsType, amplitude, frequency, phase);
-	m_harmonicOscillationsGroup.push_back(harmonic);
-	m_harmonicsUpdateSignal();
-}
-
 void HarmonicOscillationsGroup::DeleteHarmonicOscillations(size_t index)
 {
 	if (index < m_harmonicOscillationsGroup.size())
@@ -54,4 +42,16 @@ void HarmonicOscillationsGroup::DeleteHarmonicOscillations(size_t index)
 	{
 		throw std::out_of_range("Wrong index!");
 	}
+}
+
+size_t HarmonicOscillationsGroup::GetHarmonicsCount() const
+{
+	return m_harmonicOscillationsGroup.size();
+}
+
+void HarmonicOscillationsGroup::AddNewHarmonicOscillations(HarmonicOscillationTypes harmonicOscillationsType, double amplitude, double frequency, double phase)
+{
+	auto harmonic = std::make_shared<HarmonicOscillations>(harmonicOscillationsType, amplitude, frequency, phase);
+	m_harmonicOscillationsGroup.push_back(harmonic);
+	m_harmonicsUpdateSignal();
 }

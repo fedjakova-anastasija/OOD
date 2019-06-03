@@ -96,18 +96,20 @@ sig::connection MainDlg::DoOnInit(const InitSignal::slot_type& handler)
 	GetDlgItem(IDC_GRAPH)->ShowWindow(true);
 }
 
-void MainDlg::InitDefaultHarmonicOscillations()
+void MainDlg::SetDefaultHarmonicOscillations()
 {
-	int num = m_harmonicOscillationsGroup.GetCount() - 1;
-	m_harmonicOscillationsGroup.SetCurSel(num);
-	m_buttonSin.SetCheck(1);
-	m_buttonCos.SetCheck(0);
 	GetDlgItem(IDC_BUTTON_DELETE_HARMONIC)->EnableWindow(true);
+	GetDlgItem(IDC_CHECKBOX_SIN)->EnableWindow(true);
+	GetDlgItem(IDC_CHECKBOX_COS)->EnableWindow(true);
 	GetDlgItem(IDC_AMPLITUDE_FIELD)->EnableWindow(true);
 	GetDlgItem(IDC_FREQUENCE_FIELD)->EnableWindow(true);
 	GetDlgItem(IDC_PHASE_FIELD)->EnableWindow(true);
-	GetDlgItem(IDC_CHECKBOX_SIN)->EnableWindow(true);
-	GetDlgItem(IDC_CHECKBOX_COS)->EnableWindow(true);
+
+	int index = m_harmonicOscillationsGroup.GetCount() - 1;
+	m_harmonicOscillationsGroup.SetCurSel(index);
+	m_buttonSin.SetCheck(1);
+	m_buttonCos.SetCheck(0);
+	
 }
 
 void MainDlg::UpdateInputFields(HarmonicOscillationTypes harmonicOscillationTypes, double amplitude, double frequency, double phase)
@@ -283,11 +285,11 @@ void MainDlg::OnClickedDeleteHarmonic()
 			if (m_harmonicOscillationsGroup.GetCount() == 0)
 			{
 				GetDlgItem(IDC_BUTTON_DELETE_HARMONIC)->EnableWindow(false);
+				GetDlgItem(IDC_CHECKBOX_SIN)->EnableWindow(false);
+				GetDlgItem(IDC_CHECKBOX_COS)->EnableWindow(false);
 				GetDlgItem(IDC_AMPLITUDE_FIELD)->EnableWindow(false);
 				GetDlgItem(IDC_FREQUENCE_FIELD)->EnableWindow(false);
 				GetDlgItem(IDC_PHASE_FIELD)->EnableWindow(false);
-				GetDlgItem(IDC_CHECKBOX_SIN)->EnableWindow(false);
-				GetDlgItem(IDC_CHECKBOX_COS)->EnableWindow(false);
 			}
 			else
 			{

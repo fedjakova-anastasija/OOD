@@ -21,7 +21,7 @@ public:
 
 	void SetHarmonicOscillationsParams(double amplitude, double frequency, double phase) final;
 	void AddHarmonicOscillationsToGroup(Group const& harmonicOscillationsGroup) override final;
-	void InitDefaultHarmonicOscillations() override final;
+	void SetDefaultHarmonicOscillations() override final;
 	void UpdateInputFields(HarmonicOscillationTypes harmonicOscillationType, double amplitude, double frequency, double phase) override final;
 	IChartView& GetChartView() final;
 	CListBox m_harmonicOscillationsGroup;

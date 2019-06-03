@@ -19,7 +19,7 @@ public:
 
 	virtual IChartView& GetChartView() = 0;
 	virtual void AddHarmonicOscillationsToGroup(Group const& group) = 0;
-	virtual void InitDefaultHarmonicOscillations() = 0;
+	virtual void SetDefaultHarmonicOscillations() = 0;
 	virtual void UpdateInputFields(HarmonicOscillationTypes harmonicOscillationType, double amplitude, double frequency, double phase) = 0;
 
 	virtual void SetHarmonicOscillationsParams(double a, double b, double c) = 0;

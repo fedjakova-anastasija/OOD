@@ -50,7 +50,7 @@ void MainDlgPresenter::InitView()
 	m_harmonicOscillationsGroup.AddNewHarmonicOscillations(HarmonicOscillationTypes::Sin, 0, 0, 0);
 	m_harmonicOscillationsGroup.GetHarmonicOscillations(m_harmonicOscillationsGroup.GetHarmonicsCount() - 1)
 		->DoOnHarmonicOscillationsChange(std::bind(&MainDlgPresenter::Update, this));
-	m_view.InitDefaultHarmonicOscillations();
+	m_view.SetDefaultHarmonicOscillations();
 	m_view.UpdateInputFields(HarmonicOscillationTypes::Sin, 0, 0, 0);
 }
 
@@ -66,7 +66,7 @@ void MainDlgPresenter::AddHarmonicOscillations()
 	m_harmonicOscillationsGroup.AddNewHarmonicOscillations(HarmonicOscillationTypes::Sin, 0, 0, 0);
 	m_harmonicOscillationsGroup.GetHarmonicOscillations(m_harmonicOscillationsGroup.GetHarmonicsCount() - 1)
 		->DoOnHarmonicOscillationsChange(std::bind(&MainDlgPresenter::Update, this));
-	m_view.InitDefaultHarmonicOscillations();
+	m_view.SetDefaultHarmonicOscillations();
 	m_view.UpdateInputFields(HarmonicOscillationTypes::Sin, 0, 0, 0);
 }
 
