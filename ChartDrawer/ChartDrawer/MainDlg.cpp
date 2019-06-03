@@ -1,4 +1,4 @@
-
+﻿
 // MainDlg.cpp : implementation file
 //
 
@@ -22,17 +22,17 @@ BOOL MainDlg::PreTranslateMessage(MSG* msg)
 	if (msg->message == WM_KEYDOWN && msg->wParam == VK_RETURN)
 	{
 		auto focus = GetFocus();
-		if (focus == GetDlgItem(IDC_AMPLITUDE))
+		if (focus == GetDlgItem(IDC_AMPLITUDE_FIELD))
 		{
 			OnChangeAmplitude();
 			return TRUE;
 		}
-		else if (focus == GetDlgItem(IDC_FREQUENCE))
+		else if (focus == GetDlgItem(IDC_FREQUENCE_FIELD))
 		{
 			OnChangeFrequency();
 			return TRUE;
 		}
-		else if (focus == GetDlgItem(IDC_PHASE))
+		else if (focus == GetDlgItem(IDC_PHASE_FIELD))
 		{
 			OnChangePhase();
 			return TRUE;
@@ -44,25 +44,25 @@ BOOL MainDlg::PreTranslateMessage(MSG* msg)
 void MainDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_AMPLITUDE, m_amplitude);
-	DDX_Control(pDX, IDC_HARMONICS_LISTBOX, m_harmonicsList);
-	DDX_Control(pDX, IDC_RADIO_SIN, m_buttonSin);
-	DDX_Control(pDX, IDC_RADIO_COS, m_buttonCos);
-	DDX_Control(pDX, IDC_BUTTON_ADD, m_buttonAdd);
-	DDX_Control(pDX, IDC_BUTTON_DELETE, m_buttonDelete);
-	DDX_Control(pDX, IDC_FREQUENCE, m_frequency);
-	DDX_Control(pDX, IDC_PHASE, m_phase);
+	DDX_Control(pDX, IDC_AMPLITUDE_FIELD, m_amplitude);
+	DDX_Control(pDX, IDC_HARMONICS_GROUP, m_harmonicOscillationsGroup);
+	DDX_Control(pDX, IDC_CHECKBOX_SIN, m_buttonSin);
+	DDX_Control(pDX, IDC_CHECKBOX_COS, m_buttonCos);
+	DDX_Control(pDX, IDC_BUTTON_ADD_NEW_HARMONIC, m_buttonAdd);
+	DDX_Control(pDX, IDC_BUTTON_DELETE_HARMONIC, m_buttonDelete);
+	DDX_Control(pDX, IDC_FREQUENCE_FIELD, m_frequency);
+	DDX_Control(pDX, IDC_PHASE_FIELD, m_phase);
 }
 
 BEGIN_MESSAGE_MAP(MainDlg, CDialogEx)
-	ON_EN_KILLFOCUS(IDC_AMPLITUDE, &MainDlg::OnKillfocusAmplitude)
-	ON_EN_KILLFOCUS(IDC_FREQUENCE, &MainDlg::OnKillfocusFrequency)
-	ON_EN_KILLFOCUS(IDC_PHASE, &MainDlg::OnKillfocusPhase)
-	ON_BN_CLICKED(IDC_RADIO_SIN, &MainDlg::OnClickedRadioSin)
-	ON_BN_CLICKED(IDC_RADIO_COS, &MainDlg::OnClickedRadioCos)
-	ON_BN_CLICKED(IDC_BUTTON_ADD, &MainDlg::OnClickedAddHarmonic)
-	ON_BN_CLICKED(IDC_BUTTON_DELETE, &MainDlg::OnClickedDeleteHarmonic)
-	ON_LBN_SELCHANGE(IDC_HARMONICS_LISTBOX, &MainDlg::OnSetFocusListBox)
+	ON_EN_KILLFOCUS(IDC_AMPLITUDE_FIELD, &MainDlg::OnKillfocusAmplitude)
+	ON_EN_KILLFOCUS(IDC_FREQUENCE_FIELD, &MainDlg::OnKillfocusFrequency)
+	ON_EN_KILLFOCUS(IDC_PHASE_FIELD, &MainDlg::OnKillfocusPhase)
+	ON_BN_CLICKED(IDC_CHECKBOX_SIN, &MainDlg::OnClickedRadioSin)
+	ON_BN_CLICKED(IDC_CHECKBOX_COS, &MainDlg::OnClickedRadioCos)
+	ON_BN_CLICKED(IDC_BUTTON_ADD_NEW_HARMONIC, &MainDlg::OnClickedAddHarmonic)
+	ON_BN_CLICKED(IDC_BUTTON_DELETE_HARMONIC, &MainDlg::OnClickedDeleteHarmonic)
+	ON_LBN_SELCHANGE(IDC_HARMONICS_GROUP, &MainDlg::OnSetFocusListBox)
 END_MESSAGE_MAP()
 
 BOOL MainDlg::OnInitDialog()
@@ -72,15 +72,15 @@ BOOL MainDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE); // Set big icon
 	SetIcon(m_hIcon, FALSE); // Set small icon
 
-	m_chart.SubclassDlgItem(IDC_CHART, this);
-	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(false);
+	m_chart.SubclassDlgItem(IDC_GRAPH, this);
+	GetDlgItem(IDC_BUTTON_DELETE_HARMONIC)->EnableWindow(false);
 
 	m_init();
 
 	return TRUE; // return TRUE  unless you set the focus to a control
 }
 
-void MainDlg::SetHarmonicParams(double amplitude, double frequency, double phase)
+void MainDlg::SetHarmonicOscillationsParams(double amplitude, double frequency, double phase)
 {
 	m_amplitude.SetWindowTextW((boost::wformat(L"%1%") % amplitude).str().c_str());
 	m_frequency.SetWindowTextW((boost::wformat(L"%1%") % frequency).str().c_str());
@@ -94,39 +94,39 @@ void MainDlg::SetHarmonicParams(double amplitude, double frequency, double phase
 sig::connection MainDlg::DoOnInit(const InitSignal::slot_type& handler)
 {
 	return m_init.connect(handler);
-	GetDlgItem(IDC_CHART)->ShowWindow(true);
+	GetDlgItem(IDC_GRAPH)->ShowWindow(true);
 }
 
-void MainDlg::InitDefaultHarmonic()
+void MainDlg::InitDefaultHarmonicOscillations()
 {
-	int num = m_harmonicsList.GetCount() - 1;
-	m_harmonicsList.SetCurSel(num);
+	int num = m_harmonicOscillationsGroup.GetCount() - 1;
+	m_harmonicOscillationsGroup.SetCurSel(num);
 	m_buttonSin.SetCheck(1);
 	m_buttonCos.SetCheck(0);
-	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(true);
-	GetDlgItem(IDC_AMPLITUDE)->EnableWindow(true);
-	GetDlgItem(IDC_FREQUENCE)->EnableWindow(true);
-	GetDlgItem(IDC_PHASE)->EnableWindow(true);
-	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(true);
-	GetDlgItem(IDC_RADIO_COS)->EnableWindow(true);
+	GetDlgItem(IDC_BUTTON_DELETE_HARMONIC)->EnableWindow(true);
+	GetDlgItem(IDC_AMPLITUDE_FIELD)->EnableWindow(true);
+	GetDlgItem(IDC_FREQUENCE_FIELD)->EnableWindow(true);
+	GetDlgItem(IDC_PHASE_FIELD)->EnableWindow(true);
+	GetDlgItem(IDC_CHECKBOX_SIN)->EnableWindow(true);
+	GetDlgItem(IDC_CHECKBOX_COS)->EnableWindow(true);
 }
 
 void MainDlg::UpdateInputFields(HarmonicOscillationTypes harmonicOscillationTypes, double amplitude, double frequency, double phase)
 {
-	int index = m_harmonicsList.GetCurSel();
+	int index = m_harmonicOscillationsGroup.GetCurSel();
 	if (index >= 0)
 	{
 		m_amplitude.SetWindowTextW((boost::wformat(L"%1%") % amplitude).str().c_str());
 		m_frequency.SetWindowTextW((boost::wformat(L"%1%") % frequency).str().c_str());
 		m_phase.SetWindowTextW((boost::wformat(L"%1%") % phase).str().c_str());
 
-		auto functionType = IDC_RADIO_SIN;
+		auto functionType = IDC_CHECKBOX_SIN;
 		if (harmonicOscillationTypes == HarmonicOscillationTypes::Sin)
 		{
-			functionType = IDC_RADIO_COS;
+			functionType = IDC_CHECKBOX_COS;
 		}
 
-		CheckRadioButton(IDC_RADIO_SIN, IDC_RADIO_COS, functionType);
+		CheckRadioButton(IDC_CHECKBOX_SIN, IDC_CHECKBOX_COS, functionType);
 	}
 }
 
@@ -150,22 +150,22 @@ sig::connection MainDlg::DoOnPhaseChange(const HarmonicCoeffChangeSignal::slot_t
 	return m_phaseChanged.connect(handler);
 }
 
-sig::connection MainDlg::DoOnHarmonicTypeChange(const HarmonicTypeChangeSignal::slot_type& handler)
+sig::connection MainDlg::DoOnHarmonicOscillationsTypeChange(const HarmonicOscillationsTypeChangeSignal::slot_type& handler)
 {
 	return m_typeChanged.connect(handler);
 }
 
-sig::connection MainDlg::DoOnAddHarmonic(const HarmonicAddSignal::slot_type& handler)
+sig::connection MainDlg::DoOnAddHarmonicOscillations(const HarmonicOscillationsAddSignal::slot_type& handler)
 {
 	return m_addHarmonic.connect(handler);
 }
 
-sig::connection MainDlg::DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler)
+sig::connection MainDlg::DoOnDeleteHarmonicOscillations(const HarmonicOscillationsDeleteSignal::slot_type& handler)
 {
 	return m_deleteHarmonic.connect(handler);
 }
 
-sig::connection MainDlg::DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSignal::slot_type& handler)
+sig::connection MainDlg::DoOnSetGroup(const HarmonicOscillationsChangeSignal::slot_type& handler)
 {
 	return m_setFocusList.connect(handler);
 }
@@ -181,11 +181,11 @@ void MainDlg::OnChangeAmplitude()
 {
 	if (UpdateData())
 	{
-		int index = m_harmonicsList.GetCurSel();
+		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
 			m_amplitudeChanged(index, GetHarmonicCoeffValue(m_amplitude));
-			m_harmonicsList.SetCurSel(index); 
+			m_harmonicOscillationsGroup.SetCurSel(index); 
 		}
 	}
 }
@@ -194,11 +194,11 @@ void MainDlg::OnChangeFrequency()
 {
 	if (UpdateData())
 	{
-		int index = m_harmonicsList.GetCurSel();
+		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
 			m_frequencyChanged(index, GetHarmonicCoeffValue(m_frequency));
-			m_harmonicsList.SetCurSel(index);
+			m_harmonicOscillationsGroup.SetCurSel(index);
 		}
 	}
 }
@@ -207,11 +207,11 @@ void MainDlg::OnChangePhase()
 {
 	if (UpdateData())
 	{
-		int index = m_harmonicsList.GetCurSel();
+		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
 			m_phaseChanged(index, GetHarmonicCoeffValue(m_phase));
-			m_harmonicsList.SetCurSel(index);
+			m_harmonicOscillationsGroup.SetCurSel(index);
 		}
 	}
 }
@@ -229,11 +229,11 @@ void MainDlg::OnClickedRadioSin()
 {
 	if (UpdateData())
 	{
-		int index = m_harmonicsList.GetCurSel();
+		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
 			m_typeChanged(index, HarmonicOscillationTypes::Sin);
-			m_harmonicsList.SetCurSel(index);
+			m_harmonicOscillationsGroup.SetCurSel(index);
 		}
 	}
 }
@@ -242,11 +242,11 @@ void MainDlg::OnClickedRadioCos()
 {
 	if (UpdateData())
 	{
-		int index = m_harmonicsList.GetCurSel();
+		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
 			m_typeChanged(index, HarmonicOscillationTypes::Cos);
-			m_harmonicsList.SetCurSel(index);
+			m_harmonicOscillationsGroup.SetCurSel(index);
 		}
 	}
 }
@@ -256,8 +256,8 @@ void MainDlg::OnClickedAddHarmonic()
 	if (UpdateData())
 	{
 		m_addHarmonic();
-		int index = m_harmonicsList.GetCount() - 1;
-		m_harmonicsList.SetCurSel(index);
+		int index = m_harmonicOscillationsGroup.GetCount() - 1;
+		m_harmonicOscillationsGroup.SetCurSel(index);
 	}
 }
 
@@ -265,7 +265,7 @@ void MainDlg::OnSetFocusListBox()
 {
 	if (UpdateData())
 	{
-		int index = m_harmonicsList.GetCurSel();
+		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
 			m_setFocusList(index);
@@ -277,22 +277,22 @@ void MainDlg::OnClickedDeleteHarmonic()
 {
 	if (UpdateData())
 	{
-		int index = m_harmonicsList.GetCurSel();
+		int index = m_harmonicOscillationsGroup.GetCurSel();
 		if (index >= 0)
 		{
 			m_deleteHarmonic(index);
-			if (m_harmonicsList.GetCount() == 0)
+			if (m_harmonicOscillationsGroup.GetCount() == 0)
 			{
-				GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(false);
-				GetDlgItem(IDC_AMPLITUDE)->EnableWindow(false);
-				GetDlgItem(IDC_FREQUENCE)->EnableWindow(false);
-				GetDlgItem(IDC_PHASE)->EnableWindow(false);
-				GetDlgItem(IDC_RADIO_SIN)->EnableWindow(false);
-				GetDlgItem(IDC_RADIO_COS)->EnableWindow(false);
+				GetDlgItem(IDC_BUTTON_DELETE_HARMONIC)->EnableWindow(false);
+				GetDlgItem(IDC_AMPLITUDE_FIELD)->EnableWindow(false);
+				GetDlgItem(IDC_FREQUENCE_FIELD)->EnableWindow(false);
+				GetDlgItem(IDC_PHASE_FIELD)->EnableWindow(false);
+				GetDlgItem(IDC_CHECKBOX_SIN)->EnableWindow(false);
+				GetDlgItem(IDC_CHECKBOX_COS)->EnableWindow(false);
 			}
 			else
 			{
-				m_harmonicsList.SetCurSel((m_harmonicsList.GetCount() - 1 >= index ? index : index - 1));
+				m_harmonicOscillationsGroup.SetCurSel((m_harmonicOscillationsGroup.GetCount() - 1 >= index ? index : index - 1));
 			}
 		}
 	}
@@ -308,12 +308,12 @@ void MainDlg::OnKillfocusPhase()
 	OnChangePhase();
 }
 
-void MainDlg::AddHarmonicsToListBox(ListBox const& harmonicsList)
+void MainDlg::AddHarmonicOscillationsToGroup(Group const& harmonicOscillationsGroup)
 {
-	m_harmonicsList.ResetContent();
+	m_harmonicOscillationsGroup.ResetContent();
 
-	for (auto& str : harmonicsList)
+	for (auto& str : harmonicOscillationsGroup)
 	{
-		m_harmonicsList.AddString(str.c_str());
+		m_harmonicOscillationsGroup.AddString(str.c_str());
 	}
 }

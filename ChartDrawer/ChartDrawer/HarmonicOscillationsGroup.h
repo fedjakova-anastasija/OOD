@@ -15,10 +15,10 @@ public:
 	typedef sig::signal<void()> HarmonicChangeSignal;
 	sig::connection DoOnHarmonicOscillationsChange(const HarmonicChangeSignal::slot_type& handler);
 
-	IHarmonic GetHarmonic(size_t index) const;
+	IHarmonic GetHarmonicOscillations(size_t index) const;
 
-	void AddNewHarmonic(HarmonicOscillationTypes harmonicOscillationsType, double amplitude, double frequency, double phase);
-	void DeleteHarmonic(size_t index);
+	void AddNewHarmonicOscillations(HarmonicOscillationTypes harmonicOscillationsType, double amplitude, double frequency, double phase);
+	void DeleteHarmonicOscillations(size_t index);
 	
 	double CalculateValue(double x) const;
 	size_t GetHarmonicsCount() const;

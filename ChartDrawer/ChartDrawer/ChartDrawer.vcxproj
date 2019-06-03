@@ -190,6 +190,9 @@
   <ItemGroup>
     <ResourceCompile Include="ChartDrawer.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

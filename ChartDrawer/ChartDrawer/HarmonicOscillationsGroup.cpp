@@ -19,7 +19,7 @@ sig::connection HarmonicOscillationsGroup::DoOnHarmonicOscillationsChange(const 
 	return m_harmonicsUpdateSignal.connect(handler);
 }
 
-IHarmonic HarmonicOscillationsGroup::GetHarmonic(size_t index) const
+IHarmonic HarmonicOscillationsGroup::GetHarmonicOscillations(size_t index) const
 {
 	if (index < m_harmonicOscillationsGroup.size())
 	{
@@ -36,14 +36,14 @@ size_t HarmonicOscillationsGroup::GetHarmonicsCount() const
 	return m_harmonicOscillationsGroup.size();
 }
 
-void HarmonicOscillationsGroup::AddNewHarmonic(HarmonicOscillationTypes harmonicOscillationsType, double amplitude, double frequency, double phase)
+void HarmonicOscillationsGroup::AddNewHarmonicOscillations(HarmonicOscillationTypes harmonicOscillationsType, double amplitude, double frequency, double phase)
 {
 	auto harmonic = std::make_shared<HarmonicOscillations>(harmonicOscillationsType, amplitude, frequency, phase);
 	m_harmonicOscillationsGroup.push_back(harmonic);
 	m_harmonicsUpdateSignal();
 }
 
-void HarmonicOscillationsGroup::DeleteHarmonic(size_t index)
+void HarmonicOscillationsGroup::DeleteHarmonicOscillations(size_t index)
 {
 	if (index < m_harmonicOscillationsGroup.size())
 	{

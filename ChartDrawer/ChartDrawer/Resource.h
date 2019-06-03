@@ -5,16 +5,16 @@
 #define IDD_DIALOG1                     101
 #define IDI_ICON1                       103
 #define IDC_CHART_TAB                   1003
-#define IDC_AMPLITUDE                   1004
-#define IDC_PHASE                       1005
-#define IDC_FREQUENCE                   1006
-#define IDC_RADIO_SIN                   1007
-#define IDC_RADIO_COS                   1008
-#define IDC_HARMONICS_LISTBOX           1013
+#define IDC_AMPLITUDE_FIELD             1004
+#define IDC_PHASE_FIELD                 1005
+#define IDC_FREQUENCE_FIELD             1006
+#define IDC_CHECKBOX_SIN                1007
+#define IDC_CHECKBOX_COS                1008
+#define IDC_HARMONICS_GROUP             1013
 #define IDC_SCROLLBAR1                  1014
-#define IDC_BUTTON_ADD                  1015
-#define IDC_BUTTON_DELETE               1016
-#define IDC_CHART                       1017
+#define IDC_BUTTON_ADD_NEW_HARMONIC     1015
+#define IDC_BUTTON_DELETE_HARMONIC      1016
+#define IDC_GRAPH                       1017
 
 // Next default values for new objects
 // 

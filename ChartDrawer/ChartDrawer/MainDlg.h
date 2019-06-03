@@ -19,12 +19,12 @@ public:
 	};
 #endif
 
-	void SetHarmonicParams(double amplitude, double frequency, double phase) final;
-	void AddHarmonicsToListBox(ListBox const& harmonicsList) override final;
-	void InitDefaultHarmonic() override final;
+	void SetHarmonicOscillationsParams(double amplitude, double frequency, double phase) final;
+	void AddHarmonicOscillationsToGroup(Group const& harmonicOscillationsGroup) override final;
+	void InitDefaultHarmonicOscillations() override final;
 	void UpdateInputFields(HarmonicOscillationTypes harmonicOscillationType, double amplitude, double frequency, double phase) override final;
 	IChartView& GetChartView() final;
-	CListBox m_harmonicsList;
+	CListBox m_harmonicOscillationsGroup;
 	CButton m_buttonSin;
 	CButton m_buttonCos;
 	CButton m_buttonAdd;
@@ -36,11 +36,11 @@ public:
 	sig::connection DoOnAmplitudeChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
 	sig::connection DoOnFrequencyChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
 	sig::connection DoOnPhaseChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
-	sig::connection DoOnHarmonicTypeChange(const HarmonicTypeChangeSignal::slot_type& handler) final;
-	sig::connection DoOnAddHarmonic(const HarmonicAddSignal::slot_type& handler) final;
-	sig::connection DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler) final;
+	sig::connection DoOnHarmonicOscillationsTypeChange(const HarmonicOscillationsTypeChangeSignal::slot_type& handler) final;
+	sig::connection DoOnAddHarmonicOscillations(const HarmonicOscillationsAddSignal::slot_type& handler) final;
+	sig::connection DoOnDeleteHarmonicOscillations(const HarmonicOscillationsDeleteSignal::slot_type& handler) final;
 	sig::connection DoOnInit(const InitSignal::slot_type& handler) final;
-	sig::connection DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSignal::slot_type& handler) final;
+	sig::connection DoOnSetGroup(const HarmonicOscillationsChangeSignal::slot_type& handler) final;
 
 protected:
 	BOOL PreTranslateMessage(MSG* msg) override;
@@ -73,10 +73,10 @@ private:
 	HarmonicCoeffChangeSignal m_amplitudeChanged;
 	HarmonicCoeffChangeSignal m_frequencyChanged;
 	HarmonicCoeffChangeSignal m_phaseChanged;
-	HarmonicTypeChangeSignal m_typeChanged;
-	HarmonicAddSignal m_addHarmonic;
-	HarmonicDeleteSignal m_deleteHarmonic;
-	HarmonicFocusListBoxChangeSignal m_setFocusList;
+	HarmonicOscillationsTypeChangeSignal m_typeChanged;
+	HarmonicOscillationsAddSignal m_addHarmonic;
+	HarmonicOscillationsDeleteSignal m_deleteHarmonic;
+	HarmonicOscillationsChangeSignal m_setFocusList;
 	InitSignal m_init;
 
 	float GetHarmonicCoeffValue(CEdit & coef);

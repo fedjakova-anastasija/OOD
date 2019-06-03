@@ -14,10 +14,10 @@ MainDlgPresenter::MainDlgPresenter(HarmonicOscillationsGroup& harmonicOscillatio
 	m_view.DoOnAmplitudeChange(std::bind(&MainDlgPresenter::SetAmplitude, this, std::placeholders::_1, std::placeholders::_2));
 	m_view.DoOnFrequencyChange(std::bind(&MainDlgPresenter::SetFrequency, this, std::placeholders::_1, std::placeholders::_2));
 	m_view.DoOnPhaseChange(std::bind(&MainDlgPresenter::SetPhase, this, std::placeholders::_1, std::placeholders::_2));
-	m_view.DoOnHarmonicTypeChange(std::bind(&MainDlgPresenter::SetHarmonicType, this, std::placeholders::_1, std::placeholders::_2));
-	m_view.DoOnAddHarmonic(std::bind(&MainDlgPresenter::AddHarmonic, this));
-	m_view.DoOnDeleteHarmonic(std::bind(&MainDlgPresenter::DeleteHarmonic, this, std::placeholders::_1));
-	m_view.DoOnSetFocusListBox(std::bind(&MainDlgPresenter::SetFocusListBox, this, std::placeholders::_1));
+	m_view.DoOnHarmonicOscillationsTypeChange(std::bind(&MainDlgPresenter::SetHarmonicOscillationsType, this, std::placeholders::_1, std::placeholders::_2));
+	m_view.DoOnAddHarmonicOscillations(std::bind(&MainDlgPresenter::AddHarmonicOscillations, this));
+	m_view.DoOnDeleteHarmonicOscillations(std::bind(&MainDlgPresenter::DeleteHarmonicOscillations, this, std::placeholders::_1));
+	m_view.DoOnSetGroup(std::bind(&MainDlgPresenter::SetFocusListBox, this, std::placeholders::_1));
 	m_view.DoOnInit(std::bind(&MainDlgPresenter::InitView, this));
 	m_harmonicOscillationsGroup.DoOnHarmonicOscillationsChange([this] {
 		Update();
@@ -26,31 +26,31 @@ MainDlgPresenter::MainDlgPresenter(HarmonicOscillationsGroup& harmonicOscillatio
 
 void MainDlgPresenter::SetAmplitude(int index, double value)
 {
-	m_harmonicOscillationsGroup.GetHarmonic(index)->SetAmplitude(value);
+	m_harmonicOscillationsGroup.GetHarmonicOscillations(index)->SetAmplitude(value);
 }
 
 void MainDlgPresenter::SetFrequency(int index, double value)
 {
-	m_harmonicOscillationsGroup.GetHarmonic(index)->SetFrequency(value);
+	m_harmonicOscillationsGroup.GetHarmonicOscillations(index)->SetFrequency(value);
 }
 
 void MainDlgPresenter::SetPhase(int index, double value)
 {
-	m_harmonicOscillationsGroup.GetHarmonic(index)->SetPhase(value);
+	m_harmonicOscillationsGroup.GetHarmonicOscillations(index)->SetPhase(value);
 }
 
-void MainDlgPresenter::SetHarmonicType(int index, HarmonicOscillationTypes value)
+void MainDlgPresenter::SetHarmonicOscillationsType(int index, HarmonicOscillationTypes value)
 {
-	m_harmonicOscillationsGroup.GetHarmonic(index)->SetHarmonicOscillationsType(value);
+	m_harmonicOscillationsGroup.GetHarmonicOscillations(index)->SetHarmonicOscillationsType(value);
 }
 
 void MainDlgPresenter::InitView()
 {
 	Update();
-	m_harmonicOscillationsGroup.AddNewHarmonic(HarmonicOscillationTypes::Sin, 0, 0, 0);
-	m_harmonicOscillationsGroup.GetHarmonic(m_harmonicOscillationsGroup.GetHarmonicsCount() - 1)
+	m_harmonicOscillationsGroup.AddNewHarmonicOscillations(HarmonicOscillationTypes::Sin, 0, 0, 0);
+	m_harmonicOscillationsGroup.GetHarmonicOscillations(m_harmonicOscillationsGroup.GetHarmonicsCount() - 1)
 		->DoOnHarmonicOscillationsChange(std::bind(&MainDlgPresenter::Update, this));
-	m_view.InitDefaultHarmonic();
+	m_view.InitDefaultHarmonicOscillations();
 	m_view.UpdateInputFields(HarmonicOscillationTypes::Sin, 0, 0, 0);
 }
 
@@ -60,24 +60,24 @@ void MainDlgPresenter::Update()
 	UpdateChart();
 }
 
-void MainDlgPresenter::AddHarmonic()
+void MainDlgPresenter::AddHarmonicOscillations()
 {
 
-	m_harmonicOscillationsGroup.AddNewHarmonic(HarmonicOscillationTypes::Sin, 0, 0, 0);
-	m_harmonicOscillationsGroup.GetHarmonic(m_harmonicOscillationsGroup.GetHarmonicsCount() - 1)
+	m_harmonicOscillationsGroup.AddNewHarmonicOscillations(HarmonicOscillationTypes::Sin, 0, 0, 0);
+	m_harmonicOscillationsGroup.GetHarmonicOscillations(m_harmonicOscillationsGroup.GetHarmonicsCount() - 1)
 		->DoOnHarmonicOscillationsChange(std::bind(&MainDlgPresenter::Update, this));
-	m_view.InitDefaultHarmonic();
+	m_view.InitDefaultHarmonicOscillations();
 	m_view.UpdateInputFields(HarmonicOscillationTypes::Sin, 0, 0, 0);
 }
 
-void MainDlgPresenter::DeleteHarmonic(int index)
+void MainDlgPresenter::DeleteHarmonicOscillations(int index)
 {
-	m_harmonicOscillationsGroup.DeleteHarmonic(index);
+	m_harmonicOscillationsGroup.DeleteHarmonicOscillations(index);
 }
 
 void MainDlgPresenter::SetFocusListBox(int index)
 {
-	auto harmonic = m_harmonicOscillationsGroup.GetHarmonic(index);
+	auto harmonic = m_harmonicOscillationsGroup.GetHarmonicOscillations(index);
 	m_view.UpdateInputFields(harmonic->GetHarmonicOscillationsType(), harmonic->GetAmplitude(), harmonic->GetFrequency(), harmonic->GetPhase());
 }
 
@@ -87,7 +87,7 @@ void MainDlgPresenter::UpdateGroup()
 
 	for (size_t i = 0; i < m_harmonicOscillationsGroup.GetHarmonicsCount(); ++i)
 	{
-		auto harmonic = m_harmonicOscillationsGroup.GetHarmonic(i);
+		auto harmonic = m_harmonicOscillationsGroup.GetHarmonicOscillations(i);
 
 		auto amplitude = harmonic->GetAmplitude();
 		auto frequency = harmonic->GetFrequency();
@@ -100,7 +100,7 @@ void MainDlgPresenter::UpdateGroup()
 		harmonics.push_back(strm.c_str());
 	}
 
-	m_view.AddHarmonicsToListBox(harmonics);
+	m_view.AddHarmonicOscillationsToGroup(harmonics);
 }
 
 void MainDlgPresenter::UpdateChart()

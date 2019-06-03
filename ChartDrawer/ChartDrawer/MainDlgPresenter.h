@@ -20,9 +20,9 @@ private:
 	void SetAmplitude(int index, double value);
 	void SetFrequency(int index, double value);
 	void SetPhase(int index, double value);
-	void SetHarmonicType(int index, HarmonicOscillationTypes value);
-	void AddHarmonic();
-	void DeleteHarmonic(int index);
+	void SetHarmonicOscillationsType(int index, HarmonicOscillationTypes value);
+	void AddHarmonicOscillations();
+	void DeleteHarmonicOscillations(int index);
 	void Update();
 
 	HarmonicOscillationsGroup& m_harmonicOscillationsGroup;
