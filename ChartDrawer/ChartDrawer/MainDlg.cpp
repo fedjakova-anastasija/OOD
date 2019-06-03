@@ -173,9 +173,9 @@ sig::connection MainDlg::DoOnSetGroup(const HarmonicOscillationsChangeSignal::sl
 
 float MainDlg::GetHarmonicCoeffValue(CEdit & coef)
 {
-	CString val;
-	coef.GetWindowTextW(val);
-	return boost::lexical_cast<float>(val.GetBuffer());
+	CString str;
+	coef.GetWindowTextW(str);
+	return boost::lexical_cast<float>(str.GetBuffer());
 }
 
 void MainDlg::OnChangeAmplitude()
