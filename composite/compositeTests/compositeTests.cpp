@@ -20,16 +20,16 @@ TEST_CASE("A number of shapes is zero when group was created")
 	REQUIRE(group->GetShapesCount() == 0);
 }
 
-//TEST_CASE("New group has empty frame")
-//{
-//	auto group = std::make_shared<CCompositeShape>();
-//	auto groupFrame = group->GetFrame();
-//
-//	REQUIRE(groupFrame.left == NAN);
-//	REQUIRE(groupFrame.top == NAN);
-//	REQUIRE(groupFrame.width == NAN);
-//	REQUIRE(groupFrame.height == NAN);
-//}
+TEST_CASE("New group has empty frame")
+{
+	auto group = std::make_shared<CCompositeShape>();
+	auto groupFrame = group->GetFrame();
+
+	REQUIRE(groupFrame.left == NAN);
+	REQUIRE(groupFrame.top == NAN);
+	REQUIRE(groupFrame.width == NAN);
+	REQUIRE(groupFrame.height == NAN);
+}
 
 TEST_CASE("New group can not set frame")
 {
@@ -95,7 +95,8 @@ TEST_CASE("CGroupShape with shapes", "[CGroupShape]")
 	auto groupFrame = group->GetFrame();
 	auto rectangleFrame = rectangle->GetFrame();
 	
-	/*SECTION("The group does not change frame after addition the empty group")
+
+	SECTION("The group does not change frame after addition the empty group")
 	{
 		auto emptyGroup = make_shared<CCompositeShape>();
 		emptyGroup->SetFrame({ 0, 0, 0, 0 });
@@ -106,7 +107,7 @@ TEST_CASE("CGroupShape with shapes", "[CGroupShape]")
 		REQUIRE(group->GetFrame().width == 10);
 		REQUIRE(group->GetFrame().top == 10);
 		REQUIRE(group->GetFrame().left == 10);
-	}*/
+	}
 
 	SECTION("Discoloration of the group changes color in children")
 	{

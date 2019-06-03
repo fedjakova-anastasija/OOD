@@ -101,6 +101,7 @@ RectD CCompositeShape::GetFrame() const
 	}
 	catch (const std::exception& e)
 	{
+		return {0.f, 0.f, 0.f, 0.f};
 		p = std::current_exception();
 		std::cout << e.what() << std::endl;
 	}
