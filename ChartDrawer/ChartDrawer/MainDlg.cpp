@@ -120,7 +120,7 @@ void MainDlg::UpdateInputFields(HarmonicOscillationTypes harmonicOscillationType
 		m_phase.SetWindowTextW((boost::wformat(L"%1%") % phase).str().c_str());
 
 		auto functionType = IDC_CHECKBOX_SIN;
-		if (harmonicOscillationTypes == HarmonicOscillationTypes::Sin)
+		if (harmonicOscillationTypes == HarmonicOscillationTypes::Cos)
 		{
 			functionType = IDC_CHECKBOX_COS;
 		}
